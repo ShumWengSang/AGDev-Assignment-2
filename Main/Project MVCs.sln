@@ -1,0 +1,46 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio 2013
+VisualStudioVersion = 12.0.21005.1
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "Project MVCs", "Project MVCs\Project MVCs.vcxproj", "{3415CA79-0647-496D-BACE-3B79BC8CB6A0}"
+EndProject
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "Math", "Math\Math.vcxproj", "{9BB92AF9-C0E9-4A30-BAFA-BAEA759C6409}"
+EndProject
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "Camera", "Camera\Camera.vcxproj", "{4AD2F533-9E51-4DCA-AE4D-8E363162A7BE}"
+EndProject
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "Frustum Clip Space", "Frustum Clip Space\Frustum Clip Space.vcxproj", "{54BA401F-FB39-4C72-B592-17C5A9E73668}"
+EndProject
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "Mouse", "Mouse\Mouse.vcxproj", "{2E65C83B-883B-4B41-BB5F-93223735C781}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Win32 = Debug|Win32
+		Release|Win32 = Release|Win32
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{3415CA79-0647-496D-BACE-3B79BC8CB6A0}.Debug|Win32.ActiveCfg = Debug|Win32
+		{3415CA79-0647-496D-BACE-3B79BC8CB6A0}.Debug|Win32.Build.0 = Debug|Win32
+		{3415CA79-0647-496D-BACE-3B79BC8CB6A0}.Release|Win32.ActiveCfg = Release|Win32
+		{3415CA79-0647-496D-BACE-3B79BC8CB6A0}.Release|Win32.Build.0 = Release|Win32
+		{9BB92AF9-C0E9-4A30-BAFA-BAEA759C6409}.Debug|Win32.ActiveCfg = Debug|Win32
+		{9BB92AF9-C0E9-4A30-BAFA-BAEA759C6409}.Debug|Win32.Build.0 = Debug|Win32
+		{9BB92AF9-C0E9-4A30-BAFA-BAEA759C6409}.Release|Win32.ActiveCfg = Release|Win32
+		{9BB92AF9-C0E9-4A30-BAFA-BAEA759C6409}.Release|Win32.Build.0 = Release|Win32
+		{4AD2F533-9E51-4DCA-AE4D-8E363162A7BE}.Debug|Win32.ActiveCfg = Debug|Win32
+		{4AD2F533-9E51-4DCA-AE4D-8E363162A7BE}.Debug|Win32.Build.0 = Debug|Win32
+		{4AD2F533-9E51-4DCA-AE4D-8E363162A7BE}.Release|Win32.ActiveCfg = Release|Win32
+		{4AD2F533-9E51-4DCA-AE4D-8E363162A7BE}.Release|Win32.Build.0 = Release|Win32
+		{54BA401F-FB39-4C72-B592-17C5A9E73668}.Debug|Win32.ActiveCfg = Debug|Win32
+		{54BA401F-FB39-4C72-B592-17C5A9E73668}.Debug|Win32.Build.0 = Debug|Win32
+		{54BA401F-FB39-4C72-B592-17C5A9E73668}.Release|Win32.ActiveCfg = Release|Win32
+		{54BA401F-FB39-4C72-B592-17C5A9E73668}.Release|Win32.Build.0 = Release|Win32
+		{2E65C83B-883B-4B41-BB5F-93223735C781}.Debug|Win32.ActiveCfg = Debug|Win32
+		{2E65C83B-883B-4B41-BB5F-93223735C781}.Debug|Win32.Build.0 = Debug|Win32
+		{2E65C83B-883B-4B41-BB5F-93223735C781}.Release|Win32.ActiveCfg = Release|Win32
+		{2E65C83B-883B-4B41-BB5F-93223735C781}.Release|Win32.Build.0 = Release|Win32
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+EndGlobal

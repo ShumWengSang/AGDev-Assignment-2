@@ -1,0 +1,56 @@
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio 2013
+VisualStudioVersion = 12.0.21005.1
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "Octree3", "Octree3.vcxproj", "{02E3D337-DF70-426F-BC4B-0FED84D094F5}"
+	ProjectSection(ProjectDependencies) = postProject
+		{9835E339-B796-4AA2-B990-C685C522788E} = {9835E339-B796-4AA2-B990-C685C522788E}
+		{BCBBA2D4-207F-4A9B-A79C-549BDB0B34F6} = {BCBBA2D4-207F-4A9B-A79C-549BDB0B34F6}
+	EndProjectSection
+EndProject
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "Camera", "..\Camera\Camera.vcxproj", "{9835E339-B796-4AA2-B990-C685C522788E}"
+	ProjectSection(ProjectDependencies) = postProject
+		{BCBBA2D4-207F-4A9B-A79C-549BDB0B34F6} = {BCBBA2D4-207F-4A9B-A79C-549BDB0B34F6}
+	EndProjectSection
+EndProject
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "Math", "Math\Math.vcxproj", "{BCBBA2D4-207F-4A9B-A79C-549BDB0B34F6}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|ARM = Debug|ARM
+		Debug|Win32 = Debug|Win32
+		Debug|x64 = Debug|x64
+		Release|ARM = Release|ARM
+		Release|Win32 = Release|Win32
+		Release|x64 = Release|x64
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{02E3D337-DF70-426F-BC4B-0FED84D094F5}.Debug|ARM.ActiveCfg = Debug|Win32
+		{02E3D337-DF70-426F-BC4B-0FED84D094F5}.Debug|Win32.ActiveCfg = Debug|Win32
+		{02E3D337-DF70-426F-BC4B-0FED84D094F5}.Debug|Win32.Build.0 = Debug|Win32
+		{02E3D337-DF70-426F-BC4B-0FED84D094F5}.Debug|x64.ActiveCfg = Debug|Win32
+		{02E3D337-DF70-426F-BC4B-0FED84D094F5}.Release|ARM.ActiveCfg = Release|Win32
+		{02E3D337-DF70-426F-BC4B-0FED84D094F5}.Release|Win32.ActiveCfg = Release|Win32
+		{02E3D337-DF70-426F-BC4B-0FED84D094F5}.Release|Win32.Build.0 = Release|Win32
+		{02E3D337-DF70-426F-BC4B-0FED84D094F5}.Release|x64.ActiveCfg = Release|Win32
+		{9835E339-B796-4AA2-B990-C685C522788E}.Debug|ARM.ActiveCfg = Debug|Win32
+		{9835E339-B796-4AA2-B990-C685C522788E}.Debug|Win32.ActiveCfg = Debug|Win32
+		{9835E339-B796-4AA2-B990-C685C522788E}.Debug|Win32.Build.0 = Debug|Win32
+		{9835E339-B796-4AA2-B990-C685C522788E}.Debug|x64.ActiveCfg = Debug|Win32
+		{9835E339-B796-4AA2-B990-C685C522788E}.Release|ARM.ActiveCfg = Release|Win32
+		{9835E339-B796-4AA2-B990-C685C522788E}.Release|Win32.ActiveCfg = Release|Win32
+		{9835E339-B796-4AA2-B990-C685C522788E}.Release|Win32.Build.0 = Release|Win32
+		{9835E339-B796-4AA2-B990-C685C522788E}.Release|x64.ActiveCfg = Release|Win32
+		{BCBBA2D4-207F-4A9B-A79C-549BDB0B34F6}.Debug|ARM.ActiveCfg = Debug|Win32
+		{BCBBA2D4-207F-4A9B-A79C-549BDB0B34F6}.Debug|Win32.ActiveCfg = Debug|Win32
+		{BCBBA2D4-207F-4A9B-A79C-549BDB0B34F6}.Debug|Win32.Build.0 = Debug|Win32
+		{BCBBA2D4-207F-4A9B-A79C-549BDB0B34F6}.Debug|x64.ActiveCfg = Debug|Win32
+		{BCBBA2D4-207F-4A9B-A79C-549BDB0B34F6}.Release|ARM.ActiveCfg = Release|Win32
+		{BCBBA2D4-207F-4A9B-A79C-549BDB0B34F6}.Release|Win32.ActiveCfg = Release|Win32
+		{BCBBA2D4-207F-4A9B-A79C-549BDB0B34F6}.Release|Win32.Build.0 = Release|Win32
+		{BCBBA2D4-207F-4A9B-A79C-549BDB0B34F6}.Release|x64.ActiveCfg = Release|Win32
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+EndGlobal
