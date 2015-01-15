@@ -24,13 +24,16 @@ public:
 
 
 	// Here we overload the / operator so we can divide by a scalar
-	CVector3 operator/(float num);
+	CVector3 operator/(float num);	
 
 
 	CVector3 NormalizedVector3D();
 
+	bool operator== (const CVector3& rhs) const;
 
+	void Set(float X, float Y, float Z);
 
+	float GetMagnitude();
 
 	float x, y, z;
 };

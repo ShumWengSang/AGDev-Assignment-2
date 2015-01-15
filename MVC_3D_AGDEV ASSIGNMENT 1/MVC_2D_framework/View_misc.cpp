@@ -37,9 +37,9 @@ GLvoid MVC_View::ReSizeGLScene(GLsizei width, GLsizei height)		// Resize And Ini
 	glLoadIdentity(); // ReSet The Projection Matrix
 
 	// Calculate The Aspect Ratio Of The Window
-	gluPerspective(60.0f,(GLfloat)width/(GLfloat)height,0.1f,100.0f);
-	//glOrtho(0, m_theModel->m_worldSizeX, m_theModel->m_worldSizeY, 0,-1,1);
+	gluPerspective(60.0f,(GLfloat)width/(GLfloat)height,0.1f,1000.0f);
 
+	//glOrtho(0, m_theModel->m_worldSizeX, m_theModel->m_worldSizeY, 0,-1,1);
 
 	glMatrixMode(GL_MODELVIEW); // Select The Modelview Matrix
 	glLoadIdentity(); // ReSet The Modelview Matrix
@@ -168,7 +168,7 @@ BOOL MVC_View::CreateGLWindow(char* title, int width, int height, int bits)
 	{
 		dwExStyle = WS_EX_APPWINDOW; // Window Extended Style
 		dwStyle = WS_POPUP; // Windows Style
-		ShowCursor(FALSE); // Hide Mouse Pointer
+		ShowCursor(TRUE); // Hide Mouse Pointer
 		//dwExStyle=WS_EX_APPWINDOW | WS_EX_WINDOWEDGE; // Window Extended Style
 		//dwStyle=WS_OVERLAPPEDWINDOW; // Windows Style
 	}
@@ -318,36 +318,14 @@ LRESULT CALLBACK MVC_View::MsgProc( HWND hWnd, // Handle For This Window
 
 	case WM_KEYDOWN: // Is A Key Being Held Down?
 		{
-			//if(wParam>=0x41&&wParam<0x5A)
-			//{
-			//	buffer= 97+(wParam-0x41);
-			//	keys[buffer] = TRUE; // If So, Mark It As TRUE
-			//	return 1; // Jump Back
-			//}
-			//else if(wParam>=0x30&&wParam<0x39)
-			//{
-			//	return 48+(wParam-0x30);
-			//	keys[buffer] = TRUE; // If So, Mark It As TRUE
-			//	return 1; // Jump Back
-			//}
+
 			m_keys[wParam] = TRUE; // If So, Mark It As TRUE
 			return 1; // Jump Back
 		}
 
 	case WM_KEYUP: // Has A Key Been Released?
 		{
-			//if(wParam>=0x41&&wParam<0x5A)
-			//{
-			//	buffer= 97+(wParam-0x41);
-			//	keys[buffer] = FALSE; // If So, Mark It As TRUE	
-			//	return 1; // Jump Back
-			//}
-			//else if(wParam>=0x30&&wParam<0x39)
-			//{
-			//	return 48+(wParam-0x30);
-			//	keys[buffer] = FALSE; // If So, Mark It As TRUE
-			//	return 1; // Jump Back
-			//}
+
 			m_keys[wParam] = FALSE; // If So, Mark It As FALSE
 			return 1; // Jump Back
 		}
@@ -363,15 +341,15 @@ LRESULT CALLBACK MVC_View::MsgProc( HWND hWnd, // Handle For This Window
 			int diffX = m_MouseInfo.GetDiff_X();
 			int diffY = m_MouseInfo.GetDiff_Y();
 
-			m_theModel->theCamera.calculations(diffX, diffY);
+		//	m_MouseInfo.m_last_x = diffX;
+			//m_MouseInfo.m_last_y = diffY;
+			if (m_theModel->ChooseCamera == 1)
+				m_theModel->Camera2.calculations(diffX, diffY);
 
-			m_MouseInfo.m_last_x = diffX;
-			m_MouseInfo.m_last_y = diffY;
-
+			//Make sure the mouse doesn't go out of the window.
 			RECT WindowRect;
 			GetWindowRect(hWnd, &WindowRect);
 			ClipCursor(&WindowRect);
-
 			return 1; // Jump Back
 		}
 	case WM_LBUTTONDOWN:

@@ -72,3 +72,31 @@ CVector3 CVector3::NormalizedVector3D()
 	float Z = z / magnitude;
 	return CVector3(X, Y, Z);
 }
+
+bool CVector3::operator== (const CVector3& rhs) const
+{
+	if (this->x == rhs.x)
+	{
+		if (this->y == rhs.y)
+		{
+			if (this->z == rhs.z)
+			{
+				return true;
+			}
+		}
+	}
+
+	return false;
+}
+
+void CVector3::Set(float X, float Y, float Z)
+{
+	this->x = X;
+	this->y = Y;
+	this->z = Z;
+}
+
+float CVector3::GetMagnitude()
+{
+	return sqrtf(x * x + y * y + z * z);
+}

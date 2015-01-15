@@ -13,6 +13,14 @@ Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "Frustum Clip Space", "Frust
 EndProject
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "Mouse", "Mouse\Mouse.vcxproj", "{2E65C83B-883B-4B41-BB5F-93223735C781}"
 EndProject
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "Base Entity", "Base Entity\Base Entity.vcxproj", "{B3195217-5047-4FE5-8DEE-02F84C7279F2}"
+EndProject
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "Model and Texture Loader", "Model and Texture Loader\Model and Texture Loader.vcxproj", "{37832AE2-026C-4DB0-B007-D72DA59B9699}"
+EndProject
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "Quad Tree", "Quad Tree\Quad Tree.vcxproj", "{447400DE-1880-44B0-82EB-A7F54946D013}"
+EndProject
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "Sky Box", "Sky Box\Sky Box.vcxproj", "{F5919531-0CDB-45B2-A85F-75B912F43E18}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Win32 = Debug|Win32
@@ -39,6 +47,22 @@ Global
 		{2E65C83B-883B-4B41-BB5F-93223735C781}.Debug|Win32.Build.0 = Debug|Win32
 		{2E65C83B-883B-4B41-BB5F-93223735C781}.Release|Win32.ActiveCfg = Release|Win32
 		{2E65C83B-883B-4B41-BB5F-93223735C781}.Release|Win32.Build.0 = Release|Win32
+		{B3195217-5047-4FE5-8DEE-02F84C7279F2}.Debug|Win32.ActiveCfg = Debug|Win32
+		{B3195217-5047-4FE5-8DEE-02F84C7279F2}.Debug|Win32.Build.0 = Debug|Win32
+		{B3195217-5047-4FE5-8DEE-02F84C7279F2}.Release|Win32.ActiveCfg = Release|Win32
+		{B3195217-5047-4FE5-8DEE-02F84C7279F2}.Release|Win32.Build.0 = Release|Win32
+		{37832AE2-026C-4DB0-B007-D72DA59B9699}.Debug|Win32.ActiveCfg = Debug|Win32
+		{37832AE2-026C-4DB0-B007-D72DA59B9699}.Debug|Win32.Build.0 = Debug|Win32
+		{37832AE2-026C-4DB0-B007-D72DA59B9699}.Release|Win32.ActiveCfg = Release|Win32
+		{37832AE2-026C-4DB0-B007-D72DA59B9699}.Release|Win32.Build.0 = Release|Win32
+		{447400DE-1880-44B0-82EB-A7F54946D013}.Debug|Win32.ActiveCfg = Debug|Win32
+		{447400DE-1880-44B0-82EB-A7F54946D013}.Debug|Win32.Build.0 = Debug|Win32
+		{447400DE-1880-44B0-82EB-A7F54946D013}.Release|Win32.ActiveCfg = Release|Win32
+		{447400DE-1880-44B0-82EB-A7F54946D013}.Release|Win32.Build.0 = Release|Win32
+		{F5919531-0CDB-45B2-A85F-75B912F43E18}.Debug|Win32.ActiveCfg = Debug|Win32
+		{F5919531-0CDB-45B2-A85F-75B912F43E18}.Debug|Win32.Build.0 = Debug|Win32
+		{F5919531-0CDB-45B2-A85F-75B912F43E18}.Release|Win32.ActiveCfg = Release|Win32
+		{F5919531-0CDB-45B2-A85F-75B912F43E18}.Release|Win32.Build.0 = Release|Win32
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

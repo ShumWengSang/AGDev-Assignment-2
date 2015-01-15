@@ -23,10 +23,10 @@ public:
 	~CCamera();
 
 	// These are are data access functions for our camera's private data
-	CVector3 Position() {	return m_vPosition;		}
-	CVector3 View()		{	return m_vView;			}
-	CVector3 UpVector() {	return m_vUpVector;		}
-	CVector3 Strafe()	{	return m_vStrafe;		}
+	inline CVector3 Position() {	return m_vPosition;		}
+	inline CVector3 View()		{	return m_vView;			}
+	inline CVector3 UpVector() { return m_vUpVector; }
+	inline CVector3 Strafe()	{ return m_vStrafe; }
 	
 	// This changes the position, view, and up vector of the camera.
 	// This is primarily used for initialization

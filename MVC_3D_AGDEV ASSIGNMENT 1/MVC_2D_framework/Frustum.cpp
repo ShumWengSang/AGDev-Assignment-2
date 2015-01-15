@@ -7,8 +7,8 @@ CFrustum::CFrustum(void)
 	up.m_z = 0.0f;
 	angle = 0;
 
-	farDist = 15;
-	nearDist = 0.1f;
+	farDist = 50.f;
+	nearDist = 1.f;
 
 	fPosition = Vector3D(0,0,-5);
 	fDirection = Vector3D(0,0,3.14159f);
@@ -19,9 +19,19 @@ CFrustum::~CFrustum(void)
 {
 }
 
-// Update the frustum
-void CFrustum::Update(void)
+void CFrustum::Update( Vector3D newPos,Vector3D newDir)
 {
+
+	fPosition = newPos;
+	fDirection = newDir;
+
+	Update();
+}
+
+// Update the frustum
+void CFrustum::Update()
+{
+
 	heightNear = 2 * tan(FOVY*0.5f) * nearDist;
 	heightFar  = 2 * tan(FOVY*0.5f) * farDist;
 
@@ -90,7 +100,7 @@ void CFrustum::Draw(void)
 	glPushAttrib(GL_ENABLE_BIT);
 		glEnable( GL_BLEND );
 		glBlendFunc( GL_SRC_ALPHA , GL_ONE_MINUS_SRC_ALPHA );
-		glColor4f( 0.0f, 0.0f, 1.0f, 0.6f);
+		glColor4f( 0.0f, 0.0f, 1.0f, 0.3f);
 		glBegin( GL_QUADS );
 			glVertex3f(nbl.m_x, nbl.m_y, nbl.m_z);
 			glVertex3f(ntl.m_x, ntl.m_y, ntl.m_z);
@@ -266,4 +276,24 @@ bool CFrustum::ContainmentCheck(const Vector3D position)
 		return false;
 	}
 	return true;
+}
+
+int CFrustum::ContainmentCheckSpheres(Vector3D position, float radius)
+{
+#define INSIDE 0
+#define OUTSIDE 1
+#define INTERSECT 3
+
+	float distance;
+	int result = INSIDE;
+
+	for (int i = 0; i < 6; i++) {
+		//distance = pl[i].distance(p);
+		if (distance < -radius)
+			return OUTSIDE;
+		else if (distance < radius)
+			result = INTERSECT;
+	}
+	return(result);
+
 }
