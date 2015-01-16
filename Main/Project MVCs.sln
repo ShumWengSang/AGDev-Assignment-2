@@ -1,8 +1,6 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
-# Visual Studio 2013
-VisualStudioVersion = 12.0.21005.1
-MinimumVisualStudioVersion = 10.0.40219.1
+# Visual Studio 2010
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "Project MVCs", "Project MVCs\Project MVCs.vcxproj", "{3415CA79-0647-496D-BACE-3B79BC8CB6A0}"
 EndProject
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "Math", "Math\Math.vcxproj", "{9BB92AF9-C0E9-4A30-BAFA-BAEA759C6409}"
@@ -20,6 +18,8 @@ EndProject
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "Quad Tree", "Quad Tree\Quad Tree.vcxproj", "{447400DE-1880-44B0-82EB-A7F54946D013}"
 EndProject
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "Sky Box", "Sky Box\Sky Box.vcxproj", "{F5919531-0CDB-45B2-A85F-75B912F43E18}"
+EndProject
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "Lua Interface", "Lua Interface\Lua Interface.vcxproj", "{F14AEA54-2847-4851-8FA2-570E2B769142}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -63,6 +63,10 @@ Global
 		{F5919531-0CDB-45B2-A85F-75B912F43E18}.Debug|Win32.Build.0 = Debug|Win32
 		{F5919531-0CDB-45B2-A85F-75B912F43E18}.Release|Win32.ActiveCfg = Release|Win32
 		{F5919531-0CDB-45B2-A85F-75B912F43E18}.Release|Win32.Build.0 = Release|Win32
+		{F14AEA54-2847-4851-8FA2-570E2B769142}.Debug|Win32.ActiveCfg = Debug|Win32
+		{F14AEA54-2847-4851-8FA2-570E2B769142}.Debug|Win32.Build.0 = Debug|Win32
+		{F14AEA54-2847-4851-8FA2-570E2B769142}.Release|Win32.ActiveCfg = Release|Win32
+		{F14AEA54-2847-4851-8FA2-570E2B769142}.Release|Win32.Build.0 = Release|Win32
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

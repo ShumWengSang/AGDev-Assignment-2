@@ -3,7 +3,7 @@
 
 QuadTree::QuadTree(void)
 {
-	MAX_OBJECTS = 5;
+	MAX_OBJECTS = 1;
 	MAX_LEVELS = 10;
 }
 
@@ -13,7 +13,7 @@ QuadTree::QuadTree(int pLevel, rect pBounds)
 	bounds = pBounds;
 	for (int i = 0; i < 4; i++)
 		nodes[i] = NULL;
-	MAX_OBJECTS = 5;
+	MAX_OBJECTS = 1;
 	MAX_LEVELS = 10;
 }
 
@@ -115,7 +115,7 @@ void QuadTree::insert(rect pRect)
 	//The method first determines whether the node has any child nodes and tries to add the object there.
 
 	objects.push_back(pRect);
-	//If there are no child nodes or the object doesn’t fit in a child node, it adds the object to the parent node.
+	//If there are no child nodes or the object doesn’t fit in a child node, it adds the object to the current node.
 
 	if (objects.size() > MAX_OBJECTS && level < MAX_LEVELS)
 	{
