@@ -13,27 +13,39 @@
       <UniqueIdentifier>{67DA6AB6-F800-4c08-8B7A-83BB121AAD01}</UniqueIdentifier>
       <Extensions>rc;ico;cur;bmp;dlg;rc2;rct;bin;rgs;gif;jpg;jpeg;jpe;resx;tiff;tif;png;wav;mfcribbon-ms</Extensions>
     </Filter>
+    <Filter Include="Source Files\MVC">
+      <UniqueIdentifier>{d87daf99-441b-488b-8c41-90d555e69650}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Header Files\MVC">
+      <UniqueIdentifier>{8e7ae138-41f5-44eb-9dd0-9362c597cb38}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="MVC_Controller.cpp">
+    <ClCompile Include="Exit.cpp">
       <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="MVC_Controller.cpp">
+      <Filter>Source Files\MVC</Filter>
     </ClCompile>
     <ClCompile Include="MVC_Model.cpp">
-      <Filter>Source Files</Filter>
+      <Filter>Source Files\MVC</Filter>
     </ClCompile>
     <ClCompile Include="MVC_View.cpp">
-      <Filter>Source Files</Filter>
+      <Filter>Source Files\MVC</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="Exit.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
     <ClInclude Include="MVC_Controller.h">
-      <Filter>Source Files</Filter>
+      <Filter>Header Files\MVC</Filter>
     </ClInclude>
     <ClInclude Include="MVC_Model.h">
-      <Filter>Source Files</Filter>
+      <Filter>Header Files\MVC</Filter>
     </ClInclude>
     <ClInclude Include="MVC_View.h">
-      <Filter>Source Files</Filter>
+      <Filter>Header Files\MVC</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

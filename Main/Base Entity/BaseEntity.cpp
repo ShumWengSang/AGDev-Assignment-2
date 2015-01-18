@@ -3,6 +3,7 @@
 
 BaseEntity::BaseEntity()
 {
+	theType = NONE;
 }
 
 
@@ -18,7 +19,7 @@ bool BaseEntity::glRenderObject(CVector3* theCameraPosition)
 
 EntityType BaseEntity::getObjectType(void)
 {
-	return NONE;
+	return theType;
 };
 
 
@@ -33,4 +34,10 @@ const CVector3 BaseEntity::getPosition(void)
 bool BaseEntity::operator == (BaseEntity& o)
 {
 	return bool(getObjectType() == o.getObjectType() && getPosition() == o.getPosition());
+}
+
+CObjectModel BaseEntity::GetObjectModel()
+{
+	CObjectModel t;
+	return t;
 }

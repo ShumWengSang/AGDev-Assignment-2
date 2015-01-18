@@ -20,7 +20,7 @@
     <ConfigurationType>Application</ConfigurationType>
     <UseDebugLibraries>true</UseDebugLibraries>
     <PlatformToolset>v100</PlatformToolset>
-    <CharacterSet>Unicode</CharacterSet>
+    <CharacterSet>MultiByte</CharacterSet>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'" Label="Configuration">
     <ConfigurationType>Application</ConfigurationType>
@@ -53,7 +53,7 @@
       <Optimization>Disabled</Optimization>
       <PreprocessorDefinitions>WIN32;_DEBUG;_CONSOLE;_LIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <SDLCheck>true</SDLCheck>
-      <AdditionalIncludeDirectories>$(SolutionDir)Base Entity;$(SolutionDir)Math;$(SolutionDir)Frustum Clip Space;$(SolutionDir)Camera;$(SolutionDir)Mouse;$(SolutionDir)Model and Texture Loader;$(SolutionDir)Sky Box;$(SolutionDir)Quad Tree;</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>$(SolutionDir)Base Entity;$(SolutionDir)Math;$(SolutionDir)Frustum Clip Space;$(SolutionDir)Camera;$(SolutionDir)Mouse;$(SolutionDir)Model and Texture Loader;$(SolutionDir)Sky Box;$(SolutionDir)Quad Tree;$(SolutionDir)UserInterface HUD; $(SolutionDir)Time</AdditionalIncludeDirectories>
     </ClCompile>
     <Link>
       <SubSystem>Console</SubSystem>
@@ -79,11 +79,13 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="Exit.cpp" />
     <ClCompile Include="MVC_Controller.cpp" />
     <ClCompile Include="MVC_Model.cpp" />
     <ClCompile Include="MVC_View.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="Exit.h" />
     <ClInclude Include="MVC_Controller.h" />
     <ClInclude Include="MVC_Model.h" />
     <ClInclude Include="MVC_View.h" />
@@ -112,6 +114,12 @@
     </ProjectReference>
     <ProjectReference Include="..\Sky Box\Sky Box.vcxproj">
       <Project>{f5919531-0cdb-45b2-a85f-75b912f43e18}</Project>
+    </ProjectReference>
+    <ProjectReference Include="..\Time\Time.vcxproj">
+      <Project>{d08b71e0-7153-4439-9d8d-7046e838ee50}</Project>
+    </ProjectReference>
+    <ProjectReference Include="..\UserInterface HUD\UserInterface HUD.vcxproj">
+      <Project>{77673357-2e49-4bf5-bb0d-8656b60b1b70}</Project>
     </ProjectReference>
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />

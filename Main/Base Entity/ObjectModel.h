@@ -12,14 +12,17 @@ private:
 	ObjFile theObj_MedPoly;
 	ObjFile theObj_LowPoly;
 
+
 public:
 	CObjectModel(void);
 	~CObjectModel(void);
 
+	ObjFile * theCurrent;
 	void Init(void);
 	void Render(CVector3* theCameraPosition);
 	void Render(const int RESOLUTION);
 	void SetPosition(CVector3 theNewPosition);
 	CVector3 GetPosition();
+	int Texture;
 };
 

@@ -1,13 +1,13 @@
 #include "QuadTree.h"
 
 
-QuadTree::QuadTree(void)
+QuadTree1::QuadTree1(void)
 {
 	MAX_OBJECTS = 1;
 	MAX_LEVELS = 10;
 }
 
-QuadTree::QuadTree(int pLevel, rect pBounds)
+QuadTree1::QuadTree1(int pLevel, rect pBounds)
 {
 	level = pLevel;
 	bounds = pBounds;
@@ -17,7 +17,7 @@ QuadTree::QuadTree(int pLevel, rect pBounds)
 	MAX_LEVELS = 10;
 }
 
-QuadTree::~QuadTree(void)
+QuadTree1::~QuadTree1(void)
 {
 	if (level == MAX_LEVELS)
 		return;
@@ -26,7 +26,7 @@ QuadTree::~QuadTree(void)
 			nodes[i] = NULL;
 }
 
-void QuadTree::clear()
+void QuadTree1::clear()
 {
 	if (level == MAX_LEVELS)
 	{
@@ -48,20 +48,20 @@ void QuadTree::clear()
 	}
 }
 
-void QuadTree::Split()
+void QuadTree1::Split()
 {
 	int subWidth = (int)(bounds.width * 0.5);
 	int subHeight = (int)(bounds.height * 0.5);
 	int x = (int)bounds.x;
 	int y = (int)bounds.y;
 
-	nodes[0] =  new QuadTree(level+1, rect(x + subWidth, y, subWidth, subHeight));
-	nodes[1] =  new QuadTree(level+1,  rect(x, y, subWidth, subHeight));
-	nodes[2] =  new QuadTree(level+1, rect(x, y + subHeight, subWidth, subHeight));
-	nodes[3] =  new QuadTree(level+1,  rect(x + subWidth, y + subHeight, subWidth, subHeight));
+	nodes[0] =  new QuadTree1(level+1, rect(x + subWidth, y, subWidth, subHeight));
+	nodes[1] =  new QuadTree1(level+1,  rect(x, y, subWidth, subHeight));
+	nodes[2] =  new QuadTree1(level+1, rect(x, y + subHeight, subWidth, subHeight));
+	nodes[3] =  new QuadTree1(level+1,  rect(x + subWidth, y + subHeight, subWidth, subHeight));
 }
 
-int QuadTree::GetIndex(rect pRect)
+int QuadTree1::GetIndex(rect pRect)
 {
 	int index = -1;
 	double verticalMidpoint = bounds.x + (bounds.width / 2);
@@ -94,12 +94,12 @@ int QuadTree::GetIndex(rect pRect)
 	return index;
 }
 
-void QuadTree::insert(BaseEntity theEntity)
+void QuadTree1::insert(BaseEntity theEntity)
 {
 	
 }
 
-void QuadTree::insert(rect pRect)
+void QuadTree1::insert(rect pRect)
 {
 	if (nodes[0] != NULL)
 	{
@@ -143,7 +143,7 @@ void QuadTree::insert(rect pRect)
 	//Splitting will cause the node to insert any object that can fit in a child node to be added to the child node; otherwise the object will stay in the parent node.
 }
 
-vector<rect> QuadTree::retrive(vector<rect> &returnObjects, rect pRect)
+vector<rect> QuadTree1::retrive(vector<rect> &returnObjects, rect pRect)
 {
 	int index = GetIndex(pRect);
 	if (index != -1 && nodes[0] != NULL)
@@ -156,7 +156,7 @@ vector<rect> QuadTree::retrive(vector<rect> &returnObjects, rect pRect)
 	return returnObjects;
 }
 
-void QuadTree::DrawQuad()
+void QuadTree1::DrawQuad()
 {
 
 	glColor3f(1, 0, 0);
@@ -180,7 +180,7 @@ void QuadTree::DrawQuad()
 	}
 }
 
-void QuadTree::DrawQuadTree(rect * pRect)
+void QuadTree1::DrawQuadTree(rect * pRect)
 {
 	//int index = GetIndex(pRect);
 	if (pRect == NULL)

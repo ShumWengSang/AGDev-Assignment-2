@@ -319,7 +319,7 @@ void InitOpenGL_Extensions()
 {
 	if (!glBindBufferARB)
 	{
-		const char* ext = glGetString(GL_EXTENSIONS);
+		const GLubyte* ext = glGetString(GL_EXTENSIONS);
 		unsigned int i=0;
 		while (ext[i] != '\0') {
 			if (ext[i] == ' ') {
@@ -521,6 +521,9 @@ typedef struct _ObjMesh
 
 	struct _ObjMesh *m_pNext;				/*	Each mesh will be stored internally as a node on a linked list */
 
+	float MaxX, MaxY, MaxZ;
+	float MinX, MinY, MinZ;
+
 } ObjMesh;
 
 
@@ -630,7 +633,12 @@ ObjMesh *MakeOBJ( void )
 	pMesh->m_iMode				= 0;
 	pMesh->m_iMeshID			= ++g_ObjIdGenerator;
 
-
+	pMesh->MaxX = 0;
+	pMesh->MaxY = 0;
+	pMesh->MaxZ = 0;
+	pMesh->MinX = 0;
+	pMesh->MinY = 0;
+	pMesh->MinZ = 0;
 	/*
 	**	Insert the mesh at the beginning of the linked list
 	*/
@@ -841,6 +849,31 @@ ObjFile LoadOBJ(const char *filename)
 							&pMesh->m_aVertexArray[ vc ].y,
 							&pMesh->m_aVertexArray[ vc ].z);
 			++vc;
+			//Storing the min and max.
+			if (pMesh->m_aVertexArray[vc].x > pMesh->MaxX)
+			{
+				pMesh->MaxX = pMesh->m_aVertexArray[vc].x;
+			}
+			if (pMesh->m_aVertexArray[vc].y > pMesh->MaxY)
+			{
+				pMesh->MaxX = pMesh->m_aVertexArray[vc].y;
+			}
+			if (pMesh->m_aVertexArray[vc].z > pMesh->MaxZ)
+			{
+				pMesh->MaxX = pMesh->m_aVertexArray[vc].z;
+			}
+			if (pMesh->m_aVertexArray[vc].x < pMesh->MinX)
+			{
+				pMesh->m_aVertexArray[vc].x = pMesh->MinX;
+			}
+			if (pMesh->m_aVertexArray[vc].y < pMesh->MinY)
+			{
+				pMesh->m_aVertexArray[vc].y = pMesh->MinY;
+			}
+			if (pMesh->m_aVertexArray[vc].z < pMesh->MinZ)
+			{
+				pMesh->m_aVertexArray[vc].z = pMesh->MinZ;
+			}
 		}
 		else
 
@@ -1222,6 +1255,7 @@ void CalculateBiNormalArray(ObjMesh* pMesh)
 		b->z = n->x * t->y - n->y * t->x;		
 	}
 }
+
 
 /*
 **	This function renders the mesh either using glBegin/glEnd, display lists,

@@ -1,15 +1,17 @@
 #pragma once
 #include "Vector3.h"
-
+#include "ObjectModel.h"
 enum EntityType
 {
 	NONE = 0,
-	PLAYER = 1
+	PLAYER = 1,
+	EXIT
 };
 
 class BaseEntity
 {
 public:
+	EntityType theType;
 	BaseEntity();
 	BaseEntity(const BaseEntity& o);
 	virtual ~BaseEntity();
@@ -34,6 +36,8 @@ public:
 	// Operator overloaded equivalence.  Determines whether or no two objects are identical.
 	// All derived classes are expected to override this function if a getter detail of 
 	// examination is required.
+
+	virtual CObjectModel GetObjectModel();
 
 private:
 };

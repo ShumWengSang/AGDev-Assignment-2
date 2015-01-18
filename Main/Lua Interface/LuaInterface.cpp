@@ -16,6 +16,7 @@ LuaInterface::~LuaInterface(void)
 bool LuaInterface::RunScript(char * filename)
 {
 	luaL_dofile(L,filename);
+	return true;
 }
 
 bool LuaInterface::LoadFile(char * filename)

@@ -1,12 +1,12 @@
 #pragma once
 #include "BaseEntity.h"
 #include "ObjectModel.h"
-class Player :
+class CExit :
 	public BaseEntity
 {
 public:
-	Player();
-	~Player();
+	CExit();
+	~CExit();
 
 	const CVector3 getPosition(void);
 	void SetPos(CVector3 newPos);
@@ -15,13 +15,5 @@ public:
 
 	inline EntityType getObjectType(void);
 	CObjectModel theObject;
-
-	virtual CObjectModel GetObjectModel()
-	{
-		return theObject;
-	}
-private:
-
-
 };
 

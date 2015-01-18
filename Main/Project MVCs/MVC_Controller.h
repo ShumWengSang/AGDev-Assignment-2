@@ -1,14 +1,11 @@
 #ifndef __MVC_CONTROLLER_H__
 #define __MVC_CONTROLLER_H__
 
-#ifndef __WINDOWS_H__
-#include <Windows.h>
-#define __WINDOWS_H__
-#endif
 
-#ifndef __MVCTIME_H__
+#include <Windows.h>
+
 #include "MVCtime.h"
-#endif
+
 
 class MVC_Model;
 class MVC_View;

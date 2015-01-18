@@ -12,9 +12,7 @@
 #include "MVC_Model.h"
 #endif
 
-#ifndef __BASIC_H__
-#include "basicShape.h"
-#endif
+
 
 #ifndef __MVCTIME_H__
 #include "MVCtime.h"

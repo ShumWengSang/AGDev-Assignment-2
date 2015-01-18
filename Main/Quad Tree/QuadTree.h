@@ -25,7 +25,7 @@ struct rect
 	};
 };
 
-class QuadTree
+class QuadTree1
 {
 private :
 
@@ -36,14 +36,14 @@ private :
 	int level;
 	vector<rect> objects;
 	rect bounds;
-	QuadTree *nodes[4];
+	QuadTree1 *nodes[4];
 
 
 public:
 
-	QuadTree(void);
-	QuadTree(int pLevel, rect pBounds);
-	~QuadTree(void);
+	QuadTree1(void);
+	QuadTree1(int pLevel, rect pBounds);
+	~QuadTree1(void);
 
 	void clear();	//clear the quadtree
 	void Split();	//split the quadtree

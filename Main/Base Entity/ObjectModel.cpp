@@ -32,14 +32,17 @@ void CObjectModel::Render(CVector3* theCameraPosition)
 	glTranslatef(thePosition.x, thePosition.y, thePosition.z);
 	if (distance < 30)
 	{
+		theCurrent = &theObj_HighPoly;
 		DrawOBJ(theObj_HighPoly);
 	}
 	else if (distance < 60)
 	{
+		theCurrent = &theObj_MedPoly;
 		DrawOBJ(theObj_MedPoly);
 	}
 	else
 	{
+		theCurrent = &theObj_LowPoly;
 		DrawOBJ(theObj_LowPoly);
 	}
 

@@ -11,15 +11,15 @@
     </ProjectConfiguration>
   </ItemGroup>
   <PropertyGroup Label="Globals">
-    <ProjectGuid>{37832AE2-026C-4DB0-B007-D72DA59B9699}</ProjectGuid>
+    <ProjectGuid>{D08B71E0-7153-4439-9D8D-7046E838EE50}</ProjectGuid>
     <Keyword>Win32Proj</Keyword>
-    <RootNamespace>ModelandTextureLoader</RootNamespace>
+    <RootNamespace>Time</RootNamespace>
   </PropertyGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'" Label="Configuration">
     <ConfigurationType>StaticLibrary</ConfigurationType>
     <UseDebugLibraries>true</UseDebugLibraries>
-    <PlatformToolset>v100</PlatformToolset>
+    <PlatformToolset>v120</PlatformToolset>
     <CharacterSet>Unicode</CharacterSet>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'" Label="Configuration">
@@ -74,15 +74,10 @@
     <Text Include="ReadMe.txt" />
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="NewObjLoader.cpp" />
-    <ClCompile Include="ObjLoader.cpp" />
-    <ClCompile Include="tgaLoader.c" />
-    <ClCompile Include="TGALoader.cpp" />
+    <ClCompile Include="MVCtime.cpp" />
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="NewObjLoader.h" />
-    <ClInclude Include="ObjLoader.h" />
-    <ClInclude Include="tgaLoader.h" />
+    <ClInclude Include="MVCtime.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

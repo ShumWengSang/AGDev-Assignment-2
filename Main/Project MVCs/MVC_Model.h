@@ -1,45 +1,17 @@
-#ifndef __MVC_MODEL_H__
-#define __MVC_MODEL_H__
+#pragma once
 
-#ifndef __TEXTURE_H__
-#include "texture.h"
-#endif
-
-#ifndef __VECTOR_H__
+#include "TGALoader.cpp"
 #include <vector>
-#endif
-
-#ifndef __CAMERA_H__
 #include "camera.h"
-#endif
-
-#ifndef __SKYBOX_H__
 #include "SkyBox.h"
-#endif
-
-#ifndef __MOUSE_H__
+#include "Player.h"
 #include "Mouse.h"
-#endif
-
-#ifndef __CFRUSTUM_H__
-#include "Frustum.h"
-#endif
-
-#ifndef __HUD_H__
-#include "HUD.h"
-#endif
-
-#ifndef __THIRDPERSONCAMERA_H__
-#include "ThirdPersonCamera.h"
-#endif
-
-#include "MazeGenerator.h"
-
-#include "SceneGraph\\SceneNode.h"
-
 #include "Math.h"
-
+#include "Frustum.h"
+#include "HUD.h"
 #include "Exit.h"
+
+//#include "MazeGenerator.h"
 
 class MVCTime;
 
@@ -61,42 +33,39 @@ public:
 	float m_testY;
 	float m_moveX,m_moveY;
 
-	Vector3D FrustumPosition;
-	Vector3D FrustumDirection;
+	CVector3 FrustumPosition;
+	CVector3 FrustumDirection;
 
 	TextureImage SkyBoxTextures[6];
 	TextureImage ExitTexture[6];
 
-	Exit * theExits;
+	CExit * theExits;
 
 	MVCTime* m_timer;
 	CFrustum theFrustum;
-	ThirdPersonCamera* thirdpersoncamera;
-	CSceneNode theRoot;
 
-	CSceneNode * thePlayer;
 	int PlayerID;
 
 	Player thePlayerData;
 
-	Camera theCamera;
-	Camera Camera2;
+	CCamera theCamera;
+	CCamera Camera2;
 
 	HUD theHUD;
 	SkyBox theBox;
 
-	void FrustumChecking();
-	void FrustumChecking(CSceneNode* thisNode, const int ParentID, const int thisID);
+	//void FrustumChecking();
+	//void FrustumChecking(CSceneNode* thisNode, const int ParentID, const int thisID);
 
-	void CheckCollision();
-	void CheckCollision(CSceneNode * otherNode, CSceneNode * thisNode);
-	bool IsPointInside(Vector3D, Vector3D, Vector3D);
+	//void CheckCollision();
+	//void CheckCollision(CSceneNode * otherNode, CSceneNode * thisNode);
+	//bool IsPointInside(CVector3, CVector3, CVector3);
 
 	//A function just for checking the exits against the player in the scene graph
-	void PlayerAgainstExit(int PlayerID, Entity Exit[], int size);
+	//void PlayerAgainstExit(int PlayerID, Entity Exit[], int size);
 
 	//A vector to hold the IDs of the parts to rotate.
-	std::vector<int> ArrayofIDs;
+	//std::vector<int> ArrayofIDs;
 
 	//DISTANCE FROM OBJECT TO CAMERA
 	int distance;
@@ -105,7 +74,7 @@ public:
 	float x, y, z;
 
 	//MAZE
-	MazeGenerator theMaze;
+	//MazeGenerator theMaze;
 	TextureImage theImageDebugger;
 
 	//Rotate the object
@@ -117,5 +86,3 @@ public:
 	int PlayerParts[4];
 private: 
 };
-
-#endif
