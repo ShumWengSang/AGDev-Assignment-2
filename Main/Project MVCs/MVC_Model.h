@@ -6,7 +6,7 @@
 #include "SkyBox.h"
 #include "Player.h"
 #include "Mouse.h"
-#include "Math.h"
+#include "Math2.h"
 #include "Frustum.h"
 #include "HUD.h"
 #include "Exit.h"

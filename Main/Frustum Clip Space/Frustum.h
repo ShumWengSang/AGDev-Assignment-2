@@ -5,7 +5,7 @@
 #include <gl\GL.h>
 #include <gl\GLU.h>
 
-#include <math.h>
+#include <cmath>
 #pragma comment(lib, "glu32.lib")
 // This will allow us to create an object to keep track of our frustum
 class CFrustum {
