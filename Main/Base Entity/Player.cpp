@@ -40,7 +40,7 @@ bool Player::glRenderObject(CVector3* theCameraPosition)
 	return true;
 }
 
-inline EntityType Player::getObjectType(void)
+EntityType Player::getObjectType(void)
 {
 	return PLAYER;
 }

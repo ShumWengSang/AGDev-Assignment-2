@@ -36,6 +36,9 @@
     <ClCompile Include="View_misc.cpp">
       <Filter>Source Files\MVC</Filter>
     </ClCompile>
+    <ClCompile Include="main.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Exit.h">
@@ -48,6 +51,9 @@
       <Filter>Header Files\MVC</Filter>
     </ClInclude>
     <ClInclude Include="MVC_View.h">
+      <Filter>Header Files\MVC</Filter>
+    </ClInclude>
+    <ClInclude Include="gl.h">
       <Filter>Header Files\MVC</Filter>
     </ClInclude>
   </ItemGroup>

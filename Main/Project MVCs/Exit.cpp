@@ -28,7 +28,7 @@ bool CExit::glRenderObject(CVector3* theCameraPosition)
 	return true;
 }
 
-inline EntityType CExit::getObjectType(void)
+EntityType CExit::getObjectType(void)
 {
 	return EXIT;
 }

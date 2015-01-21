@@ -3,6 +3,8 @@
 #include <gl\GL.h>
 #include <gl\GLU.h>
 #include <iostream>
+
+
 typedef struct												// Create A Structure
 {
 	GLubyte	*imageData;										// Image Data (Up To 32 Bits)

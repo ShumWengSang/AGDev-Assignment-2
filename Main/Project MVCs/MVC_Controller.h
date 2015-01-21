@@ -1,9 +1,8 @@
-#ifndef __MVC_CONTROLLER_H__
-#define __MVC_CONTROLLER_H__
-
+#pragma once
 
 #include <Windows.h>
-
+#include <gl\GL.h>
+#include <gl\GLU.h>
 #include "MVCtime.h"
 
 
@@ -51,5 +50,3 @@ protected:
 	float v1, u1;
 
 };
-
-#endif

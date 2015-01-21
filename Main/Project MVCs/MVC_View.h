@@ -1,21 +1,10 @@
-#ifndef __MVC_VIEW_H__
-#define __MVC_VIEW_H__
-//#pragma comment(lib, "opengl32.lib")
-//#pragma comment(lib, "glu32.lib")
-
-#ifndef __MOUSE_H__
+#pragma once
 #include "Mouse.h"
-#endif __MOUSE_H__
 
-#ifndef __WINDOWS_H__
 #include <windows.h> // Header File For Windows
-#define __WINDOWS_H__
-#endif
-#ifndef __GL_H__
+#include <gl\GLU.h>
 #include <gl\gl.h> // Header File For The OpenGL32 Library
-#pragma comment(lib, "glu32.lib")
-#define __GL_H__
-#endif
+
 
 class MVC_Model;
 
@@ -76,5 +65,3 @@ public:
 	void DrawObject();
 	void MVC_View::Draw3DSGrid();
 };
-
-#endif

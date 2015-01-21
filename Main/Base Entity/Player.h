@@ -15,7 +15,7 @@ public:
 
 	bool glRenderObject(CVector3* theCameraPosition);
 
-	inline EntityType getObjectType(void);
+	EntityType getObjectType(void);
 	CObjectModel theObject;
 
 	virtual CObjectModel GetObjectModel()
