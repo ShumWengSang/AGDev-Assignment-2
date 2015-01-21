@@ -80,3 +80,14 @@ CVector3 CObjectModel::GetPosition()
 {
 	return CVector3(thePosition.x, thePosition.y, thePosition.z);
 }
+
+
+void CObjectModel::SetDirection(CVector3 theNewDirection)
+{
+	theDirection.Set(theNewDirection.x, theNewDirection.y, theNewDirection.z);
+}
+
+CVector3 CObjectModel::GetDirection()
+{
+	return CVector3(theDirection.x, theDirection.y, theDirection.z);
+}

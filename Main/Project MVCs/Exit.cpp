@@ -11,7 +11,7 @@ CExit::~CExit()
 }
 
 
-const CVector3 CExit::getPosition()
+CVector3 CExit::getPosition()
 {
 	return theObject.GetPosition();
 }

@@ -33,6 +33,9 @@
     <ClCompile Include="MVC_View.cpp">
       <Filter>Source Files\MVC</Filter>
     </ClCompile>
+    <ClCompile Include="View_misc.cpp">
+      <Filter>Source Files\MVC</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Exit.h">

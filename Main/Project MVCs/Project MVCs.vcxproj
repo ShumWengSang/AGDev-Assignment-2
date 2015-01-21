@@ -83,6 +83,7 @@
     <ClCompile Include="MVC_Controller.cpp" />
     <ClCompile Include="MVC_Model.cpp" />
     <ClCompile Include="MVC_View.cpp" />
+    <ClCompile Include="View_misc.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Exit.h" />

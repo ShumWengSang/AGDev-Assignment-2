@@ -7,11 +7,11 @@
 #include <gl\GLU.h>
 
 
-enum CameraType
-{
-	FirstPerson,
-	ThirdPerson
+enum CameraType {
+  FirstPerson = 1,
+  ThirdPerson = 2
 };
+
 
 // This is our camera class
 class CCamera {
@@ -19,6 +19,7 @@ class CCamera {
 public:
 
 	// Our camera constructor
+	CCamera();
 	CCamera(CameraType theType);
 	~CCamera();
 

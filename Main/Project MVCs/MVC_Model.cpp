@@ -16,6 +16,9 @@
 
 MVC_Model::MVC_Model(void)
 {
+	//theCamera(CameraType::FirstPerson);
+	//Camera2(CameraType::ThirdPerson);
+
 	Rotate = 0;
 	m_timer=MVCTime::GetInstance();
 	x = 0; y = 0; z = 0;

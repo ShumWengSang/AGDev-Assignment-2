@@ -26,11 +26,12 @@ public:
 	// BaseEntity_Type types listed above.  All derived classes are expected to override this
 	// function.
 
-	const virtual CVector3 getPosition(void);
+	virtual CVector3 getPosition(void);
 	// Returns the center position of the object.  This is used to obtain an idea of where
 	// the object is located within a graphical scene.  Returns a myVector, not a pointer so
 	// the position can be manipulated without effecting the object.  All derived classes are 
 	// expected to override this function.
+	virtual CVector3 getDirection();
 
 	virtual bool operator== (BaseEntity& o);
 	// Operator overloaded equivalence.  Determines whether or no two objects are identical.

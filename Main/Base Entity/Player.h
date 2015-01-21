@@ -8,7 +8,9 @@ public:
 	Player();
 	~Player();
 
-	const CVector3 getPosition(void);
+	CVector3 getPosition(void);
+	CVector3 getDirection();
+	void SetDir(CVector3 newDir);
 	void SetPos(CVector3 newPos);
 
 	bool glRenderObject(CVector3* theCameraPosition);

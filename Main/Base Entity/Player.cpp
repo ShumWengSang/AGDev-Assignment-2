@@ -13,7 +13,7 @@ Player::~Player()
 }
 
 
-const CVector3 Player::getPosition()
+CVector3 Player::getPosition()
 {
 	return theObject.GetPosition();
 }
@@ -21,6 +21,16 @@ const CVector3 Player::getPosition()
 void Player::SetPos(CVector3 newPos)
 {
 	theObject.SetPosition(newPos);
+}
+
+CVector3 Player::getDirection()
+{
+	return theObject.GetDirection();
+}
+
+void Player::SetDir(CVector3 newPos)
+{
+	theObject.SetDirection(newPos);
 }
 
 

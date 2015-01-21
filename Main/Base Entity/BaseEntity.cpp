@@ -23,12 +23,15 @@ EntityType BaseEntity::getObjectType(void)
 };
 
 
-const CVector3 BaseEntity::getPosition(void)
+CVector3 BaseEntity::getPosition(void)
  { 
 	 CVector3 t; return t;
  };
 
-
+CVector3 BaseEntity::getDirection()
+{
+	CVector3 t; return t;
+}
 
 
 bool BaseEntity::operator == (BaseEntity& o)

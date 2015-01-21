@@ -8,7 +8,7 @@ public:
 	CExit();
 	~CExit();
 
-	const CVector3 getPosition(void);
+	CVector3 getPosition(void);
 	void SetPos(CVector3 newPos);
 
 	bool glRenderObject(CVector3* theCameraPosition);

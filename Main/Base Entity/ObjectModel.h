@@ -8,6 +8,7 @@ class CObjectModel
 {
 private:
 	CVector3 thePosition;
+	CVector3 theDirection;
 	ObjFile theObj_HighPoly;
 	ObjFile theObj_MedPoly;
 	ObjFile theObj_LowPoly;
@@ -22,7 +23,9 @@ public:
 	void Render(CVector3* theCameraPosition);
 	void Render(const int RESOLUTION);
 	void SetPosition(CVector3 theNewPosition);
+	void SetDirection(CVector3 theNewDirection);
 	CVector3 GetPosition();
+	CVector3 GetDirection();
 	int Texture;
 };
 

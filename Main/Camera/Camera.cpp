@@ -67,6 +67,11 @@ CVector3 Normalize(CVector3 vNormal);
 /////	This is the class constructor
 /////
 ///////////////////////////////// CCAMERA \\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\*
+CCamera::CCamera(void)
+{
+	//this->theType = FirstPerson;
+	int x=0;
+}
 
 CCamera::CCamera(CameraType theType)
 {
@@ -80,8 +85,8 @@ CCamera::CCamera(CameraType theType)
 
 	this->theType = theType;
 
-	SCREENHEIGHT = 0;
-	SCREENWIDTH = 0;
+	SCREENHEIGHT = 600;
+	SCREENWIDTH = 800;
 }
 
 CCamera::~CCamera()
@@ -360,7 +365,7 @@ void CCamera::CheckForMovement()
 		MoveCamera(-speed);				
 	}
 
-	if (theType == CameraType::ThirdPerson)
+	if (theType == ThirdPerson)
 	{
 		// Check if we hit the Left arrow or the 'a' key
 		if (GetKeyState(VK_LEFT) & 0x80 || GetKeyState('A') & 0x80) {
@@ -376,7 +381,7 @@ void CCamera::CheckForMovement()
 			RotateAroundPoint(m_vView, rotatespeed, 0, -1, 0);
 		}
 	}
-	else if (theType == CameraType::FirstPerson)
+	else if (theType == FirstPerson)
 	{
 		// Check if we hit the Left arrow or the 'a' key
 		if (GetKeyState(VK_LEFT) & 0x80 || GetKeyState('A') & 0x80) {
@@ -409,14 +414,14 @@ void CCamera::Update()
 	// Normalize the strafe vector
 	m_vStrafe = Normalize(vCross);
 
-	if (theType == CameraType::FirstPerson)
+	if (theType == FirstPerson)
 	{
 		// Move the camera's view by the mouse
 		SetViewByMouse();
 	}
 
 	// This checks to see if the keyboard was pressed
-	CheckForMovement();
+	//CheckForMovement();
 	
 	// Calculate our frame rate and set our frame interval for time based movement
 	//CalculateFrameRate();

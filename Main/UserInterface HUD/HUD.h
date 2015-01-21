@@ -27,5 +27,6 @@ public:
 	int m_iHeightOfBar;
 	int m_iWidthOfBar;
 
+	void SetHUD(bool);
 	
 };

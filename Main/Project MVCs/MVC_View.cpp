@@ -69,12 +69,9 @@ BOOL MVC_View::Draw(void)
 	glLoadIdentity(); // ReSet The Current Modelview Matrix
 	glColor3f(1,1,1);
 
-	if (m_theModel->ChooseCamera == 0)
-		m_theModel->theCamera.Update(m_theModel->thePlayerData.GetPos(), m_theModel->thePlayerData.GetDir(), m_theModel->ObjectAngle);
-	else
-		m_theModel->Camera2.Update();
+	m_theModel->Camera2.Update();
 
-	m_theModel->thePlayerData.DebugDraw();
+	m_theModel->thePlayerData.glRenderObject(&m_theModel->theCamera.Position());
 
 	DrawScene();
 
@@ -100,8 +97,8 @@ int MVC_View::InitGL(GLvoid)										// All Setup For OpenGL Goes Here
 void MVC_View::DrawObject()
 {
 	glPushMatrix();
-	glTranslatef(m_theModel->theCamera.GetPosition().m_x, m_theModel->theCamera.GetPosition().m_y, m_theModel->theCamera.GetPosition().m_z);
-	glRotatef(Math::VectorToAngle(m_theModel->theCamera.GetDirection()), 0.0f, 1.0f, 0.0f); // Rotate The Triangle On The Y axis ( NEW )
+	glTranslatef(m_theModel->theCamera.Position().x, m_theModel->theCamera.Position().y, m_theModel->theCamera.Position().z);
+	glRotatef(Math::VectorToAngle(m_theModel->theCamera.View()), 0.0f, 1.0f, 0.0f); // Rotate The Triangle On The Y axis ( NEW )
 	glBegin(GL_QUADS);                // Begin drawing the color cube with 6 quads
 	// Top face (y = 1.0f)
 	// Define vertices in counter-clockwise (CCW) order with normal pointing out
@@ -156,33 +153,19 @@ void MVC_View::DrawScene()
 
 	Draw3DSGrid();
 
-	for (int i = 0; i < m_theModel->theMaze.PossibleExits.size(); i++)
-	{
-		m_theModel->theExits[i].Draw();
-	}
-
-	if (m_theModel->thePlayerData.ToggleFrustum)
-	{
-
-		m_theModel->FrustumChecking();
-		m_theModel->theFrustum.Draw();
-	}
-	else
-	{
-		m_theModel->theRoot.Draw();
-	}
 
 
 
-	m_theModel->theCamera.SetHUD(true);
+
+	m_theModel->theHUD.SetHUD(true);
 	m_theModel->theHUD.Draw();
 	Printw(10, 50, "FPS: %.2f", MVCTime::GetInstance()->GetFPS());
-	Printw(10, 100, "Camera Pos: %f %f %f", m_theModel->theCamera.GetPosition().m_x, m_theModel->theCamera.GetPosition().m_y, m_theModel->theCamera.GetPosition().m_z);
-	Printw(10, 150, "Player Data Pos: %f %f %f", m_theModel->thePlayerData.GetPos().m_x, m_theModel->thePlayerData.GetPos().m_y, m_theModel->thePlayerData.GetPos().m_z);
-	Printw(10, 200, "Player Direction %f %f %f , Angle : %f", m_theModel->thePlayerData.GetDir().m_x, m_theModel->thePlayerData.GetDir().m_y, m_theModel->thePlayerData.GetDir().m_z, Math::VectorToAngle(m_theModel->thePlayerData.GetDir()));
-	Printw(10, 250, "Camera Direction %f %f %f , Angle : %f", m_theModel->theCamera.GetDirection().m_x, m_theModel->theCamera.GetDirection().m_y, m_theModel->theCamera.GetDirection().m_z, Math::VectorToAngle(m_theModel->theCamera.GetDirection()));
-	Printw(10, 300, "Distance with Data: %f", (m_theModel->thePlayerData.GetPos() - m_theModel->theCamera.GetPosition()).GetMagnitude());
-	m_theModel->theCamera.SetHUD(false);
+	Printw(10, 100, "Camera Pos: %f %f %f", m_theModel->theCamera.Position().x, m_theModel->theCamera.Position().y, m_theModel->theCamera.Position().z);
+	Printw(10, 150, "Player Data Pos: %f %f %f", m_theModel->thePlayerData.getPosition().x, m_theModel->thePlayerData.getPosition().y, m_theModel->thePlayerData.getPosition().z);
+	Printw(10, 200, "Player Direction %f %f %f , Angle : %f", m_theModel->thePlayerData.getDirection().x, m_theModel->thePlayerData.getDirection().y, m_theModel->thePlayerData.getDirection().z, Math::VectorToAngle(m_theModel->thePlayerData.getDirection()));
+	Printw(10, 250, "Camera Direction %f %f %f , Angle : %f", m_theModel->theCamera.View().x, m_theModel->theCamera.View().y, m_theModel->theCamera.View().z, Math::VectorToAngle(m_theModel->theCamera.View()));
+	Printw(10, 300, "Distance with Data: %f", (m_theModel->thePlayerData.getPosition() - m_theModel->theCamera.Position()).GetMagnitude());
+	m_theModel->theHUD.SetHUD(false);
 	glPopMatrix();
 
 }
