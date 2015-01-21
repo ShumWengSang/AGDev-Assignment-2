@@ -1,23 +1,7 @@
-#ifndef __MVC_VIEW_H
+
 #include "MVC_View.h"
-#endif
 
-#ifndef __MVC_MODEL_H__
-#include "MVC_Model.h"
-#endif
 
-#ifndef __WINDOWS_H__
-#include <windows.h> // Header File For Windows
-#define __WINDOWS_H__
-#endif
-#ifndef __GL_H__
-#include <gl\gl.h> // Header File For The OpenGL32 Library
-#define __GL_H__
-#endif
-#ifndef __GLU_H__
-#include <gl\glu.h> // Header File For The GLu32 Library
-#define __GLU_H__
-#endif
 
 GLvoid MVC_View::ReSizeGLScene(GLsizei width, GLsizei height)		// Resize And Initialize The GL Window
 {

@@ -1,8 +1,9 @@
 #pragma once
 
-#include <Windows.h>
-#include <gl\GL.h>
-#include <gl\GLU.h>
+
+#include "gl.h"
+#include "MVC_Model.h"
+#include "MVC_View.h"
 #include "MVCtime.h"
 
 

@@ -1,5 +1,6 @@
 #pragma once
 
+
 #include "TGALoader.cpp"
 #include <vector>
 #include "camera.h"
@@ -10,6 +11,7 @@
 #include "Frustum.h"
 #include "HUD.h"
 #include "Exit.h"
+#include "MVCtime.h"
 
 //#include "MazeGenerator.h"
 

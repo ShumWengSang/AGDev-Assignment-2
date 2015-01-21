@@ -5,17 +5,7 @@
 //	Framework taken with permission by Shum Weng Sang
 //************************************************************************************************************************************//
 
-#ifndef __MVC_CONTROLLER_H__
 #include "MVC_Controller.h"
-#endif
-
-#ifndef __MVC_MODEL_H__
-#include "MVC_Model.h"
-#endif
-
-#ifndef __MVC_VIEW_H__
-#include "MVC_View.h"
-#endif
 
 
 HDC			hDC=NULL;		// Private GDI Device Context

@@ -4,34 +4,8 @@
 //	Adapted and modified by Kennard Kee Wei Sheng
 //	Framework taken with permission by Shum Weng Sang
 //************************************************************************************************************************************//
-#ifndef __MVC_VIEW_H__
 #include "MVC_View.h"
-#endif
 
-#ifndef __MVC_MODEL_H__
-#include "MVC_Model.h"
-#endif
-
-
-
-#ifndef __MVCTIME_H__
-#include "MVCtime.h"
-#endif
-
-#ifndef __WINDOWS_H__
-#include <windows.h> // Header File For Windows
-#define __WINDOWS_H__
-#endif
-#ifndef __GL_H__
-#include <gl\gl.h> // Header File For The OpenGL32 Library
-#pragma comment(lib, "glu32.lib")
-#define __GL_H__
-#endif
-#ifndef __GLU_H__
-#include <gl\glu.h> // Header File For The GLu32 Library
-#pragma comment(lib, "opengl32.lib")
-#define __GLU_H__
-#endif
 
 
 MVC_View::MVC_View(MVC_Model* theModel)

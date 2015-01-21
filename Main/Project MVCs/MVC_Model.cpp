@@ -4,12 +4,10 @@
 //	Adapted and modified by Kennard Kee Wei Sheng
 //	Framework taken with permission by Shum Weng Sang
 //************************************************************************************************************************************//
-#ifndef __MVC_MODEL_H__
+
 #include "MVC_Model.h"
-#endif
-#ifndef __MVC_TIME_H__
-#include "MVCtime.h"
-#endif
+
+
 
 
 //extern bool LoadTGA(TextureImage *texture, char *filename);

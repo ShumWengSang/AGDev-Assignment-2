@@ -1,10 +1,9 @@
 #pragma once
+
+#include "gl.h"
+#include "MVC_Model.h"
 #include "Mouse.h"
-
-#include <windows.h> // Header File For Windows
-#include <gl\GLU.h>
-#include <gl\gl.h> // Header File For The OpenGL32 Library
-
+#include "MVCtime.h"
 
 class MVC_Model;
 
