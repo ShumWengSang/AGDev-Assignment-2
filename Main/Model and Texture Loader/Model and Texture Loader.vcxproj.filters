@@ -21,9 +21,6 @@
     <ClCompile Include="tgaLoader.c">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="TGALoader.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
     <ClCompile Include="NewObjLoader.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>

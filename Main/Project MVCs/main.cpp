@@ -3,8 +3,7 @@
 #include "MVC_View.h"
 #include "MVC_Controller.h"
 //#include "gl.h"
-
-#include "ComGTGALoad.h"
+#define _CRT_SECURE_NO_DEPRECATE
 
 //#pragma comment (lib,"Math")
 //#pragma comment (lib,"Model and Texture Loader")

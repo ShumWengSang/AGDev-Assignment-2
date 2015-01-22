@@ -1,5 +1,4 @@
 #pragma once
-
 #include <vector>
 #include "camera.h"
 #include "SkyBox.h"
@@ -11,7 +10,6 @@
 #include "Exit.h"
 #include "MVCtime.h"
 #include "ComGTGALoad.h"
-
 //#include "MazeGenerator.h"
 
 class MVCTime;
