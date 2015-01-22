@@ -2,11 +2,13 @@
 #include "MVC_Model.h"
 #include "MVC_View.h"
 #include "MVC_Controller.h"
-#include "gl.h"
+//#include "gl.h"
 
+#include "ComGTGALoad.h"
 
-#pragma comment (lib,"Math")
-#pragma comment (lib,"Model and Texture Loader")
+//#pragma comment (lib,"Math")
+//#pragma comment (lib,"Model and Texture Loader")
+//#pragma comment (lib,"GLU32.lib")
 
 int main( int argc, char* args )
 {

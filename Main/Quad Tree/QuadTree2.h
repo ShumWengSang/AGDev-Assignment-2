@@ -3,46 +3,9 @@
 #include <set>
 #include <vector>
 #include "ObjLoader.h"
-#include "ObjLoader.cpp"
 
-extern _ObjMesh *g_LinkedListHead;
 
-typedef struct _MinMax
-{
-	float MinX, MinY, MinZ;
-	float MaxX, MaxY, MaxZ;
-} MinMax;
 
-MinMax GetMinMax(ObjFile id)
-{
-	/*
-	**	Because the meshes are on a linked list, we first need to find the
-	**	mesh with the specified ID number so traverse the list.
-	*/
-	ObjMesh *pMesh = g_LinkedListHead;
-
-	while (pMesh && pMesh->m_iMeshID != id)
-	{
-		pMesh = pMesh->m_pNext;
-	}
-
-	/*
-	**	Check to see if the mesh ID is valid.
-	*/
-	if (pMesh != NULL)
-	{
-		MinMax theMinMax;
-		theMinMax.MaxX = pMesh->MaxX;
-		theMinMax.MaxY = pMesh->MaxY;
-		theMinMax.MaxZ = pMesh->MaxZ;
-		theMinMax.MinX = pMesh->MinX;
-		theMinMax.MinY = pMesh->MinY;
-		theMinMax.MinZ = pMesh->MinZ;
-		return theMinMax;
-	}
-	MinMax nothing;
-	return nothing;
-}
 
 struct BaseEntityPair
 {

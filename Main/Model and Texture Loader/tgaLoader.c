@@ -5,6 +5,7 @@
 #include <math.h>
 #include <assert.h>
 #include <memory.h>
+#include "tgaLoader.h"
 
 #ifndef IN
 #define IN

@@ -10,8 +10,6 @@
 
 
 
-//extern bool LoadTGA(TextureImage *texture, char *filename);
-
 MVC_Model::MVC_Model(void)
 {
 	//theCamera(CameraType::FirstPerson);

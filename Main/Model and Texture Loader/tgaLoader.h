@@ -21,7 +21,7 @@ extern "C" {
  *	\param	bpp			-	the bytes per pixel of the image file.
  *	\return	1 if ok, 0 otherwise
  */
-int LoadTgaImage(const char filename[],unsigned char** pixels,unsigned int *w,unsigned int *h,unsigned int* bpp);
+extern int LoadTgaImage(const char filename[],unsigned char** pixels,unsigned int *w,unsigned int *h,unsigned int* bpp);
 
 
 #ifdef __cplusplus
