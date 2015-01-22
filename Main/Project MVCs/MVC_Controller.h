@@ -5,6 +5,7 @@
 #include "MVC_Model.h"
 #include "MVC_View.h"
 #include "MVCtime.h"
+#include"ComGTGALoad.h"
 
 
 class MVC_Model;

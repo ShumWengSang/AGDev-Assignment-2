@@ -52,6 +52,9 @@
       <SubSystem>Windows</SubSystem>
       <GenerateDebugInformation>true</GenerateDebugInformation>
     </Link>
+    <Lib>
+      <AdditionalDependencies>OpenGL32.lib</AdditionalDependencies>
+    </Lib>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
     <ClCompile>
@@ -80,6 +83,7 @@
     <ClCompile Include="TGALoader.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="ComGTGALoad.h" />
     <ClInclude Include="NewObjLoader.h" />
     <ClInclude Include="ObjLoader.h" />
     <ClInclude Include="tgaLoader.h" />

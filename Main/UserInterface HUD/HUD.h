@@ -7,7 +7,7 @@
 #include <gl\glu.h> // Header File For The GLu32 Library
 #include "Vector3.h"
 #include "camera.h"
-#include "TGALoader.cpp"
+#include "ComGTGALoad.h"
 
 class HUD
 {

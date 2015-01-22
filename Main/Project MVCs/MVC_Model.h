@@ -1,7 +1,5 @@
 #pragma once
 
-
-#include "TGALoader.cpp"
 #include <vector>
 #include "camera.h"
 #include "SkyBox.h"
@@ -12,6 +10,7 @@
 #include "HUD.h"
 #include "Exit.h"
 #include "MVCtime.h"
+#include "ComGTGALoad.h"
 
 //#include "MazeGenerator.h"
 
