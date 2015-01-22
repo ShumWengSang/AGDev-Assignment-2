@@ -33,11 +33,11 @@
     <ClCompile Include="MVC_View.cpp">
       <Filter>Source Files\MVC</Filter>
     </ClCompile>
-    <ClCompile Include="View_misc.cpp">
-      <Filter>Source Files\MVC</Filter>
-    </ClCompile>
     <ClCompile Include="main.cpp">
       <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="View_misc.cpp">
+      <Filter>Source Files\MVC</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -50,10 +50,10 @@
     <ClInclude Include="MVC_Model.h">
       <Filter>Header Files\MVC</Filter>
     </ClInclude>
-    <ClInclude Include="MVC_View.h">
+    <ClInclude Include="gl.h">
       <Filter>Header Files\MVC</Filter>
     </ClInclude>
-    <ClInclude Include="gl.h">
+    <ClInclude Include="MVC_View.h">
       <Filter>Header Files\MVC</Filter>
     </ClInclude>
   </ItemGroup>

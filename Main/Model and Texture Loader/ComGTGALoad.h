@@ -13,7 +13,7 @@ typedef struct												// Create A Structure
 	GLuint	texID;											// Texture ID Used To Select A Texture
 } TextureImage;												// Structure Name
 #define _CRT_SECURE_NO_WARNINGS
-bool LoadTGA(TextureImage *texture, char *filename)			// Loads A TGA File Into Memory
+static bool LoadTGA(TextureImage *texture, char *filename)			// Loads A TGA File Into Memory
 {
 	GLubyte		TGAheader[12] = { 0, 0, 2, 0, 0, 0, 0, 0, 0, 0, 0, 0 };	// Uncompressed TGA Header
 	GLubyte		TGAcompare[12];								// Used To Compare TGA Header

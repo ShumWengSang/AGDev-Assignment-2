@@ -1,10 +1,8 @@
 #include "Vector3.h"
 
-// This computes the magnitude of a normal.   (magnitude = sqrt(x^2 + y^2 + z^2)
-#define Mag(Normal) (sqrt(Normal.x*Normal.x + Normal.y*Normal.y + Normal.z*Normal.z))
 
 // This returns the cross product between 2 vectors
-CVector3 Cross(CVector3 vVector1, CVector3 vVector2)
+CVector3 CVector3::Cross(CVector3 vVector1, CVector3 vVector2)
 {
 	CVector3 vCross;								// The vector to hold the cross product
 	// Get the X value
@@ -18,11 +16,11 @@ CVector3 Cross(CVector3 vVector1, CVector3 vVector2)
 }
 
 // This returns the normal of a vector
-CVector3 Normalize(CVector3 vNormal)
+CVector3 CVector3::Normalize(CVector3 vNormal)
 {
-	double Magnitude;							// This holds the magitude			
+	float Magnitude;							// This holds the magitude			
 
-	Magnitude = Mag(vNormal);					// Get the magnitude
+	Magnitude = vNormal.GetMagnitude();					// Get the magnitude
 
 	vNormal.x /= (float)Magnitude;				// Divide the vector's X by the magnitude
 	vNormal.y /= (float)Magnitude;				// Divide the vector's Y by the magnitude
@@ -99,4 +97,9 @@ void CVector3::Set(float X, float Y, float Z)
 float CVector3::GetMagnitude()
 {
 	return sqrtf(x * x + y * y + z * z);
+}
+
+void CVector3::Set(CVector3 newVector)
+{
+	Set(newVector.x, newVector.y, newVector.z);
 }

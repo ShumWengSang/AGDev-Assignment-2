@@ -7,6 +7,7 @@
 
 #include "MVC_Controller.h"
 
+#define fps 60
 
 HDC			hDC=NULL;		// Private GDI Device Context
 HGLRC		hRC=NULL;		// Permanent Rendering Context
@@ -37,7 +38,7 @@ bool MVC_Controller::Init(void)
 {
 
 
-	if(!m_theModel->Init(60))
+	if(!m_theModel->Init(fps))
 		return false;
 
 	return true;
@@ -57,7 +58,7 @@ BOOL MVC_Controller::RunMainLoop(void)
 		int height, width;
 		m_theView->GetDefaultRes(height, width);
 		// Create Our OpenGL Window
-		if (!m_theView->CreateGLWindow("NeHe's OpenGL Framework",height,width/2,16))
+		if (!m_theView->CreateGLWindow("NeHe's OpenGL Framework",800,600,16))
 		{
 			return false;									// Quit If Window Was Not Created
 		}
@@ -93,6 +94,7 @@ BOOL MVC_Controller::RunMainLoop(void)
 		else // If There Are No Messages
 		{
 			theTimer->UpdateTime();
+			m_theModel->Camera2.SetDT(theTimer->GetDelta());
 			if (ProcessInput())
 			{
 				m_theModel->Update();
@@ -121,7 +123,7 @@ bool MVC_Controller::ProcessInput(void)
 	{
 		//Every 0.5 seconds, set the cursor back to normal position.
 		//Due to restarting the timer when mouse is moved, it isn't really checking every 0.5 seconds.
-		SetCursorPos(m_theView->m_iWindows_Width / 2, m_theView->m_iWindows_Height / 2);
+		//SetCursorPos(m_theView->m_iWindows_Width / 2, m_theView->m_iWindows_Height / 2);
 		theTimer->ResetTime(0);
 		ControlRotationTime = true;
 	}
@@ -166,12 +168,12 @@ void MVC_Controller::ProcMouse()
 		if (m_theView->m_MouseInfo.m_x < (m_theView->m_iWindows_Height / 2))
 		{
 			//m_theModel->ObjectAngle += -40 * theTimer->GetDelta();
-			RotateCamera(-80);
+			//RotateCamera(-80);
 
 		}
 		else if (m_theView->m_MouseInfo.m_x > (m_theView->m_iWindows_Width / 2))
 		{
-			RotateCamera(80);
+			//RotateCamera(80);
 		}
 
 	}
@@ -209,6 +211,7 @@ int MVC_Controller::ProcKeys(int key)
 
 void MVC_Controller::ProcKeyboard()
 {
+	m_theModel->Camera2.CheckForMovement();
 	bool* temp = m_theView->GetKeyBuffer();
 	if (m_theModel->ChooseCamera == 0){
 		if (temp[ProcKeys('d')])

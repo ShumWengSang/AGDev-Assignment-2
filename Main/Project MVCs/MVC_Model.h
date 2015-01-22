@@ -4,13 +4,12 @@
 #include "camera.h"
 #include "SkyBox.h"
 #include "Player.h"
-#include "Mouse.h"
 #include "Math2.h"
 #include "Frustum.h"
 #include "HUD.h"
 #include "Exit.h"
 #include "MVCtime.h"
-
+#include "camera2.h"
 
 class MVCTime;
 
@@ -47,6 +46,7 @@ public:
 
 	Player thePlayerData;
 
+	Camera	theFirstCamera;
 	CCamera theCamera;
 	CCamera Camera2;
 

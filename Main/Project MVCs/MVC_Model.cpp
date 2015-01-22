@@ -10,10 +10,10 @@
 
 
 
-MVC_Model::MVC_Model(void)
+MVC_Model::MVC_Model(void):
+theCamera(CameraType::ThirdPerson),
+Camera2(CameraType::FirstPerson)
 {
-	//theCamera(CameraType::FirstPerson);
-	//Camera2(CameraType::ThirdPerson);
 
 	Rotate = 0;
 	m_timer=MVCTime::GetInstance();
@@ -93,8 +93,8 @@ bool MVC_Model::InitPhase2(void)
 // Update the model
 void MVC_Model::Update(void)
 {
-	m_timer->UpdateTime();
-	
+
+	Camera2.Update();
 	if (m_timer->TestFramerate())
 	{
 		m_testX += m_moveX*m_timer->GetDelta();

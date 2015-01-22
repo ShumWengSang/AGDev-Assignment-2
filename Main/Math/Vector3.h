@@ -32,8 +32,12 @@ public:
 	bool operator== (const CVector3& rhs) const;
 
 	void Set(float X, float Y, float Z);
+	void Set(CVector3);
 
 	float GetMagnitude();
+
+	static CVector3 CVector3::Cross(CVector3 vVector1, CVector3 vVector2);
+	CVector3 Normalize(CVector3 vNormal);
 
 	float x, y, z;
 };

@@ -1,6 +1,4 @@
-#ifndef __MOUSE_H__
-#define __MOUSE_H__
-
+#pragma once
 class CMouse
 {
 public:
@@ -53,5 +51,3 @@ public:
 		return (m_y - m_last_y);
 	}
 };
-
-#endif

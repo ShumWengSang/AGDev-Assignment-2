@@ -47,7 +47,7 @@
       <WarningLevel>Level3</WarningLevel>
       <Optimization>Disabled</Optimization>
       <PreprocessorDefinitions>WIN32;_DEBUG;_LIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
-      <AdditionalIncludeDirectories>$(SolutionDir)Math; $(SolutionDir)Camera; $(SolutionDir)Model and Texture Loader</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>$(SolutionDir)Math; $(SolutionDir)Camera; $(SolutionDir)Model and Texture Loader; $(SolutionDir)Mouse</AdditionalIncludeDirectories>
     </ClCompile>
     <Link>
       <SubSystem>Windows</SubSystem>
@@ -83,12 +83,6 @@
   <ItemGroup>
     <ProjectReference Include="..\Camera\Camera.vcxproj">
       <Project>{4ad2f533-9e51-4dca-ae4d-8e363162a7be}</Project>
-    </ProjectReference>
-    <ProjectReference Include="..\Math\Math.vcxproj">
-      <Project>{9bb92af9-c0e9-4a30-bafa-baea759c6409}</Project>
-    </ProjectReference>
-    <ProjectReference Include="..\Model and Texture Loader\Model and Texture Loader.vcxproj">
-      <Project>{37832ae2-026c-4db0-b007-d72da59b9699}</Project>
     </ProjectReference>
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />

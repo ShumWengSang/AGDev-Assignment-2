@@ -14,6 +14,7 @@ int main( int argc, char* args )
 	MVC_Model* theModel = new MVC_Model();
 	MVC_View* theView = new MVC_View( theModel );
 	MVC_Controller* theController = new MVC_Controller( theModel, theView );
+
 	if(!theController->Init())
 		return 1;
 	else

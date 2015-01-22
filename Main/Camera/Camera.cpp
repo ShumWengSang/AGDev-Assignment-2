@@ -16,10 +16,9 @@
 #include "Camera.h"
 
 // This is how fast our camera moves
-#define kSpeed	5.0f	
+#define kSpeed	10.0f	
 
-CVector3 Cross(CVector3 vVector1, CVector3 vVector2);
-CVector3 Normalize(CVector3 vNormal);
+
 
 ///////////////////////////////// CALCULATE FRAME RATE \\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\*
 /////
@@ -75,9 +74,9 @@ CCamera::CCamera(void)
 
 CCamera::CCamera(CameraType theType)
 {
-	CVector3 vZero = CVector3(0.0, 0.0, 0.0);		// Init a vVector to 0 0 0 for our position
+	CVector3 vZero = CVector3(0.0, 10.0, 0.0);		// Init a vVector to 0 0 0 for our position
 	CVector3 vView = CVector3(0.0, 1.0, 0.5);		// Init a starting view vVector (looking up and out the screen) 
-	CVector3 vUp   = CVector3(0.0, 0.0, 1.0);		// Init a standard up vVector (Rarely ever changes)
+	CVector3 vUp   = CVector3(0.0, 1.0, 0.0);		// Init a standard up vVector (Rarely ever changes)
 
 	m_vPosition	= vZero;					// Init the position to zero
 	m_vView		= vView;					// Init the view to a std starting view
@@ -87,6 +86,7 @@ CCamera::CCamera(CameraType theType)
 
 	SCREENHEIGHT = 600;
 	SCREENWIDTH = 800;
+	Angle = 0;
 }
 
 CCamera::~CCamera()
@@ -174,8 +174,8 @@ void CCamera::SetViewByMouse()
 			// movements, we need to get a perpendicular vector from the
 			// camera's view vector and up vector.  This will be the axis.
 			// Before using the axis, it's a good idea to normalize it first.
-			CVector3 vAxis = Cross(m_vView - m_vPosition, m_vUpVector);
-			vAxis = Normalize(vAxis);
+			CVector3 vAxis = vAxis.Cross(m_vView - m_vPosition, m_vUpVector);
+			vAxis = vAxis.Normalize(vAxis);
 				
 			// rotate the camera by the remaining angle (1.0f - lastRotX)
 			RotateView( 1.0f - lastRotX, vAxis.x, vAxis.y, vAxis.z);
@@ -193,8 +193,8 @@ void CCamera::SetViewByMouse()
 			// movements, we need to get a perpendicular vector from the
 			// camera's view vector and up vector.  This will be the axis.
 			// Before using the axis, it's a good idea to normalize it first.
-			CVector3 vAxis = Cross(m_vView - m_vPosition, m_vUpVector);
-			vAxis = Normalize(vAxis);
+			CVector3 vAxis = vAxis.Cross(m_vView - m_vPosition, m_vUpVector);
+			vAxis = vAxis.Normalize(vAxis);
 			
 			// rotate the camera by ( -1.0f - lastRotX)
 			RotateView( -1.0f - lastRotX, vAxis.x, vAxis.y, vAxis.z);
@@ -207,8 +207,8 @@ void CCamera::SetViewByMouse()
 		// movements, we need to get a perpendicular vector from the
 		// camera's view vector and up vector.  This will be the axis.
 		// Before using the axis, it's a good idea to normalize it first.
-		CVector3 vAxis = Cross(m_vView - m_vPosition, m_vUpVector);
-		vAxis = Normalize(vAxis);
+		CVector3 vAxis = vAxis.Cross(m_vView - m_vPosition, m_vUpVector);
+		vAxis = vAxis.Normalize(vAxis);
 	
 		// Rotate around our perpendicular axis
 		RotateView(angleZ, vAxis.x, vAxis.y, vAxis.z);
@@ -216,6 +216,56 @@ void CCamera::SetViewByMouse()
 
 	// Always rotate the camera around the y-axis
 	RotateView(angleY, 0, 1, 0);
+}
+
+#include <iostream>
+using namespace std;
+
+void CCamera::SetViewByMouseTwo(float x,float y)
+{
+	//POINT mousePos;									// This is a window structure that holds an X and Y
+
+	// Get the mouse's current X,Y position
+	//GetCursorPos(&mousePos);
+	int NewX = x;
+	int NewY = y;
+	cout << x << " " << y << endl;
+
+	// If our cursor is still in the middle, we never moved... so don't update the screen
+	//if ((mousePos.x == middleX) && (mousePos.y == middleY)) return;
+	theMouse.SetMousePos(NewX, NewY);
+
+	calculations(theMouse.GetDiff_X(), theMouse.GetDiff_Y());
+}
+
+void CCamera::Pitch(GLfloat theta)
+{
+	m_vView.y -= theta;
+	if (m_vView.y > 3.142f)
+		m_vView.y = 3.142f;
+	else if (m_vView.y < -3.142f)
+		m_vView.y = -3.142f;
+}
+void CCamera::Yaw(GLfloat theta)
+{
+	m_vView.x = sin(-theta);
+	m_vView.z = -cos(-theta);
+}
+void CCamera::Roll(GLfloat theta)
+{
+}
+
+void CCamera::calculations(float diffX, float diffY)
+{
+	Pitch(diffY * 3.142f / 180.0f);
+
+	Angle += (float)diffX * 3.142f / 180.0f;
+	while (Angle > 6.284f)
+		Angle -= 6.284f;
+	while (Angle < -6.284f)
+		Angle += 6.284f;
+
+	Yaw(-Angle);
 }
 
 
@@ -313,8 +363,8 @@ void CCamera::StrafeCamera(float speed)
 	m_vPosition.z += m_vStrafe.z * speed;
 
 	// Add the strafe vector to our view
-	m_vView.x += m_vStrafe.x * speed;
-	m_vView.z += m_vStrafe.z * speed;
+	//m_vView.x += m_vStrafe.x * speed;
+	//m_vView.z += m_vStrafe.z * speed;
 }
 
 
@@ -327,15 +377,12 @@ void CCamera::StrafeCamera(float speed)
 void CCamera::MoveCamera(float speed)
 {
 	// Get the current view vector (the direction we are looking)
-	CVector3 vVector = m_vView - m_vPosition;
-	vVector = Normalize(vVector);
+	CVector3 vVector = m_vView;
+	vVector = vVector.Normalize(vVector);
 
 	m_vPosition.x += vVector.x * speed;		// Add our acceleration to our position's X
 	m_vPosition.y += vVector.y * speed;		// Add our acceleration to our position's Y
 	m_vPosition.z += vVector.z * speed;		// Add our acceleration to our position's Z
-	m_vView.x += vVector.x * speed;			// Add our acceleration to our view's X
-	m_vView.y += vVector.y * speed;			// Add our acceleration to our view's Y
-	m_vView.z += vVector.z * speed;			// Add our acceleration to our view's Z
 }
 
 
@@ -408,16 +455,18 @@ void CCamera::CheckForMovement()
 
 void CCamera::Update() 
 {
+
 	// Initialize a variable for the cross product result
-	CVector3 vCross = Cross(m_vView - m_vPosition, m_vUpVector);
+	CVector3 vCross = CVector3::Cross(m_vView , m_vUpVector);
 
 	// Normalize the strafe vector
-	m_vStrafe = Normalize(vCross);
+	m_vStrafe = m_vView.Normalize(vCross);
 
 	if (theType == FirstPerson)
 	{
 		// Move the camera's view by the mouse
-		SetViewByMouse();
+		//SetViewByMouse();
+		//SetViewByMouseTwo();
 	}
 
 	// This checks to see if the keyboard was pressed
@@ -438,8 +487,12 @@ void CCamera::Look()
 {
 	// Give openGL our camera position, then camera view, then camera up vector
 	gluLookAt(m_vPosition.x, m_vPosition.y, m_vPosition.z,	
-			  m_vView.x,	 m_vView.y,     m_vView.z,	
-			  m_vUpVector.x, m_vUpVector.y, m_vUpVector.z);
+		m_vPosition.x + m_vView.x, m_vPosition.y + m_vView.y, m_vPosition.z+m_vView.z,
+		m_vUpVector.x, m_vUpVector.y, m_vUpVector.z);
+	//gluLookAt(m_position.m_x, m_position.m_y, m_position.m_z,
+		//m_position.m_x + m_forward.m_x, m_position.m_y + m_forward.m_y,
+		//m_position.m_z + m_forward.m_z,
+		//0.0, 0.1, 0.0);
 }
 
 

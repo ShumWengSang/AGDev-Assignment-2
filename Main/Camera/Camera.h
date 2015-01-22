@@ -1,12 +1,11 @@
-#ifndef _CAMERA_H
-#define _CAMERA_H
+#pragma once
 #include <windows.h>
 #include <mmsystem.h>
-#include "Vector3.h"
+
 #include <gl\GL.h>
 #include <gl\GLU.h>
-
-
+#include "Mouse.h"
+#include "Vector3.h"
 enum CameraType {
   FirstPerson = 1,
   ThirdPerson = 2
@@ -39,7 +38,9 @@ public:
 	void RotateView(float angle, float X, float Y, float Z);
 
 	// This moves the camera's view by the mouse movements (First person view)
-	void SetViewByMouse(); 
+	void SetViewByMouse();
+
+	void SetViewByMouseTwo(float x,float y);
 
 	// This rotates the camera around a point (I.E. your character).
 	void RotateAroundPoint(CVector3 vCenter, float angle, float X, float Y, float Z);
@@ -81,9 +82,16 @@ private:
 	float g_DT;		
 	int SCREENHEIGHT;
 	int SCREENWIDTH;
+
+	CMouse theMouse;
+
+	void calculations(float diffX, float diffY);
+	void Pitch(GLfloat theta);
+	void Yaw(GLfloat theta);
+	void Roll(GLfloat theta);
+	float Angle;
 };
 
-#endif
 
 
 /////////////////////////////////////////////////////////////////////////////////
