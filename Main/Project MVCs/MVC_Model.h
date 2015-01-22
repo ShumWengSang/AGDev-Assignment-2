@@ -12,8 +12,6 @@
 #include "MVCtime.h"
 
 
-//#include "MazeGenerator.h"
-
 class MVCTime;
 
 class MVC_Model
