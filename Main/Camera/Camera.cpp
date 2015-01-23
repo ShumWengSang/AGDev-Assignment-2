@@ -191,16 +191,6 @@ using namespace std;
 
 void CCamera::SetViewByMouseTwo(float x,float y)
 {
-	//POINT mousePos;									// This is a window structure that holds an X and Y
-
-	// Get the mouse's current X,Y position
-	//GetCursorPos(&mousePos);
-	int NewX = x;
-	int NewY = y;
-
-	// If our cursor is still in the middle, we never moved... so don't update the screen
-	//if ((mousePos.x == middleX) && (mousePos.y == middleY)) return;
-	theMouse->SetMousePos(NewX, NewY);
 
 	calculations(theMouse->GetDiff_X(), theMouse->GetDiff_Y());
 }
@@ -443,8 +433,6 @@ void CCamera::Update()
 	theMouse->SetMousePos(mousePos.x,mousePos.y);
 	if (theType == FirstPerson)
 	{
-
-
 		// Move the camera's view by the mouse
 		SetViewByMouseTwo(mousePos.x,mousePos.y);
 	}

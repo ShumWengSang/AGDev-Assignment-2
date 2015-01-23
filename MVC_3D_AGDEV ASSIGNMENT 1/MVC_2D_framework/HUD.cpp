@@ -4,8 +4,8 @@
 HUD::HUD(void): theCamera(NULL)
 {
 	theCamDir.Set(0,0,1);
-	int m_iHeightOfBar = 30;
-	int m_iWidthOfBar = 30;
+	m_iHeightOfBar = 30;
+	m_iWidthOfBar = 100;
 }
 
 
@@ -13,10 +13,10 @@ HUD::~HUD(void)
 {
 }
 
-void HUD::Draw()
+void HUD::Draw(int health)
 {
-	DrawMinimap();
-	DrawHealthBar(50,100);
+	//DrawMinimap();
+	DrawHealthBar(health,100);
 }
 
 void HUD::DrawHealthBar(const int m_iHealth, const int m_iMaxHealth)

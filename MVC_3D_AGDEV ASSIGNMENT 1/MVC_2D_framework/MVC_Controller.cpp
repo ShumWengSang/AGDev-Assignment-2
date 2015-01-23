@@ -224,6 +224,7 @@ void MVC_Controller::ProcKeyboard()
 	if (m_theModel->ChooseCamera == 0){
 		if (temp[ProcKeys('d')])
 		{
+			m_theModel->thePlayerData.PreviousPosition = m_theModel->thePlayerData.GetPos();
 			Vector3D temp = m_theModel->thePlayerData.GetPos();
 			m_theModel->thePlayerData.MoveMeSideways(true, theTimer->GetDelta());
 			temp = temp - m_theModel->thePlayerData.GetPos();
@@ -234,6 +235,7 @@ void MVC_Controller::ProcKeyboard()
 		}
 		else if (temp[ProcKeys('a')])
 		{
+			m_theModel->thePlayerData.PreviousPosition = m_theModel->thePlayerData.GetPos();
 			Vector3D temp = m_theModel->thePlayerData.GetPos();
 			m_theModel->thePlayerData.MoveMeSideways(false, theTimer->GetDelta());
 			temp = temp - m_theModel->thePlayerData.GetPos();
@@ -245,6 +247,7 @@ void MVC_Controller::ProcKeyboard()
 		}
 		else
 		{
+			m_theModel->thePlayerData.PreviousPosition = m_theModel->thePlayerData.GetPos();
 			Vector3D temp = m_theModel->thePlayerData.GetPos();
 			m_theModel->thePlayerData.deceleratesideways(theTimer->GetDelta());
 			temp = temp - m_theModel->thePlayerData.GetPos();
@@ -256,6 +259,7 @@ void MVC_Controller::ProcKeyboard()
 
 		if (temp[ProcKeys('w')])
 		{
+			m_theModel->thePlayerData.PreviousPosition = m_theModel->thePlayerData.GetPos();
 			Vector3D temp = m_theModel->thePlayerData.GetPos();
 			m_theModel->thePlayerData.MoveMeForward(true, theTimer->GetDelta());
 			temp = temp - m_theModel->thePlayerData.GetPos();
@@ -267,6 +271,7 @@ void MVC_Controller::ProcKeyboard()
 		}
 		else if (temp[ProcKeys('s')])
 		{
+			m_theModel->thePlayerData.PreviousPosition = m_theModel->thePlayerData.GetPos();
 			Vector3D temp = m_theModel->thePlayerData.GetPos();
 			m_theModel->thePlayerData.MoveMeForward(false, theTimer->GetDelta());
 			temp = temp - m_theModel->thePlayerData.GetPos();
@@ -278,6 +283,7 @@ void MVC_Controller::ProcKeyboard()
 		}
 		else
 		{
+			m_theModel->thePlayerData.PreviousPosition = m_theModel->thePlayerData.GetPos();
 			Vector3D temp = m_theModel->thePlayerData.GetPos();
 			m_theModel->thePlayerData.deceleratestraight(theTimer->GetDelta());
 			temp = temp - m_theModel->thePlayerData.GetPos();
@@ -330,20 +336,40 @@ void MVC_Controller::ProcKeyboard()
 		}
 		temp[ProcKeys('p')] = false;
 	}
+	if (temp[VK_F2])
+	{
+		m_theModel->FrustumDebug = !m_theModel->FrustumDebug;
+		temp[VK_F2] = false;
+	}
+	if (temp[VK_F3])
+	{
+		m_theModel->RotateBool = !m_theModel->RotateBool;
+		temp[VK_F3] = false;
+	}
 
 	//DEBUG
 	if (temp[VK_NUMPAD8])
 	{
-		m_theModel->thirdpersoncamera->MoveUpCamera(1);
+		m_theModel->theRoot.ApplyTranslate(0, 500 * theTimer->GetDelta(), 0);
+		m_theModel->theRoot.SetColorForChild(11, 1, 0, 0);
+		m_theModel->theRoot.SetColorForChild(12, 1, 0, 0);
+		m_theModel->theRoot.SetColorForChild(13, 1, 0, 0);
+		m_theModel->theRoot.SetColor(0, 0, 0);
 	}
 	if (temp[VK_NUMPAD2])
 	{
-		m_theModel->thirdpersoncamera->MoveUpCamera(-1);
+		m_theModel->theRoot.ApplyTranslate(0, -50 * theTimer->GetDelta(), 0);
 	}
-	if (temp[VK_F3])
+
+	if (temp[VK_NUMPAD4])
 	{
-		m_theModel->theRoot.ApplyTranslate( 0.01f, 0.0f, 0.0f );
+		m_theModel->theRoot.ApplyTranslate(-5, 0, 0);
 	}
+	if (temp[VK_NUMPAD6])
+	{
+		m_theModel->theRoot.ApplyTranslate(5, -0, 0);
+	}
+
 	if (temp[VK_F4])
 	{
 		m_theModel->theRoot.ApplyTranslate(-0.01f, 0.0f, 0.0f);

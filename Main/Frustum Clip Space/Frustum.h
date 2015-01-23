@@ -6,7 +6,6 @@
 #include <gl\GLU.h>
 
 #include <cmath>
-#pragma comment(lib, "glu32.lib")
 // This will allow us to create an object to keep track of our frustum
 class CFrustum {
 
@@ -32,18 +31,3 @@ private:
 
 
 #endif
-
-
-/////////////////////////////////////////////////////////////////////////////////
-//
-// * QUICK NOTES * 
-//
-// This file holds the frustum class prototypes.  Nothing was added for this tutorial.
-// 
-// 
-// Ben Humphrey (DigiBen)
-// Game Programmer
-// DigiBen@GameTutorials.com
-// Co-Web Host of www.GameTutorials.com
-//
-//

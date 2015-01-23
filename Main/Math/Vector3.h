@@ -37,6 +37,7 @@ public:
 	float GetMagnitude();
 
 	static CVector3 CVector3::Cross(CVector3 vVector1, CVector3 vVector2);
+	static float DotProduct(CVector3 vVector1, CVector3 vVector2);
 	CVector3 Normalize(CVector3 vNormal);
 
 	float x, y, z;

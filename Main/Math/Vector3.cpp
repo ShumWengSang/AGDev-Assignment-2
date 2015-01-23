@@ -15,6 +15,11 @@ CVector3 CVector3::Cross(CVector3 vVector1, CVector3 vVector2)
 	return vCross;								// Return the cross product
 }
 
+float CVector3::DotProduct(CVector3 vVector1, CVector3 vVector2)
+{
+	return vVector1.x * vVector2.x + vVector1.y * vVector2.y;
+}
+
 // This returns the normal of a vector
 CVector3 CVector3::Normalize(CVector3 vNormal)
 {

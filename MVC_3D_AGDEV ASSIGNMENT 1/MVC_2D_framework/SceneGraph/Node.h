@@ -8,5 +8,6 @@ public:
 	CNode(void);
 	virtual ~CNode(void);
 	virtual void Draw(void);
+	virtual void SetColor(const float red, const float green, const float blue);
 };
 #endif

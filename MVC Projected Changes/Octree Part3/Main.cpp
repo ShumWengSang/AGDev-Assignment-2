@@ -402,7 +402,7 @@ void RenderScene()
 	}
 
 	// Each frame we calculate the new frustum.  In reality you only need to
-	// calculate the frustum when we move the camera.
+	// calculate the frustum when we movse the camera.
 	g_Frustum.CalculateFrustum();
 
 	// Initialize the total node count that is being draw per frame

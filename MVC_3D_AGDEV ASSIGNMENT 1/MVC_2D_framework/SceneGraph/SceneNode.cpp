@@ -248,7 +248,11 @@ Vector3D CSceneNode::GetBottomRight(void)
 
 void CSceneNode::SetColor(const float red, const float green, const float blue)
 {
-	theModel->SetColor(red, green, blue);
+	for (int i = 0; i < theChildren.size(); i++)
+	{
+		theChildren[i]->SetColor(0, 0, 0);
+	}
+	//theModel->SetColor(red, green, blue);
 }
 
 // Return the number of children in this group

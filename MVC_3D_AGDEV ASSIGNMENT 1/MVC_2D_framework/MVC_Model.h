@@ -65,9 +65,9 @@ public:
 	Vector3D FrustumDirection;
 
 	TextureImage SkyBoxTextures[6];
-	TextureImage ExitTexture[6];
+	TextureImage ExitTexture;
 
-	Exit * theExits;
+	std::vector<Exit> theExits;
 
 	MVCTime* m_timer;
 	CFrustum theFrustum;
@@ -93,10 +93,11 @@ public:
 	bool IsPointInside(Vector3D, Vector3D, Vector3D);
 
 	//A function just for checking the exits against the player in the scene graph
-	void PlayerAgainstExit(int PlayerID, Entity Exit[], int size);
+	void PlayerAgainstExit(int PlayerID, Entity * Exit, int size);
 
 	//A vector to hold the IDs of the parts to rotate.
 	std::vector<int> ArrayofIDs;
+	std::vector<int> SecondArrayofIDs;
 
 	//DISTANCE FROM OBJECT TO CAMERA
 	int distance;
@@ -115,6 +116,10 @@ public:
 	int ChooseCamera;
 
 	int PlayerParts[4];
+	bool RotateBool;
+
+	float FrustumPower;
+	bool FrustumDebug;
 private: 
 };
 

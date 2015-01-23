@@ -11,8 +11,8 @@
 
 
 MVC_Model::MVC_Model(void):
-theCamera(CameraType::ThirdPerson),
-Camera2(CameraType::FirstPerson)
+theCamera(ThirdPerson),
+Camera2(FirstPerson)
 {
 
 	Rotate = 0;

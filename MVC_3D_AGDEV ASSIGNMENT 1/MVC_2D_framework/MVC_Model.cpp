@@ -29,7 +29,16 @@ thirdpersoncamera()
 	PlayerID = 0;
 	thePlayerData.theFrustum = &theFrustum;
 	ChooseCamera = 0;
-	theExits = NULL;
+	RotateBool = false;
+	FrustumPower = 100;
+	FrustumDebug = false;
+
+	for (int i = 0; i < theMaze.PossibleExits.size(); i++)
+	{
+		Exit aNewExit;
+		aNewExit.SetPos(theMaze.PossibleExits[i].x, 0, theMaze.PossibleExits[i].x);
+		theExits.push_back(aNewExit);
+	}
 }
 
 MVC_Model::~MVC_Model(void)
@@ -39,8 +48,6 @@ MVC_Model::~MVC_Model(void)
 		delete thirdpersoncamera;
 		thirdpersoncamera = NULL;
 	}
-	delete[] theExits;
-	theExits = NULL;
 }
 
 bool MVC_Model::Init(float fpsLimit)
@@ -57,9 +64,6 @@ bool MVC_Model::InitPhase2(void)
 	m_testY=m_worldSizeY*0.5f;
 
 	glEnable(GL_TEXTURE_2D);							// Enable Texture Mapping ( NEW )
-	
-
-	theExits = new Exit [theMaze.PossibleExits.size()];
 
 
 	if (!LoadTGA(&SkyBoxTextures[0], "SkyBox/front.tga"))				// Load The Font Texture
@@ -75,20 +79,19 @@ bool MVC_Model::InitPhase2(void)
 	if (!LoadTGA(&SkyBoxTextures[5], "SkyBox/bottom.tga"))				// Load The Font Texture
 		return false;										// If Loading Failed, Return False
 
-	if (!LoadTGA(&ExitTexture[0], "exit.tga"))				// Load The Font Texture
+	if (!LoadTGA(&ExitTexture, "exit.tga"))				// Load The Font Texture
 		return false;	// If Loading Failed, Return False
 
 	//////////////////////\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\
 					TEXTURE FOR EXIT
-	for (int i = 1; i < 6; i++)
+	if(!theExits.empty())
 	{
-		ExitTexture[i] = ExitTexture[0];
-	}
-	for (int i = 0; i < 6; i++)
-	{
-		for (int j = 0; j < 6; j++)
+		for (int i = 0; i < theExits.size(); i++)
 		{
-			theExits[i].textureID[j] = ExitTexture[j].texID;
+			for (int j = 0; j < 6; j++)
+			{
+				theExits[i].textureID[j] = ExitTexture.texID;
+			}
 		}
 	}
 	///////////////////////////\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\
@@ -165,13 +168,12 @@ bool MVC_Model::InitPhase2(void)
 				//}
 				newModel = new CModel();
 				CSceneNode * temp = theRoot.GetNode(10 + 1 * counter );
-				std::cout << temp->AddChild(new CTransform(0, 2, 0), newModel) << endl;
+				SecondArrayofIDs.push_back(	temp->AddChild(new CTransform(0, 2, 0), newModel));
 
 				newModel = new CModel();
 				temp = theRoot.GetNode(100 + 1 + 10 * counter);
 				//theRoot.GetNode(100 + 1 + 10 * counter)
-				ArrayofIDs.push_back(temp->AddChild(new CTransform(Vector3D(0,2,0),Vector3D(1,3,1)), newModel));
-				//ArrayofIDs.push_back(temp->AddChild(new CTransform(0, 2, 0), newModel));
+				ArrayofIDs.push_back(temp->AddChild(new CTransform(Vector3D(0,4,0),Vector3D(1,3,1)), newModel));
 				counter++;
 				theCounter++;
 			}
@@ -230,8 +232,32 @@ void MVC_Model::Update(void)
 
 	if (m_timer->TestFramerate())
 	{
-		PlayerAgainstExit(PlayerID, theExits, theMaze.PossibleExits.size());
+		for (int i = 0; i < theExits.size(); i++)
+		{
+			PlayerAgainstExit(PlayerID, &theExits[i], theMaze.PossibleExits.size());
+		}
 		CheckCollision();
+	}
+
+	if(RotateBool)
+	{
+		for(int i = 0; i < SecondArrayofIDs.size(); i++)
+		{
+			theRoot.GetNode(SecondArrayofIDs[i])->ApplyRotate(20 * m_timer->GetDelta(),1,0,0);
+			theRoot.GetNode(SecondArrayofIDs[i])->SetColor(0.5,0.5,1);
+		}
+		for(int i = 0; i < ArrayofIDs.size(); i++)
+		{
+			theRoot.GetNode(ArrayofIDs[i])->ApplyRotate(50 * m_timer->GetDelta(),1,0,0);
+		}
+	}
+	if(thePlayerData.ToggleFrustum)
+	{
+		FrustumPower -= 20 * m_timer->GetDelta();
+	}
+	if(FrustumPower <= 0 && !FrustumDebug)
+	{
+		thePlayerData.ToggleFrustum = false;
 	}
 }
 
@@ -279,7 +305,15 @@ void MVC_Model::FrustumChecking(CSceneNode * thisNode, const int ParentID, const
 		{
 			//The scene graph is not inside the frustum
 			//thisNode->SetColor(0, 0, 0);
-			thisNode->Draw();
+			if(FrustumDebug)
+			{
+				thisNode->SetColor(0,0,1);
+				thisNode->Draw();
+			}
+			else
+			{
+				thisNode->Draw();
+			}
 		}
 
 		else
@@ -290,15 +324,29 @@ void MVC_Model::FrustumChecking(CSceneNode * thisNode, const int ParentID, const
 				&& m_bCheckFarBottomLeft && m_bCheckFarBottomRight)
 			{
 				// The scene graph is inside the frustum!
-				//thisNode->SetColor(1.0f, 1.0f, 1.0f);
-				//thisNode->Draw();
+				if(FrustumDebug)
+				{
+					thisNode->SetColor(1,0,0);
+					thisNode->Draw();
+				}
+				else
+				{
+					//thisNode->Draw();
+				}
 			}
 
 			else
 			{
 				//thisNode->Draw();
-				//thisNode->SetColor(1, 0, 0);
-				//Scene graph halfway in.
+				if(FrustumDebug)
+				{
+					thisNode->SetColor(0,1,0);
+					thisNode->Draw();
+				}
+				else
+				{
+					//thisNode->Draw();
+				}
 			}
 			for (int i = 0; i < thisNode->GetNumOfChild(); i++)
 			{
@@ -352,7 +400,13 @@ void MVC_Model::CheckCollision(CSceneNode * otherNode, CSceneNode * thisNode)
 		if (IsPointInside(OtherVectors[i], FarTopRight, NearBottomLeft)
 			|| IsPointInside(OtherVectors[i], NearBottomLeft, FarTopRight))
 		{
-			cout << "COLLIDED" << i << endl;
+			//Vector3D temp = thePlayerData.GetPos();
+			//thePlayerData.SetPos(thePlayerData.PreviousPosition * 2 );
+			//temp = temp - thePlayerData.GetPos();
+			//temp *= -1;
+			//theRoot.GetNode(PlayerID)->ApplyTranslate(temp.m_x, 0, temp.m_z);
+			//theRoot.GetNode(PlayerParts[0])->ApplyRotate(300 * m_timer->GetDelta(),0, 0, 1);
+			//theRoot.GetNode(PlayerParts[1])->ApplyRotate(300 * m_timer->GetDelta(), 0, 0, 1);
 		}
 	}
 
@@ -414,15 +468,15 @@ bool MVC_Model::IsPointInside(Vector3D thePoint, Vector3D Min, Vector3D Max)
 	return false;
 }
 
-void MVC_Model::PlayerAgainstExit(int PlayerID, Entity Exit[], int size)
+void MVC_Model::PlayerAgainstExit(int PlayerID, Entity * Exit, int size)
 {
 	for (int i = 0; i < size; i++)
 	{
 
-		Vector3D NearTopRight (-1,1,-1);
-		Vector3D FarBottomLeft(1, -1, 1);
-		Vector3D FarTopRight(1, 1, -1);
-		Vector3D NearBottomLeft(-1, -1, 1);
+		Vector3D NearTopRight (-2,2,-2);
+		Vector3D FarBottomLeft(2, -2, 2);
+		Vector3D FarTopRight(2, 2, -2);
+		Vector3D NearBottomLeft(-2, -2, 2);
 
 		NearTopRight += Exit[i].GetPos();
 		FarBottomLeft += Exit[i].GetPos();

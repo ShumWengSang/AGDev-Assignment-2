@@ -53,12 +53,12 @@
       <Optimization>Disabled</Optimization>
       <PreprocessorDefinitions>WIN32;_DEBUG;_CONSOLE;_LIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <SDLCheck>true</SDLCheck>
-      <AdditionalIncludeDirectories>$(SolutionDir)Base Entity;$(SolutionDir)Camera;$(SolutionDir)Camera 2;$(SolutionDir)Frustum Clip Space;$(SolutionDir)Lua Interface;$(SolutionDir)Math;$(SolutionDir)Model and Texture Loader;$(SolutionDir)Mouse;$(SolutionDir)Quad Tree;$(SolutionDir)Sky Box;$(SolutionDir)Time;$(SolutionDir)UserInterface HUD;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>$(SolutionDir)Base Entity;$(SolutionDir)Camera;$(SolutionDir)Camera 2;$(SolutionDir)Frustum Clip Space;$(SolutionDir)Lua Interface;$(SolutionDir)Math;$(SolutionDir)Model and Texture Loader;$(SolutionDir)Mouse;$(SolutionDir)Quad Tree;$(SolutionDir)Sky Box;$(SolutionDir)Time;$(SolutionDir)UserInterface HUD;$(SolutionDir)Frustum Geometry;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
     </ClCompile>
     <Link>
       <SubSystem>Console</SubSystem>
       <GenerateDebugInformation>true</GenerateDebugInformation>
-      <AdditionalDependencies>OpenGL32.lib;%(AdditionalDependencies)</AdditionalDependencies>
+      <AdditionalDependencies>OpenGL32.lib;glu32.lib;%(AdditionalDependencies)</AdditionalDependencies>
     </Link>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
@@ -106,6 +106,9 @@
     </ProjectReference>
     <ProjectReference Include="..\Frustum Clip Space\Frustum Clip Space.vcxproj">
       <Project>{54ba401f-fb39-4c72-b592-17c5a9e73668}</Project>
+    </ProjectReference>
+    <ProjectReference Include="..\Frustum Geometry\Frustum Geometry.vcxproj">
+      <Project>{2d6c98ff-7be7-4930-a686-351e43d49d9a}</Project>
     </ProjectReference>
     <ProjectReference Include="..\Math\Math.vcxproj">
       <Project>{9bb92af9-c0e9-4a30-bafa-baea759c6409}</Project>

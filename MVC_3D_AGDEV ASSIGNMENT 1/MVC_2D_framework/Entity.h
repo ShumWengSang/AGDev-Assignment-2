@@ -18,6 +18,8 @@ public:
 	Entity(void);
 	~Entity(void);
 
+	Vector3D PreviousPosition;
+
 	void SetPos(Vector3D theNewPos);
 	void SetPos(float x, float y, float z);
 	Vector3D GetPos();

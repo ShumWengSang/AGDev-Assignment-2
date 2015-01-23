@@ -36,7 +36,7 @@ public:
 	Camera * theCamera;
 	TextureImage theMinimap;
 	void DrawMinimap();
-	void Draw();
+	void Draw(int health);
 	void DrawHealthBar(const int m_iHealth, const int m_iMaxHealth);
 
 	int m_iHeightOfBar;

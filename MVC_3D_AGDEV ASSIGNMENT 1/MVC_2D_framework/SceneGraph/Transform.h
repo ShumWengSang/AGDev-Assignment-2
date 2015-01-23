@@ -33,9 +33,11 @@ class CTransform :
 	public CNode
 {
 private:
-	Matrix4x4 Mtx, Update_Mtx;
+	
 
 public:
+
+	Matrix4x4 Mtx, Update_Mtx;
 	CTransform(void);
 	CTransform( const float dx, const float dy, const float dz  );
 	CTransform(Vector3D Translate, Vector3D Scale);

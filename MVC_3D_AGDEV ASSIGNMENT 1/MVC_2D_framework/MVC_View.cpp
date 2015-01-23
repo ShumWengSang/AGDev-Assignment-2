@@ -177,13 +177,15 @@ void MVC_View::DrawScene()
 
 
 	m_theModel->theCamera.SetHUD(true);
-	m_theModel->theHUD.Draw();
+	m_theModel->theHUD.Draw(m_theModel->FrustumPower);
+	Printw(10, 20, "Frustum Power: %.1f", m_theModel->FrustumPower);
 	Printw(10, 50, "FPS: %.2f", MVCTime::GetInstance()->GetFPS());
-	Printw(10, 100, "Camera Pos: %f %f %f", m_theModel->theCamera.GetPosition().m_x, m_theModel->theCamera.GetPosition().m_y, m_theModel->theCamera.GetPosition().m_z);
-	Printw(10, 150, "Player Data Pos: %f %f %f", m_theModel->thePlayerData.GetPos().m_x, m_theModel->thePlayerData.GetPos().m_y, m_theModel->thePlayerData.GetPos().m_z);
-	Printw(10, 200, "Player Direction %f %f %f , Angle : %f", m_theModel->thePlayerData.GetDir().m_x, m_theModel->thePlayerData.GetDir().m_y, m_theModel->thePlayerData.GetDir().m_z, Math::VectorToAngle(m_theModel->thePlayerData.GetDir()));
-	Printw(10, 250, "Camera Direction %f %f %f , Angle : %f", m_theModel->theCamera.GetDirection().m_x, m_theModel->theCamera.GetDirection().m_y, m_theModel->theCamera.GetDirection().m_z, Math::VectorToAngle(m_theModel->theCamera.GetDirection()));
-	Printw(10, 300, "Distance with Data: %f", (m_theModel->thePlayerData.GetPos() - m_theModel->theCamera.GetPosition()).GetMagnitude());
+
+	//Printw(10, 100, "Camera Pos: %f %f %f", m_theModel->theCamera.GetPosition().m_x, m_theModel->theCamera.GetPosition().m_y, m_theModel->theCamera.GetPosition().m_z);
+	//Printw(10, 150, "Player Data Pos: %f %f %f", m_theModel->thePlayerData.GetPos().m_x, m_theModel->thePlayerData.GetPos().m_y, m_theModel->thePlayerData.GetPos().m_z);
+	//Printw(10, 200, "Player Direction %f %f %f , Angle : %f", m_theModel->thePlayerData.GetDir().m_x, m_theModel->thePlayerData.GetDir().m_y, m_theModel->thePlayerData.GetDir().m_z, Math::VectorToAngle(m_theModel->thePlayerData.GetDir()));
+	//Printw(10, 250, "Camera Direction %f %f %f , Angle : %f", m_theModel->theCamera.GetDirection().m_x, m_theModel->theCamera.GetDirection().m_y, m_theModel->theCamera.GetDirection().m_z, Math::VectorToAngle(m_theModel->theCamera.GetDirection()));
+	//Printw(10, 300, "Distance with Data: %f", (m_theModel->thePlayerData.GetPos() - m_theModel->theCamera.GetPosition()).GetMagnitude());
 	m_theModel->theCamera.SetHUD(false);
 	glPopMatrix();
 

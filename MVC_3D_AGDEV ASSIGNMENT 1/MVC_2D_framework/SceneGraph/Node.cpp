@@ -13,3 +13,8 @@ CNode::~CNode(void)
 void CNode::Draw(void)
 {
 }
+
+void CNode::SetColor(const float, const float, const float)
+{
+
+}

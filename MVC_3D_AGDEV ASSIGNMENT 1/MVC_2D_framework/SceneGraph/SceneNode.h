@@ -29,19 +29,20 @@ class CSceneNode :
 	public CNode
 {
 private:
-	vector<CNode*> theChildren;
+
 
 	CModel* theModel;
-	CTransform* theTransform;
+
 	//Entity* theEntity;
 
 	int sceneNodeID;
 
 public:
+	vector<CNode*> theChildren;
 	CSceneNode(void);
 	CSceneNode(const int sceneNodeID);
 	~CSceneNode(void);
-
+	CTransform* theTransform;
 	// Draw this Node and its children
 	void Draw(void);
 

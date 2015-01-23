@@ -1,8 +1,6 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
-# Visual Studio 2013
-VisualStudioVersion = 12.0.21005.1
-MinimumVisualStudioVersion = 10.0.40219.1
+# Visual Studio 2012
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "Project MVCs", "Project MVCs\Project MVCs.vcxproj", "{3415CA79-0647-496D-BACE-3B79BC8CB6A0}"
 EndProject
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "Math", "Math\Math.vcxproj", "{9BB92AF9-C0E9-4A30-BAFA-BAEA759C6409}"
@@ -28,6 +26,8 @@ EndProject
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "Time", "Time\Time.vcxproj", "{D08B71E0-7153-4439-9D8D-7046E838EE50}"
 EndProject
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "Camera 2", "Camera 2\Camera 2.vcxproj", "{D9269894-B2D0-4B6C-B59E-12BB5D95DD42}"
+EndProject
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "Frustum Geometry", "Frustum Geometry\Frustum Geometry.vcxproj", "{2D6C98FF-7BE7-4930-A686-351E43D49D9A}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -87,6 +87,10 @@ Global
 		{D9269894-B2D0-4B6C-B59E-12BB5D95DD42}.Debug|Win32.Build.0 = Debug|Win32
 		{D9269894-B2D0-4B6C-B59E-12BB5D95DD42}.Release|Win32.ActiveCfg = Release|Win32
 		{D9269894-B2D0-4B6C-B59E-12BB5D95DD42}.Release|Win32.Build.0 = Release|Win32
+		{2D6C98FF-7BE7-4930-A686-351E43D49D9A}.Debug|Win32.ActiveCfg = Debug|Win32
+		{2D6C98FF-7BE7-4930-A686-351E43D49D9A}.Debug|Win32.Build.0 = Debug|Win32
+		{2D6C98FF-7BE7-4930-A686-351E43D49D9A}.Release|Win32.ActiveCfg = Release|Win32
+		{2D6C98FF-7BE7-4930-A686-351E43D49D9A}.Release|Win32.Build.0 = Release|Win32
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
