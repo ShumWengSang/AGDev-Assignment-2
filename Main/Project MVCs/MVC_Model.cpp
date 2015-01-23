@@ -17,13 +17,12 @@ Camera2(CameraType::FirstPerson)
 
 	Rotate = 0;
 	m_timer=MVCTime::GetInstance();
-	x = 0; y = 0; z = 0;
 	distance = 10;
 	ObjectAngle = 0;
 	PlayerID = 0;
 	//thePlayerData.theFrustum = &theFrustum;
-	ChooseCamera = 0;
 	theExits = NULL;
+	DebugCam = true;
 }
 
 MVC_Model::~MVC_Model(void)
@@ -62,13 +61,13 @@ bool MVC_Model::InitPhase2(void)
 	if (!LoadTGA(&SkyBoxTextures[5], "SkyBox/bottom.tga"))				// Load The Font Texture
 		return false;										// If Loading Failed, Return False
 
-	if (!LoadTGA(&ExitTexture[0], "exit.tga"))				// Load The Font Texture
-		return false;	// If Loading Failed, Return False
+	//if (!LoadTGA(&ExitTexture[0], "exit.tga"))				// Load The Font Texture
+		//return false;	// If Loading Failed, Return False
 
 
 	
-	if (!LoadTGA(&theImageDebugger, "steel.tga"))				// Load The Font Texture
-		return false;										// If Loading Failed, Return False
+	//if (!LoadTGA(&theImageDebugger, "steel.tga"))				// Load The Font Texture
+		//return false;										// If Loading Failed, Return False
 
 	glDisable(GL_TEXTURE_2D);								
 
@@ -82,8 +81,8 @@ bool MVC_Model::InitPhase2(void)
 
 	//Find the ratio between skybox width and height and maze width and height.
 	//We need this to fully fill our skybox with the maze.
-	float ratiox = theBox.Width / 800;
-	float ratioy = theBox.Height / 600;
+	float ratiox = theBox.Width / m_worldSizeX;
+	float ratioy = theBox.Height / m_worldSizeY;
 
 
 
@@ -93,8 +92,16 @@ bool MVC_Model::InitPhase2(void)
 // Update the model
 void MVC_Model::Update(void)
 {
-
-	Camera2.Update();
+	if(DebugCam)
+	{
+		Camera2.SetDT(m_timer->GetDelta());
+		Camera2.Update();
+	}
+	else
+	{
+		theCamera.SetDT(m_timer->GetDelta());
+		theCamera.Update();
+	}
 	if (m_timer->TestFramerate())
 	{
 		m_testX += m_moveX*m_timer->GetDelta();

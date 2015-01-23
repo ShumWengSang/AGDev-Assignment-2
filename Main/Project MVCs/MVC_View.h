@@ -24,7 +24,7 @@ public:
 	bool* GetKeyBuffer();
 	void GetSize(int* x,int* y);
 
-	CMouse m_MouseInfo;
+	CMouse * m_MouseInfo;
 	float m_Swidth,m_Sheight;
 private:
 	GLuint  m_base;                           // Base Display List For The Font Set

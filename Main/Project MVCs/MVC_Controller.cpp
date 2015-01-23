@@ -94,7 +94,6 @@ BOOL MVC_Controller::RunMainLoop(void)
 		else // If There Are No Messages
 		{
 			theTimer->UpdateTime();
-			m_theModel->Camera2.SetDT(theTimer->GetDelta());
 			if (ProcessInput())
 			{
 				m_theModel->Update();
@@ -119,11 +118,11 @@ BOOL MVC_Controller::RunMainLoop(void)
 // Process input from I/O devices
 bool MVC_Controller::ProcessInput(void)
 {
-	if (theTimer->TestTime(0,true) && (m_theModel->ChooseCamera == 0))
+	if (theTimer->TestTime(0,true) && (!m_theModel->DebugCam))
 	{
 		//Every 0.5 seconds, set the cursor back to normal position.
 		//Due to restarting the timer when mouse is moved, it isn't really checking every 0.5 seconds.
-		//SetCursorPos(m_theView->m_iWindows_Width / 2, m_theView->m_iWindows_Height / 2);
+		SetCursorPos(m_theView->m_iWindows_Width / 2, m_theView->m_iWindows_Height / 2);
 		theTimer->ResetTime(0);
 		ControlRotationTime = true;
 	}
@@ -158,41 +157,41 @@ void MVC_Controller::ProcMouse()
 	m_theView->GetSize(&w,&h);
 
 
-	if (m_theModel->ChooseCamera == 0)
+	if (!m_theModel->DebugCam)
 	{
 
 		//ROTATING CAMERA
 		//SINCE SetCursor (in controller in process input) sets the cursor back to the middle every 0.5 seconds
 		//We don't have to worry about where the cursor is all the time.
 		//If left side, rotate that way. If right side, rotate that way.
-		if (m_theView->m_MouseInfo.m_x < (m_theView->m_iWindows_Height / 2))
+		if (m_theView->m_MouseInfo->m_x < (m_theView->m_iWindows_Height / 2))
 		{
 			//m_theModel->ObjectAngle += -40 * theTimer->GetDelta();
 			//RotateCamera(-80);
 
 		}
-		else if (m_theView->m_MouseInfo.m_x > (m_theView->m_iWindows_Width / 2))
+		else if (m_theView->m_MouseInfo->m_x > (m_theView->m_iWindows_Width / 2))
 		{
 			//RotateCamera(80);
 		}
 
 	}
-	if(m_theView->m_MouseInfo.m_LButtonDown)
+	if(m_theView->m_MouseInfo->m_LButtonDown)
 	{
 
 	}
-	else if(m_theView->m_MouseInfo.m_LButtonUp)
+	else if(m_theView->m_MouseInfo->m_LButtonUp)
 	{
 
 	}
 
-	if(m_theView->m_MouseInfo.m_RButtonDown)
+	if(m_theView->m_MouseInfo->m_RButtonDown)
 	{
 
 	}
-	else if(m_theView->m_MouseInfo.m_RButtonUp)
+	else if(m_theView->m_MouseInfo->m_RButtonUp)
 	{
-		m_theView->m_MouseInfo.m_RButtonUp=false;
+		m_theView->m_MouseInfo->m_RButtonUp=false;
 	}
 }
 
@@ -211,68 +210,17 @@ int MVC_Controller::ProcKeys(int key)
 
 void MVC_Controller::ProcKeyboard()
 {
-	m_theModel->Camera2.CheckForMovement();
-	bool* temp = m_theView->GetKeyBuffer();
-	if (m_theModel->ChooseCamera == 0){
-		if (temp[ProcKeys('d')])
-		{
-
-		}
-		else if (temp[ProcKeys('a')])
-		{
-
-		}
-		else
-		{
-
-
-		}
-
-		if (temp[ProcKeys('w')])
-		{
-
-		}
-		else if (temp[ProcKeys('s')])
-		{
-
-		}
-		else
-		{
-
-		}
-
-	}
+	if(m_theModel->DebugCam)
+		m_theModel->Camera2.CheckForMovement();
 	else
-	{
-		if (temp[ProcKeys('d')])
-		{
-			
-		}
-		else if (temp[ProcKeys('a')])
-		{
-			
-		}
-		else
-		{
-			
-		}
+		m_theModel->theCamera.CheckForMovement();
 
-		if (temp[ProcKeys('w')])
-		{
-			
-		}
-		else if (temp[ProcKeys('s')])
-		{
-			
-		}
-		else
-		{
-			
-		}
-	}
+	bool* temp = m_theView->GetKeyBuffer();
+
 	if (temp[ProcKeys('p')])
 	{
-
+		m_theModel->DebugCam = !m_theModel->DebugCam;
+		temp[ProcKeys('p')] = false;
 	}
 
 	//DEBUG

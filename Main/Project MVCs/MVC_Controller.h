@@ -50,5 +50,4 @@ protected:
 
 	void RotateCamera(float AngletoChange);
 	float v1, u1;
-
 };

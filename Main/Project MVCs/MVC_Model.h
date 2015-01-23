@@ -69,8 +69,6 @@ public:
 	//DISTANCE FROM OBJECT TO CAMERA
 	int distance;
 
-	//TESTING CODES
-	float x, y, z;
 
 	//MAZE
 	//MazeGenerator theMaze;
@@ -79,9 +77,6 @@ public:
 	//Rotate the object
 	float ObjectAngle;
 
-	//Choose camera debug purposes
-	int ChooseCamera;
-
-	int PlayerParts[4];
+	bool DebugCam;
 private: 
 };

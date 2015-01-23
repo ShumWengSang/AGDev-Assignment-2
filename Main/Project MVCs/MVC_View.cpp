@@ -11,8 +11,8 @@
 MVC_View::MVC_View(MVC_Model* theModel)
 {
 	m_theModel = theModel;
-
-	m_MouseInfo.init();
+	m_MouseInfo = CMouse::getInstance(0);
+	m_MouseInfo->init();
 	m_iWindows_Width = 1; 
 	m_iWindows_Height = 1;
 	m_Sheight=100;
@@ -29,6 +29,8 @@ MVC_View::MVC_View(MVC_Model* theModel)
 	{
 		m_keys[i] = false;
 	}
+
+	m_theModel->Camera2.GetKeys(GetKeyBuffer());
 }
 
 MVC_View::~MVC_View(void)
@@ -44,7 +46,10 @@ BOOL MVC_View::Draw(void)
 	glColor3f(1,1,1);
 
 	//m_theModel->theFirstCamera.Update();
-	m_theModel->Camera2.Look();
+	if(m_theModel->DebugCam)
+		m_theModel->Camera2.Look();
+	else
+		m_theModel->theCamera.Look();
 	//m_theModel->theCamera.Update();
 	//m_theModel->thePlayerData.glRenderObject(&m_theModel->theCamera.Position());
 
@@ -124,7 +129,7 @@ void MVC_View::DrawObject()
 void MVC_View::DrawScene()
 {
 	glPushMatrix();
-	//m_theModel->theBox.Draw();
+	m_theModel->theBox.Draw();
 
 	Draw3DSGrid();
 
@@ -135,18 +140,23 @@ void MVC_View::DrawScene()
 	m_theModel->theHUD.SetHUD(true);
 	m_theModel->theHUD.Draw();
 	glColor3f(0.0, 0.0, 1.0);
-	Printw(10, 50, "FPS: %.2f", MVCTime::GetInstance()->GetFPS());
-	Printw(10, 100, "Camera 2 Pos: %f %f %f", m_theModel->Camera2.Position().x, m_theModel->Camera2.Position().y, m_theModel->Camera2.Position().z);
-	Printw(10, 150, "Player Data Pos: %f %f %f", m_theModel->thePlayerData.getPosition().x, m_theModel->thePlayerData.getPosition().y, m_theModel->thePlayerData.getPosition().z);
-	Printw(10, 200, "Player Direction %f %f %f , Angle : %f", m_theModel->thePlayerData.getDirection().x, m_theModel->thePlayerData.getDirection().y, m_theModel->thePlayerData.getDirection().z, Math::VectorToAngle(m_theModel->thePlayerData.getDirection()));
-	Printw(10, 250, "Camera 2 Direction %f %f %f , Angle : %f", m_theModel->Camera2.View().x, m_theModel->Camera2.View().y, m_theModel->Camera2.View().z, Math::VectorToAngle(m_theModel->Camera2.View()));
+	if(m_theModel->DebugCam)
+	{
+		Printw(10, 50, "FPS: %.2f", MVCTime::GetInstance()->GetFPS());
+		Printw(10, 100, "Camera 2 Pos: %f %f %f", m_theModel->Camera2.Position().x, m_theModel->Camera2.Position().y, m_theModel->Camera2.Position().z);
+		Printw(10, 150, "Player Data Pos: %f %f %f", m_theModel->thePlayerData.getPosition().x, m_theModel->thePlayerData.getPosition().y, m_theModel->thePlayerData.getPosition().z);
+		Printw(10, 200, "Player Direction %f %f %f , Angle : %f", m_theModel->thePlayerData.getDirection().x, m_theModel->thePlayerData.getDirection().y, m_theModel->thePlayerData.getDirection().z, Math::VectorToAngle(m_theModel->thePlayerData.getDirection()));
+		Printw(10, 250, "Camera 2 Direction %f %f %f , Angle : %f", m_theModel->Camera2.View().x, m_theModel->Camera2.View().y, m_theModel->Camera2.View().z, Math::VectorToAngle(m_theModel->Camera2.View()));
+	}
+	else
+	{
+		Printw(10, 50, "FPS: %.2f", MVCTime::GetInstance()->GetFPS());
+		Printw(10, 100, "Camera 2 Pos: %f %f %f", m_theModel->theCamera.Position().x, m_theModel->theCamera.Position().y, m_theModel->theCamera.Position().z);
+		Printw(10, 150, "Player Data Pos: %f %f %f", m_theModel->thePlayerData.getPosition().x, m_theModel->thePlayerData.getPosition().y, m_theModel->thePlayerData.getPosition().z);
+		Printw(10, 200, "Player Direction %f %f %f , Angle : %f", m_theModel->thePlayerData.getDirection().x, m_theModel->thePlayerData.getDirection().y, m_theModel->thePlayerData.getDirection().z, Math::VectorToAngle(m_theModel->thePlayerData.getDirection()));
+		Printw(10, 250, "Camera 2 Direction %f %f %f , Angle : %f", m_theModel->theCamera.View().x, m_theModel->theCamera.View().y, m_theModel->theCamera.View().z, Math::VectorToAngle(m_theModel->theCamera.View()));
+	}
 
-
-	//Printw(10, 100, "Camera 2 Pos: %f %f %f", m_theModel->theFirstCamera.GetPosition().x, m_theModel->theFirstCamera.GetPosition().y, m_theModel->theFirstCamera.GetPosition().z);
-	//Printw(10, 150, "Player Data Pos: %f %f %f", m_theModel->thePlayerData.getPosition().x, m_theModel->thePlayerData.getPosition().y, m_theModel->thePlayerData.getPosition().z);
-	//Printw(10, 200, "Player Direction %f %f %f , Angle : %f", m_theModel->thePlayerData.getDirection().x, m_theModel->thePlayerData.getDirection().y, m_theModel->thePlayerData.getDirection().z, Math::VectorToAngle(m_theModel->thePlayerData.getDirection()));
-	//Printw(10, 250, "Camera 2 Direction %f %f %f , Angle : %f", m_theModel->theFirstCamera.GetDirection().x, m_theModel->theFirstCamera.GetDirection().y, m_theModel->theFirstCamera.GetDirection().z, Math::VectorToAngle(m_theModel->theFirstCamera.GetDirection()));
-	//Printw(10, 300, "Distance with Data: %f", (m_theModel->thePlayerData.getPosition() - m_theModel->theCamera.Position()).GetMagnitude());
 
 	Printw(10, 300, "Distance with Data: %f", (m_theModel->thePlayerData.getPosition() - m_theModel->theCamera.Position()).GetMagnitude());
 	m_theModel->theHUD.SetHUD(false);

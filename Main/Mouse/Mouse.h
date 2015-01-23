@@ -1,10 +1,15 @@
 #pragma once
 class CMouse
 {
-public:
+private:
+
+	static int instanceFlag;
+    static CMouse *singleton[3];
+
+
 	CMouse(void);
 	~CMouse(void);
-
+public:
 	int m_x, m_y;
 	int m_last_x, m_last_y;
 	bool m_LButtonDown,m_RButtonDown,m_MButtonDown;
@@ -23,6 +28,8 @@ public:
 		m_LButtonUp=m_RButtonUp=m_MButtonUp=false;
 		m_LButtonHold=m_RButtonHold=m_MButtonHold=false;
 	};
+
+	static CMouse* getInstance(int);
 
 	void SetMousePos( const int new_x, const int new_y )
 	{

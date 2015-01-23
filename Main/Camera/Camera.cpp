@@ -17,48 +17,7 @@
 
 // This is how fast our camera moves
 #define kSpeed	10.0f	
-
-
-
-///////////////////////////////// CALCULATE FRAME RATE \\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\*
-/////
-/////	This function calculates the frame rate and time intervals between frames
-/////
-///////////////////////////////// CALCULATE FRAME RATE \\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\*
-
-//void CalculateFrameRate()
-//{
-//	static int framesPerSecond = 0;				// This will store our fps
-//	static float fpsTime = 0.0f;				// Amount of elapsed time until we update the FPS count
-//	char strFrameRate[50] = {0};				// We will store the string here for the window title
-//
-//	 Increase the fps elapsed time
-//	fpsTime += g_DT;
-//
-//	 Now we want to subtract the current time by the last time that was stored
-//	 to see if the time elapsed has been over a second, which means we found our FPS.
-//	if( fpsTime > 1.0f )
-//	{
-//		 Reset the fpsTime
-//		fpsTime = 0.0f;
-//
-//		// Copy the frames per second into a string to display in the window title bar
-//		sprintf(strFrameRate, "Current Frames Per Second: %d", framesPerSecond);
-//
-//		// Set the window title bar to our string
-//		SetWindowText(g_hWnd, strFrameRate);
-//
-//		 Reset the frames per second
-//		framesPerSecond = 0;
-//	}
-//	else
-//	{
-//		 Increase the frame counter
-//		++framesPerSecond;
-//	}
-//}
-
-
+#define kRotate 80.0f
 
 
 ///////////////////////////////// CCAMERA \\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\*
@@ -68,14 +27,16 @@
 ///////////////////////////////// CCAMERA \\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\*
 CCamera::CCamera(void)
 {
+	theMouse = CMouse::getInstance(0);
 	//this->theType = FirstPerson;
 	int x=0;
 }
 
 CCamera::CCamera(CameraType theType)
 {
+	theMouse = CMouse::getInstance(0);
 	CVector3 vZero = CVector3(0.0, 10.0, 0.0);		// Init a vVector to 0 0 0 for our position
-	CVector3 vView = CVector3(0.0, 1.0, 0.5);		// Init a starting view vVector (looking up and out the screen) 
+	CVector3 vView = CVector3(0.0, 0.0, 1.0);		// Init a starting view vVector (looking up and out the screen) 
 	CVector3 vUp   = CVector3(0.0, 1.0, 0.0);		// Init a standard up vVector (Rarely ever changes)
 
 	m_vPosition	= vZero;					// Init the position to zero
@@ -86,7 +47,14 @@ CCamera::CCamera(CameraType theType)
 
 	SCREENHEIGHT = 600;
 	SCREENWIDTH = 800;
+	RotateAngleByMouse = 0;
 	Angle = 0;
+}
+
+void CCamera::SetScreen(int Width, int Height)
+{
+	SCREENHEIGHT = Height;
+	SCREENWIDTH = Width;
 }
 
 CCamera::~CCamera()
@@ -229,13 +197,12 @@ void CCamera::SetViewByMouseTwo(float x,float y)
 	//GetCursorPos(&mousePos);
 	int NewX = x;
 	int NewY = y;
-	cout << x << " " << y << endl;
 
 	// If our cursor is still in the middle, we never moved... so don't update the screen
 	//if ((mousePos.x == middleX) && (mousePos.y == middleY)) return;
-	theMouse.SetMousePos(NewX, NewY);
+	theMouse->SetMousePos(NewX, NewY);
 
-	calculations(theMouse.GetDiff_X(), theMouse.GetDiff_Y());
+	calculations(theMouse->GetDiff_X(), theMouse->GetDiff_Y());
 }
 
 void CCamera::Pitch(GLfloat theta)
@@ -391,6 +358,18 @@ void CCamera::MoveCamera(float speed)
 /////	This function handles the input faster than in the WinProc()
 /////
 //////////////////////////// CHECK FOR MOVEMENT \\\\\\\\\\\\\\\\\\\\\\\\\\\\*
+int ProcKeys(int key)
+{
+	if(key>=97&&key<122)
+	{
+		return 0x41+(key-97);
+	}
+	else if(key>=48&&key<57)
+	{
+		return 0x30+(key-48);
+	}
+	return 0;
+}
 
 void CCamera::CheckForMovement()
 {	
@@ -412,37 +391,33 @@ void CCamera::CheckForMovement()
 		MoveCamera(-speed);				
 	}
 
-	if (theType == ThirdPerson)
-	{
-		// Check if we hit the Left arrow or the 'a' key
-		if (GetKeyState(VK_LEFT) & 0x80 || GetKeyState('A') & 0x80) {
+	//if (theType == ThirdPerson)
+	//{
+	//	// Check if we hit the Left arrow or the 'a' key
+	//	if (GetKeyState(VK_LEFT) & 0x80 || GetKeyState('A') & 0x80) {
 
-			// Strafe the camera left
-			RotateAroundPoint(m_vView, rotatespeed, 0, 1, 0);
-		}
+	//		RotateAroundPoint(m_vView + m_vPosition, rotatespeed, 0, 1, 0);
+	//	}
 
-		// Check if we hit the Right arrow or the 'd' key
-		if (GetKeyState(VK_RIGHT) & 0x80 || GetKeyState('D') & 0x80) {
+	//	// Check if we hit the Right arrow or the 'd' key
+	//	if (GetKeyState(VK_RIGHT) & 0x80 || GetKeyState('D') & 0x80) {
 
-			// Strafe the camera right
-			RotateAroundPoint(m_vView, rotatespeed, 0, -1, 0);
-		}
+	//		RotateAroundPoint(m_vView + m_vPosition, rotatespeed, 0, -1, 0);
+	//	}
+	//}
+
+	// Check if we hit the Left arrow or the 'a' key
+	if (GetKeyState(VK_LEFT) & 0x80 || GetKeyState('A') & 0x80) {
+
+		// Strafe the camera left
+		StrafeCamera(-speed);
 	}
-	else if (theType == FirstPerson)
-	{
-		// Check if we hit the Left arrow or the 'a' key
-		if (GetKeyState(VK_LEFT) & 0x80 || GetKeyState('A') & 0x80) {
 
-			// Strafe the camera left
-			StrafeCamera(-speed);
-		}
+	// Check if we hit the Right arrow or the 'd' key
+	if (GetKeyState(VK_RIGHT) & 0x80 || GetKeyState('D') & 0x80) {
 
-		// Check if we hit the Right arrow or the 'd' key
-		if (GetKeyState(VK_RIGHT) & 0x80 || GetKeyState('D') & 0x80) {
-
-			// Strafe the camera right
-			StrafeCamera(speed);
-		}
+		// Strafe the camera right
+		StrafeCamera(speed);
 	}
 }
 
@@ -456,24 +431,27 @@ void CCamera::CheckForMovement()
 void CCamera::Update() 
 {
 
-	// Initialize a variable for the cross product result
+		// Initialize a variable for the cross product result
 	CVector3 vCross = CVector3::Cross(m_vView , m_vUpVector);
 
-	// Normalize the strafe vector
+		// Normalize the strafe vector
 	m_vStrafe = m_vView.Normalize(vCross);
-
+	
+	POINT mousePos;									// This is a window structure that holds an X and Y
+		// Get the mouse's current X,Y position
+	GetCursorPos(&mousePos);
+	theMouse->SetMousePos(mousePos.x,mousePos.y);
 	if (theType == FirstPerson)
 	{
-		// Move the camera's view by the mouse
-		//SetViewByMouse();
-		//SetViewByMouseTwo();
-	}
 
-	// This checks to see if the keyboard was pressed
-	//CheckForMovement();
-	
-	// Calculate our frame rate and set our frame interval for time based movement
-	//CalculateFrameRate();
+
+		// Move the camera's view by the mouse
+		SetViewByMouseTwo(mousePos.x,mousePos.y);
+	}
+	else if(theType == ThirdPerson)
+	{
+		CheckMouse();
+	}
 }
 
 
@@ -496,18 +474,33 @@ void CCamera::Look()
 }
 
 
-/////////////////////////////////////////////////////////////////////////////////
-//
-// * QUICK NOTES * 
-//
-// Nothing was changed since the Time Based Movement tutorial, except in
-// MoveCamera() we allowed the user to enter fly mode with using the Y value.
-// The 1000 was changed to 500 in SetViewByMouse() to make the camera faster.
-//
-//
-// Ben Humphrey (DigiBen)
-// Game Programmer
-// DigiBen@GameTutorials.com
-// Co-Web Host of www.GameTutorials.com
-//
-//
+void CCamera::GetKeys(bool * theKeys)
+{
+	keys = theKeys;
+}
+
+void CCamera::SetRotatebyMouse(float AngletoChange)
+{
+	RotateAngleByMouse += AngletoChange * g_DT;
+
+	//Change into Radian, so that we can change into a vector.
+	float Angle = Math::degreesToRadians(RotateAngleByMouse);
+	CVector3 newDir(cosf(Angle), 0, (sinf(Angle)));
+	m_vView.Set(newDir);
+}
+
+void CCamera::CheckMouse()
+{
+	//cout << " Mouse Pos  x : " <<theMouse->m_x << " : Mouse Pos Y: " <<theMouse->m_y << endl; 
+	if (theMouse->m_x < (SCREENWIDTH / 2))
+	{
+		//m_theModel->ObjectAngle += -40 * theTimer->GetDelta();
+		SetRotatebyMouse(-kRotate);
+		//cout<<"1" << endl;
+	}
+	else if (theMouse->m_x > (SCREENWIDTH / 2))
+	{
+		SetRotatebyMouse(kRotate);
+		//cout<<"2"<<endl;
+	}
+}

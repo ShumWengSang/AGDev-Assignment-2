@@ -321,16 +321,16 @@ LRESULT CALLBACK MVC_View::MsgProc( HWND hWnd, // Handle For This Window
 		}
 	case WM_MOUSEMOVE:
 		{
-			//m_MouseInfo.SetMousePos( LOWORD(lParam), HIWORD(lParam) );
-			//int diffX = m_MouseInfo.GetDiff_X();
-			//int diffY = m_MouseInfo.GetDiff_Y();
+			//m_MouseInfo->SetMousePos( LOWORD(lParam), HIWORD(lParam) );
+			//int diffX = m_MouseInfo->GetDiff_X();
+			//int diffY = m_MouseInfo->GetDiff_Y();
 
-		//	m_MouseInfo.m_last_x = diffX;
-			//m_MouseInfo.m_last_y = diffY;
+		//	m_MouseInfo->m_last_x = diffX;
+			//m_MouseInfo->m_last_y = diffY;
 			//if (m_theModel->ChooseCamera == 1)
 		//	m_theModel->theFirstCamera.calculations(diffX, diffY);
 
-			m_theModel->Camera2.SetViewByMouseTwo(LOWORD(lParam), HIWORD(lParam));
+			//m_theModel->Camera2.SetViewByMouseTwo(LOWORD(lParam), HIWORD(lParam));
 
 			//Make sure the mouse doesn't go out of the window.
 			RECT WindowRect;
@@ -340,28 +340,28 @@ LRESULT CALLBACK MVC_View::MsgProc( HWND hWnd, // Handle For This Window
 		}
 	case WM_LBUTTONDOWN:
 		{
-			m_MouseInfo.m_LButtonDown=true;
-			m_MouseInfo.m_LButtonHold=true;
+			m_MouseInfo->m_LButtonDown=true;
+			m_MouseInfo->m_LButtonHold=true;
 			return 1;
 		}
 	case WM_LBUTTONUP:
 		{
-			m_MouseInfo.m_LButtonDown=false;
-			m_MouseInfo.m_LButtonHold=false;
-			m_MouseInfo.m_LButtonUp=true;
+			m_MouseInfo->m_LButtonDown=false;
+			m_MouseInfo->m_LButtonHold=false;
+			m_MouseInfo->m_LButtonUp=true;
 			return 1;
 		}
 	case WM_RBUTTONDOWN:
 		{
-			m_MouseInfo.m_RButtonDown=true;
-			m_MouseInfo.m_RButtonHold=true;
+			m_MouseInfo->m_RButtonDown=true;
+			m_MouseInfo->m_RButtonHold=true;
 			return 1;
 		}
 	case WM_RBUTTONUP:
 		{
-			m_MouseInfo.m_RButtonDown=false;
-			m_MouseInfo.m_RButtonHold=false;
-			m_MouseInfo.m_RButtonUp=true;
+			m_MouseInfo->m_RButtonDown=false;
+			m_MouseInfo->m_RButtonHold=false;
+			m_MouseInfo->m_RButtonUp=true;
 			return 1;
 		}
 	}

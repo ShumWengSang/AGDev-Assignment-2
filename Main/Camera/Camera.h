@@ -6,6 +6,7 @@
 #include <gl\GLU.h>
 #include "Mouse.h"
 #include "Vector3.h"
+#include "Math2.h"
 enum CameraType {
   FirstPerson = 1,
   ThirdPerson = 2
@@ -42,6 +43,8 @@ public:
 
 	void SetViewByMouseTwo(float x,float y);
 
+	void SetRotatebyMouse(float);
+	void CheckMouse();
 	// This rotates the camera around a point (I.E. your character).
 	void RotateAroundPoint(CVector3 vCenter, float angle, float X, float Y, float Z);
 
@@ -63,6 +66,8 @@ public:
 	void SetDT(float);
 	void SetHeightWidth(int, int);
 
+	void GetKeys(bool * theKeys);
+	void SetScreen(int, int);
 
 private:
 	CameraType theType;
@@ -83,13 +88,15 @@ private:
 	int SCREENHEIGHT;
 	int SCREENWIDTH;
 
-	CMouse theMouse;
+	CMouse * theMouse;
 
 	void calculations(float diffX, float diffY);
 	void Pitch(GLfloat theta);
 	void Yaw(GLfloat theta);
 	void Roll(GLfloat theta);
 	float Angle;
+	float RotateAngleByMouse;
+	bool * keys;
 };
 
 
