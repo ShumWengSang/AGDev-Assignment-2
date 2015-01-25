@@ -61,6 +61,55 @@ bool MVC_Model::InitPhase2(void)
 	if (!LoadTGA(&SkyBoxTextures[5], "SkyBox/bottom.tga"))				// Load The Font Texture
 		return false;										// If Loading Failed, Return False
 
+	//Find the ratio between skybox width and height and maze width and height.
+	//We need this to fully fill our skybox with the maze.
+	float ratiox = theBox.Width / MAZEWIDTH;
+	float ratioy = theBox.Height / MAZEHEIGHT;
+
+	MazeGenerator theMaze;
+	BlockWall * newWall;
+	ObjFile thecube = LoadOBJ("Objects/Cube.obj");
+	theMaze.Draw();
+	for (int MazeWidth = -0; MazeWidth < MAZEWIDTH; MazeWidth++)
+	{
+		for (int MazeHeight = -0; MazeHeight < MAZEHEIGHT; MazeHeight++)
+		{
+			if (theMaze.theMaze[MazeWidth][MazeHeight] == 0)
+			{
+				continue;
+			}
+			else
+			{
+				newWall = new BlockWall;
+				newWall->theObjectX.theObj_LowPoly = thecube;
+				newWall->theObjectZ.theObj_LowPoly = thecube;
+
+				newWall->SetPosition(CVector3((float)(MazeWidth - MAZEWIDTH / 2) * ratiox, 0, (float)(MazeHeight - MAZEHEIGHT / 2)* ratioy));
+
+				if (theMaze.theMaze[MazeWidth + 1][MazeHeight] == 1)
+				{
+					newWall->SetScale(CVector3(ratiox/2,1,1),false);
+				}
+				if (theMaze.theMaze[MazeWidth - 1][MazeHeight] == 1)
+				{
+					newWall->SetScale(CVector3(ratiox / 2, 1, 1),true);
+				}
+				if (theMaze.theMaze[MazeWidth][MazeHeight + 1])
+				{
+					newWall->SetScale(CVector3(1, 1, ratioy / 2),true);
+				}
+				if (theMaze.theMaze[MazeWidth][MazeHeight - 1] == 1)
+				{
+					newWall->SetScale(CVector3(1, 1, ratioy / 2),false );
+				}
+				theListofObjects.push_back(newWall);
+			}
+		}
+	}
+
+
+
+
 	//if (!LoadTGA(&ExitTexture[0], "exit.tga"))				// Load The Font Texture
 		//return false;	// If Loading Failed, Return False
 
@@ -79,10 +128,9 @@ bool MVC_Model::InitPhase2(void)
 	}
 
 
-	//Find the ratio between skybox width and height and maze width and height.
-	//We need this to fully fill our skybox with the maze.
-	float ratiox = theBox.Width / m_worldSizeX;
-	float ratioy = theBox.Height / m_worldSizeY;
+
+
+	//Generate the Maze and input it.
 
 
 

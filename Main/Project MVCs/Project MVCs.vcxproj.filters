@@ -19,11 +19,14 @@
     <Filter Include="Header Files\MVC">
       <UniqueIdentifier>{8e7ae138-41f5-44eb-9dd0-9362c597cb38}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Header Files\Classes">
+      <UniqueIdentifier>{ad4e4efb-59c2-49fe-b8f1-db3fd59f314a}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\Classes">
+      <UniqueIdentifier>{b0213c8b-6b40-49c1-83d1-e30765c30742}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="Exit.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
     <ClCompile Include="MVC_Controller.cpp">
       <Filter>Source Files\MVC</Filter>
     </ClCompile>
@@ -39,11 +42,14 @@
     <ClCompile Include="View_misc.cpp">
       <Filter>Source Files\MVC</Filter>
     </ClCompile>
+    <ClCompile Include="Exit.cpp">
+      <Filter>Source Files\Classes</Filter>
+    </ClCompile>
+    <ClCompile Include="BlockWall.cpp">
+      <Filter>Source Files\Classes</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="Exit.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
     <ClInclude Include="MVC_Controller.h">
       <Filter>Header Files\MVC</Filter>
     </ClInclude>
@@ -55,6 +61,12 @@
     </ClInclude>
     <ClInclude Include="MVC_View.h">
       <Filter>Header Files\MVC</Filter>
+    </ClInclude>
+    <ClInclude Include="BlockWall.h">
+      <Filter>Header Files\Classes</Filter>
+    </ClInclude>
+    <ClInclude Include="Exit.h">
+      <Filter>Header Files\Classes</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

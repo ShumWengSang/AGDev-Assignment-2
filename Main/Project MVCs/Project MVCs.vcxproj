@@ -51,9 +51,9 @@
       </PrecompiledHeader>
       <WarningLevel>Level3</WarningLevel>
       <Optimization>Disabled</Optimization>
-      <PreprocessorDefinitions>WIN32;_DEBUG;_CONSOLE;_LIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <PreprocessorDefinitions>WIN32;_DEBUG;_CONSOLE;_LIB;_CRT_SECURE_NO_DEPRECATE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <SDLCheck>true</SDLCheck>
-      <AdditionalIncludeDirectories>$(SolutionDir)Base Entity;$(SolutionDir)Camera;$(SolutionDir)Camera 2;$(SolutionDir)Frustum Clip Space;$(SolutionDir)Lua Interface;$(SolutionDir)Math;$(SolutionDir)Model and Texture Loader;$(SolutionDir)Mouse;$(SolutionDir)Quad Tree;$(SolutionDir)Sky Box;$(SolutionDir)Time;$(SolutionDir)UserInterface HUD;$(SolutionDir)Frustum Geometry;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>$(SolutionDir)Base Entity;$(SolutionDir)Camera;$(SolutionDir)Camera 2;$(SolutionDir)Frustum Clip Space;$(SolutionDir)Lua Interface;$(SolutionDir)Math;$(SolutionDir)Model and Texture Loader;$(SolutionDir)Mouse;$(SolutionDir)Quad Tree;$(SolutionDir)Sky Box;$(SolutionDir)Time;$(SolutionDir)UserInterface HUD;$(SolutionDir)Frustum Geometry;$(SolutionDir)Maze Generator;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
     </ClCompile>
     <Link>
       <SubSystem>Console</SubSystem>
@@ -80,6 +80,7 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="BlockWall.cpp" />
     <ClCompile Include="Exit.cpp" />
     <ClCompile Include="main.cpp" />
     <ClCompile Include="MVC_Controller.cpp" />
@@ -88,6 +89,7 @@
     <ClCompile Include="View_misc.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="BlockWall.h" />
     <ClInclude Include="Exit.h" />
     <ClInclude Include="gl.h" />
     <ClInclude Include="MVC_Controller.h" />
@@ -112,6 +114,9 @@
     </ProjectReference>
     <ProjectReference Include="..\Math\Math.vcxproj">
       <Project>{9bb92af9-c0e9-4a30-bafa-baea759c6409}</Project>
+    </ProjectReference>
+    <ProjectReference Include="..\Maze Generator\Maze Generator.vcxproj">
+      <Project>{2dab0b6f-208b-4c3d-b903-cea661d13f92}</Project>
     </ProjectReference>
     <ProjectReference Include="..\Model and Texture Loader\Model and Texture Loader.vcxproj">
       <Project>{37832ae2-026c-4db0-b007-d72da59b9699}</Project>

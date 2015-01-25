@@ -9,12 +9,16 @@ class CObjectModel
 private:
 	CVector3 thePosition;
 	CVector3 theDirection;
+	CVector3 Scale;
+
+
+public:
+
+
 	ObjFile theObj_HighPoly;
 	ObjFile theObj_MedPoly;
 	ObjFile theObj_LowPoly;
 
-
-public:
 	CObjectModel(void);
 	~CObjectModel(void);
 
@@ -24,8 +28,10 @@ public:
 	void Render(const int RESOLUTION);
 	void SetPosition(CVector3 theNewPosition);
 	void SetDirection(CVector3 theNewDirection);
+	void SetScale(CVector3 theNewScale);
 	CVector3 GetPosition();
 	CVector3 GetDirection();
+	CVector3 GetScale();
 	int Texture;
 };
 

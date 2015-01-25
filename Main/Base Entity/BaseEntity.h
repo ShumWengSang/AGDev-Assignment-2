@@ -5,6 +5,9 @@ enum EntityType
 {
 	NONE = 0,
 	PLAYER = 1,
+	HorizontalWall,
+	VerticalWall,
+	BothWall,
 	EXIT
 };
 
@@ -17,6 +20,7 @@ public:
 	virtual ~BaseEntity();
 
 	virtual bool glRenderObject(CVector3* theCameraPosition);
+	virtual bool glRenderObject(int RESOLUTION);
 	// Designed to render the specified object.  Returns TRUE if the object is successfully
 	// rendered, otherwise FALSE.  All derived objects are expected to override this
 	// function.

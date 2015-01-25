@@ -10,6 +10,8 @@
 #include "Exit.h"
 #include "MVCtime.h"
 #include "camera2.h"
+#include "MazeGenerator.h"
+#include "BlockWall.h"
 
 class MVCTime;
 
@@ -53,6 +55,7 @@ public:
 	HUD theHUD;
 	SkyBox theBox;
 
+	std::vector<BaseEntity *> theListofObjects;
 	//void FrustumChecking();
 	//void FrustumChecking(CSceneNode* thisNode, const int ParentID, const int thisID);
 

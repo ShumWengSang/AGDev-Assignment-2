@@ -7,6 +7,7 @@ CObjectModel::CObjectModel(void)
 , theObj_MedPoly(0)
 , theObj_LowPoly(0)
 {
+	Scale.Set(1,1,1);
 }
 
 CObjectModel::~CObjectModel(void)
@@ -15,9 +16,7 @@ CObjectModel::~CObjectModel(void)
 
 void CObjectModel::Init(void)
 {
-	theObj_HighPoly = LoadOBJ("./ObjectModels/Cylinder_High.obj");
-	theObj_MedPoly = LoadOBJ("./ObjectModels/Cylinder_Med.obj");
-	theObj_LowPoly = LoadOBJ("./ObjectModels/Cylinder_Low.obj");
+
 }
 
 void CObjectModel::Render(CVector3* theCameraPosition)
@@ -30,6 +29,7 @@ void CObjectModel::Render(CVector3* theCameraPosition)
 	glPushMatrix();
 
 	glTranslatef(thePosition.x, thePosition.y, thePosition.z);
+	glScalef(Scale.x, Scale.y, Scale.z);
 	if (distance < 30)
 	{
 		theCurrent = &theObj_HighPoly;
@@ -53,6 +53,7 @@ void CObjectModel::Render(const int RESOLUTION)
 {
 	glPushMatrix();
 	glTranslatef(thePosition.x, thePosition.y, thePosition.z);
+	glScalef(Scale.x, Scale.y, Scale.z);
 	if (RESOLUTION == 0)
 	{
 		glColor3f(1.0f, 0.0f, 0.0f);
@@ -90,4 +91,14 @@ void CObjectModel::SetDirection(CVector3 theNewDirection)
 CVector3 CObjectModel::GetDirection()
 {
 	return CVector3(theDirection.x, theDirection.y, theDirection.z);
+}
+
+void CObjectModel::SetScale(CVector3 theNewScale)
+{
+	Scale.Set( theNewScale);
+}
+
+CVector3 CObjectModel::GetScale()
+{
+	return Scale;
 }

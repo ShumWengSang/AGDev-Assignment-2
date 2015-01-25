@@ -40,6 +40,12 @@ bool Player::glRenderObject(CVector3* theCameraPosition)
 	return true;
 }
 
+bool Player::glRenderObject(int RESOLUTION)
+{
+	theObject.Render(RESOLUTION);
+	return true;
+}
+
 EntityType Player::getObjectType(void)
 {
 	return PLAYER;

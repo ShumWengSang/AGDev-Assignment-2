@@ -133,7 +133,10 @@ void MVC_View::DrawScene()
 
 	Draw3DSGrid();
 
-
+	for (int i = 0; i < m_theModel->theListofObjects.size(); i++)
+	{
+		m_theModel->theListofObjects[i]->glRenderObject(3);
+	}
 
 
 

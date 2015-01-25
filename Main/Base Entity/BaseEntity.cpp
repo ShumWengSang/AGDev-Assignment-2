@@ -44,3 +44,8 @@ CObjectModel BaseEntity::GetObjectModel()
 	CObjectModel t;
 	return t;
 }
+
+bool BaseEntity::glRenderObject(int RESOLUTION)
+{
+	return false;
+}

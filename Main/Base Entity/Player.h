@@ -14,6 +14,7 @@ public:
 	void SetPos(CVector3 newPos);
 
 	bool glRenderObject(CVector3* theCameraPosition);
+	bool glRenderObject(int RESOLUTION);
 
 	EntityType getObjectType(void);
 	CObjectModel theObject;
