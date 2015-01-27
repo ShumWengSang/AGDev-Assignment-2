@@ -1,6 +1,9 @@
 #pragma once
 #include "Vector3.h"
 #include "BaseEntity.h"
+#include "tgaLoader.h"
+
+//struct MinMax;
 
 class BlockWall : public BaseEntity
 {
@@ -37,11 +40,24 @@ public:
 	 CVector3 GetTopLeft()
 	 {
 		 CVector3 TopLeft;
-		 MinMAx ObjX = GetMinMax(*theObjectX.theCurrent);
+		 MinMax ObjX = GetMinMax(theObjectX.theObj_HighPoly);
+		 float ObjWidthX = ObjX.MaxX - ObjX.MinX ;
+		 TopLeft.x = ObjX.MinX + ObjWidthX / 2 * theScale.x + theObjectX.GetPosition().x;
+		 MinMax ObjZ = GetMinMax(theObjectZ.theObj_HighPoly);
+		 float ObjLengthZ = ObjZ.MaxZ - ObjX.MinZ;
+		 TopLeft.z = ObjZ.MaxZ + ObjLengthZ / 2 * theScale.y + theObjectZ.GetPosition().z;
+		 return TopLeft;
 	 }
 	 CVector3 GetBottomRight()
 	 {
-
+		 CVector3 BottomRight;
+		 MinMax ObjX = GetMinMax(theObjectX.theObj_HighPoly);
+		 float ObjWidthX = ObjX.MaxX - ObjX.MinX;
+		 BottomRight.x = ObjX.MaxX + ObjWidthX / 2 * theScale.x + theObjectX.GetPosition().x;
+		 MinMax ObjZ = GetMinMax(theObjectZ.theObj_HighPoly);
+		 float ObjLengthZ = ObjZ.MaxZ - ObjX.MinZ;
+		 BottomRight.z = ObjZ.MinZ + ObjLengthZ / 2 * theScale.y + theObjectZ.GetPosition().z;
+		 return BottomRight;
 	 }
 };
 

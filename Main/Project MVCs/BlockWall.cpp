@@ -23,6 +23,16 @@ bool BlockWall::glRenderObject(int RESOLUTION)
 {
 	theObjectZ.Render(RESOLUTION);
 	theObjectX.Render(RESOLUTION);
+
+	CVector3 TopLeft = GetTopLeft();
+	CVector3 BottomRight = GetBottomRight();
+
+	glBegin(GL_LINE);
+	glVertex3f(TopLeft.x, 0 , TopLeft.z);
+	glVertex3f(BottomRight.x, 0, TopLeft.z);
+	glVertex3f(BottomRight.x, 0, BottomRight.z);
+	glVertex3f(TopLeft.x, 0, BottomRight.z);
+	glEnd();
 	return true;
 }
 

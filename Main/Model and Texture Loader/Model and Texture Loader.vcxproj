@@ -79,7 +79,7 @@
   <ItemGroup>
     <ClCompile Include="NewObjLoader.cpp" />
     <ClCompile Include="ObjLoader.cpp" />
-    <ClCompile Include="tgaLoader.c" />
+    <ClCompile Include="tgaLoader.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="ComGTGALoad.h" />

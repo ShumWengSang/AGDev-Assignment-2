@@ -115,7 +115,7 @@ typedef struct
 	*/
 	typedef unsigned int ObjFile;
 
-	typedef struct _MinMax
+typedef struct _MinMax
 {
 	float MinX, MinY, MinZ;
 	float MaxX, MaxY, MaxZ;

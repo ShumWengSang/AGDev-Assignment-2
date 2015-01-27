@@ -153,6 +153,9 @@ int QuadTree1::GetPtQuadrant(float x, float y)
 
 void QuadTree1::insert(BaseEntity * theEntity)
 {
+	rect InsertRect;
+
+
 	//insert(rect(theEntity->getPosition().x, theEntity->getPosition().z,))
 }
 

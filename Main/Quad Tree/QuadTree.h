@@ -3,6 +3,7 @@
 #include <gl\gl.h> // Header File For The OpenGL32 Library
 #include <vector>
 #include "BaseEntity.h"
+#include "tgaLoader.h"
 using namespace std;
 
 struct Quadrant
