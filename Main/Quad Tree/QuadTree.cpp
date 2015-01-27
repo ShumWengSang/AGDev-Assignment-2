@@ -94,9 +94,9 @@ int QuadTree1::GetIndex(rect pRect)
 	return index;
 }
 
-void QuadTree1::insert(BaseEntity theEntity)
+void QuadTree1::insert(BaseEntity * theEntity)
 {
-	
+	//insert(rect(theEntity->getPosition().x, theEntity->getPosition().z,))
 }
 
 void QuadTree1::insert(rect pRect)

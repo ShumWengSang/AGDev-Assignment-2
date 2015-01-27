@@ -38,30 +38,40 @@ private:
 	int numBaseEntitys;
 
 	//Adds a BaseEntity to or removes one from the children of this
-	void fileBaseEntity(BaseEntity* theBaseEntity, float x, float z, bool addBaseEntity) {
+	void fileBaseEntity(BaseEntity* theBaseEntity, float x, float z, bool addBaseEntity)
+	{
 		//Figure out in which child(ren) thetheBaseEntity belongs
-		for (int xi = 0; xi < 2; xi++) {
-			if (xi == 0) {
-				if (GetMinMax(*theBaseEntity->GetObjectModel().theCurrent).MaxX > centerX) {
+		for (int xi = 0; xi < 2; xi++)
+		{
+			if (xi == 0)
+			{
+				if (GetMinMax(*theBaseEntity->GetObjectModel().theCurrent).MaxX > centerX)
+				{
 					continue;
 				}
 			}
-			else if (GetMinMax(*theBaseEntity->GetObjectModel().theCurrent).MinX < centerX) {
+			else if (GetMinMax(*theBaseEntity->GetObjectModel().theCurrent).MinX < centerX) 
+			{
 				continue;
 			}
 
-			for (int zi = 0; zi < 2; zi++) {
-				if (zi == 0) {
-					if (GetMinMax(*theBaseEntity->GetObjectModel().theCurrent).MaxZ > centerZ) {
+			for (int zi = 0; zi < 2; zi++)
+			{
+				if (zi == 0)
+				{
+					if (GetMinMax(*theBaseEntity->GetObjectModel().theCurrent).MaxZ > centerZ)
+					{
 						continue;
 					}
 				}
-				else if (GetMinMax(*theBaseEntity->GetObjectModel().theCurrent).MinZ < centerZ) {
+				else if (GetMinMax(*theBaseEntity->GetObjectModel().theCurrent).MinZ < centerZ)
+				{
 					continue;
 				}
 
 				//Add or remove thetheBaseEntity
-				if (addBaseEntity) {
+				if (addBaseEntity)
+				{
 					children[xi][zi]->add(theBaseEntity);
 				}
 				else {
@@ -183,7 +193,8 @@ public:
 	}
 
 	//Adds a BaseEntity to this
-	void add(BaseEntity* BaseEntity) {
+	void add(BaseEntity* BaseEntity)
+	{
 		numBaseEntitys++;
 		if (!hasChildren && depth < 10 &&
 			numBaseEntitys > 1) {

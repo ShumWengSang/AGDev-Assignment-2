@@ -49,7 +49,7 @@ public:
 	void Split();	//split the quadtree
 	int GetIndex(rect pRect);	//Determine Location in quadtree -1 means object cannot completely fit within a child node and is part of the parent node
 
-	void insert(BaseEntity theEntity);
+	void insert(BaseEntity * theEntity);
 	void insert(rect pRect);
 	vector<rect> retrive(vector<rect> &returnObjects, rect pRect);
 

@@ -49,3 +49,8 @@ bool BaseEntity::glRenderObject(int RESOLUTION)
 {
 	return false;
 }
+
+CVector3 BaseEntity::GetScale()
+{
+	return CVector3(1, 1, 1);
+}

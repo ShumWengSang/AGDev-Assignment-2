@@ -12,6 +12,8 @@
 #include "camera2.h"
 #include "MazeGenerator.h"
 #include "BlockWall.h"
+#include "QuadTree.h"
+#include "QuadTree2.h"
 
 class MVCTime;
 
@@ -71,7 +73,6 @@ public:
 
 	//DISTANCE FROM OBJECT TO CAMERA
 	int distance;
-
 
 	//MAZE
 	//MazeGenerator theMaze;

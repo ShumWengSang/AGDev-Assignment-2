@@ -30,5 +30,8 @@ public:
 
 	 void SetPosition(CVector3 theNewPosition);
 	 void SetScale(CVector3 theNewScale, bool LeftUp);
+	 CVector3 theScale;
+
+	 CVector3 GetScale();
 };
 

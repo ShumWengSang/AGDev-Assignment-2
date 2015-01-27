@@ -4,6 +4,7 @@
 BlockWall::BlockWall()
 {
 	theType = HorizontalWall;
+	theScale.Set(1, 1, 1);
 }
 
 
@@ -131,4 +132,9 @@ void BlockWall::SetScale(CVector3 theNewScale, bool LeftUp)
 			}
 		}
 	}
+}
+
+CVector3 BlockWall::GetScale()
+{
+	return theScale;
 }

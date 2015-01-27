@@ -44,6 +44,8 @@ public:
 
 	virtual CObjectModel GetObjectModel();
 
+	virtual CVector3 GetScale();
+
 private:
 };
 
