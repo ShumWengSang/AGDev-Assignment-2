@@ -33,5 +33,15 @@ public:
 	 CVector3 theScale;
 
 	 CVector3 GetScale();
+
+	 CVector3 GetTopLeft()
+	 {
+		 CVector3 TopLeft;
+		 MinMAx ObjX = GetMinMax(*theObjectX.theCurrent);
+	 }
+	 CVector3 GetBottomRight()
+	 {
+
+	 }
 };
 

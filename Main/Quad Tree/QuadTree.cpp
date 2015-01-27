@@ -61,19 +61,76 @@ void QuadTree1::Split()
 	nodes[3] =  new QuadTree1(level+1,  rect(x + subWidth, y + subHeight, subWidth, subHeight));
 }
 
-int QuadTree1::GetIndex(rect pRect)
+Quadrant QuadTree1::GetIndex(rect pRect)
+{
+	Quadrant index;
+	double verticalMidpoint = bounds.x + (bounds.width / 2);
+	double horizontalMidpoint = bounds.y + (bounds.height / 2);
+
+	int BottomLeftQuad = GetPtQuadrant(pRect.x, pRect.y);
+	int TopRightQuad = GetPtQuadrant(pRect.x + pRect.width, pRect.y + pRect.height);
+
+
+	for (int i = 0; i < 4; i++)
+	{
+		if (BottomLeftQuad == i)
+		{
+			index.quad[i] = true;
+		}
+		if (TopRightQuad == i)
+		{
+			index.quad[i] = true;
+		}
+	}
+
+	//Check if the poitns are in opposite quads. IF they are, all four of them should have points.
+	if ((BottomLeftQuad + TopRightQuad) % 2 == 0)
+	{
+		for (int i = 0; i < 4; i ++)
+			index.quad[i] = true;
+	}
+
+	return index;
+	//// Object can completely fit within the top quadrants
+	//bool topQuadrant = (pRect.y < horizontalMidpoint && pRect.y + pRect.height < horizontalMidpoint);
+	//// Object can completely fit within the bottom quadrants
+	//bool bottomQuadrant = (pRect.y > horizontalMidpoint);
+
+	//// Object can completely fit within the left quadrants
+	//if (pRect.x < verticalMidpoint && pRect.x + pRect.width < verticalMidpoint) {
+	//	if (topQuadrant) {
+	//		index = 1;
+	//	}
+	//	else if (bottomQuadrant) {
+	//		index = 2;
+	//	}
+	//}
+	//// Object can completely fit within the right quadrants
+	//else if (pRect.x > verticalMidpoint) {
+	//	if (topQuadrant) {
+	//		index = 0;
+	//	}
+	//	else if (bottomQuadrant) {
+	//		index = 3;
+	//	}
+	//}
+	////Basically cut two lines in a cross and get the index value of which rect it is act.
+	//return index;
+}
+
+int QuadTree1::GetPtQuadrant(float x, float y)
 {
 	int index = -1;
 	double verticalMidpoint = bounds.x + (bounds.width / 2);
 	double horizontalMidpoint = bounds.y + (bounds.height / 2);
 
 	// Object can completely fit within the top quadrants
-	bool topQuadrant = (pRect.y < horizontalMidpoint && pRect.y + pRect.height < horizontalMidpoint);
+	bool topQuadrant = (y < horizontalMidpoint);
 	// Object can completely fit within the bottom quadrants
-	bool bottomQuadrant = (pRect.y > horizontalMidpoint);
+	bool bottomQuadrant = (y > horizontalMidpoint);
 
 	// Object can completely fit within the left quadrants
-	if (pRect.x < verticalMidpoint && pRect.x + pRect.width < verticalMidpoint) {
+	if (x < verticalMidpoint) {
 		if (topQuadrant) {
 			index = 1;
 		}
@@ -82,7 +139,7 @@ int QuadTree1::GetIndex(rect pRect)
 		}
 	}
 	// Object can completely fit within the right quadrants
-	else if (pRect.x > verticalMidpoint) {
+	else if (x > verticalMidpoint) {
 		if (topQuadrant) {
 			index = 0;
 		}
@@ -103,14 +160,16 @@ void QuadTree1::insert(rect pRect)
 {
 	if (nodes[0] != NULL)
 	{
-		int index = GetIndex(pRect);
+		Quadrant index = GetIndex(pRect);
 
-		if (index != -1)
+		for (int i = 0; i < 4; i++)
 		{
-			nodes[index]->insert(pRect);
-
-			return;
+			if (index.quad[i])
+			{
+				nodes[i]->insert(pRect);
+			}
 		}
+		return;
 	}
 	//The method first determines whether the node has any child nodes and tries to add the object there.
 
@@ -128,15 +187,16 @@ void QuadTree1::insert(rect pRect)
 		int counter;
 		for(i = objects.begin(), counter = 0; i != objects.end();counter++)
 		{
-			int index = GetIndex(objects.at(counter));
-			if (index != -1)
+			Quadrant index = GetIndex(objects.at(counter));
+			for (int a = 0; a < 4; a++)
 			{
-				nodes[index]->insert(objects.at(counter));
-				i = objects.erase(i);
-				counter--;
+				if (index.quad[a])
+				{
+					nodes[a]->insert(objects.at(counter));
+					i = objects.erase(i);
+					counter--;
+				}
 			}
-			else
-				i++;
 		}
 	}
 	//Once the object is added, it determines whether the node needs to split by checking if the current number of objects exceeds the max allowed objects.
@@ -145,13 +205,13 @@ void QuadTree1::insert(rect pRect)
 
 vector<rect> QuadTree1::retrive(vector<rect> &returnObjects, rect pRect)
 {
-	int index = GetIndex(pRect);
-	if (index != -1 && nodes[0] != NULL)
-	{
-		nodes[index]->retrive(returnObjects, pRect);
-	}
+	//int index = GetIndex(pRect);
+	//if (index != -1 && nodes[0] != NULL)
+	//{
+	//	nodes[index]->retrive(returnObjects, pRect);
+	//}
 
-	returnObjects.insert(returnObjects.end(),objects.begin(),objects.end());
+	//returnObjects.insert(returnObjects.end(),objects.begin(),objects.end());
 
 	return returnObjects;
 }

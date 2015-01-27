@@ -5,6 +5,18 @@
 #include "BaseEntity.h"
 using namespace std;
 
+struct Quadrant
+{
+	bool quad[4];
+	Quadrant()
+	{
+		for (int i = 0; i < 4; i++)
+		{
+			quad[i] = false;
+		}
+	}
+};
+
 struct rect
 {
 	int x;
@@ -40,14 +52,14 @@ private :
 
 
 public:
-
+	int QuadTree1::GetPtQuadrant(float x, float y);
 	QuadTree1(void);
 	QuadTree1(int pLevel, rect pBounds);
 	~QuadTree1(void);
 
 	void clear();	//clear the quadtree
 	void Split();	//split the quadtree
-	int GetIndex(rect pRect);	//Determine Location in quadtree -1 means object cannot completely fit within a child node and is part of the parent node
+	Quadrant GetIndex(rect pRect);	//Determine Location in quadtree -1 means object cannot completely fit within a child node and is part of the parent node
 
 	void insert(BaseEntity * theEntity);
 	void insert(rect pRect);

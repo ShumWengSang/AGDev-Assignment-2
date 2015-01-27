@@ -45,6 +45,14 @@ public:
 	virtual CObjectModel GetObjectModel();
 
 	virtual CVector3 GetScale();
+	virtual CVector3 GetTopLeft()
+	{
+		return CVector3(0, 0, 0);
+	}
+	virtual CVector3 GetBottomRight()
+	{
+		return CVector3(0, 0, 0);
+	}
 
 private:
 };
