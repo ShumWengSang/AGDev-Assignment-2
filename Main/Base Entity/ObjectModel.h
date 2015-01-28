@@ -12,6 +12,7 @@ private:
 	CVector3 Scale;
 
 
+
 public:
 
 
@@ -29,9 +30,12 @@ public:
 	void SetPosition(CVector3 theNewPosition);
 	void SetDirection(CVector3 theNewDirection);
 	void SetScale(CVector3 theNewScale);
+	void SetOffset(CVector3 theNewOffset);
 	CVector3 GetPosition();
 	CVector3 GetDirection();
 	CVector3 GetScale();
 	int Texture;
+
+	CVector3 TOffset;
 };
 

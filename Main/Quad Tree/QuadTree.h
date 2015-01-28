@@ -24,6 +24,7 @@ struct rect
 	int y;
 	int height;
 	int width;
+	BaseEntity * Pointer;
 
 	rect(int x, int y, int width, int height)
 	{
@@ -32,6 +33,16 @@ struct rect
 		this->width = width;
 		this->height = height;
 	}
+
+	rect(int x, int y, int width, int height, BaseEntity * theEntity)
+	{
+		this->x = x;
+		this->y = y;
+		this->width = width;
+		this->height = height;
+		this->Pointer = theEntity;
+	}
+
 	rect()
 	{
 
@@ -53,7 +64,7 @@ private :
 
 
 public:
-	int QuadTree1::GetPtQuadrant(float x, float y);
+	int GetPtQuadrant(float x, float y);
 	QuadTree1(void);
 	QuadTree1(int pLevel, rect pBounds);
 	~QuadTree1(void);

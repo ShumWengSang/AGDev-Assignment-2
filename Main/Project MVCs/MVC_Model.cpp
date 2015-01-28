@@ -12,7 +12,8 @@
 
 MVC_Model::MVC_Model(void):
 theCamera(ThirdPerson),
-Camera2(FirstPerson)
+Camera2(FirstPerson),
+theQuadTree(0, rect(theBox.GetLeft(), theBox.GetNear(), theBox.Width, theBox.Height))
 {
 
 	Rotate = 0;
@@ -86,9 +87,13 @@ bool MVC_Model::InitPhase2(void)
 
 				newWall->SetPosition(CVector3((float)(MazeWidth - MAZEWIDTH / 2) * ratiox, 0, (float)(MazeHeight - MAZEHEIGHT / 2)* ratioy));
 
+				if (newWall->getPosition().x == -100 && newWall->getPosition().z == -75)
+				{
+					int i = 1;
+				}
 				if (theMaze.theMaze[MazeWidth + 1][MazeHeight] == 1)
 				{
-					newWall->SetScale(CVector3(ratiox/2,1,1),false);
+					newWall->SetScale(CVector3(ratiox / 2,1,1),false);
 				}
 				if (theMaze.theMaze[MazeWidth - 1][MazeHeight] == 1)
 				{
@@ -128,7 +133,10 @@ bool MVC_Model::InitPhase2(void)
 	}
 
 
-
+	for (int i = 0; i < theListofObjects.size(); i++)
+	{
+		theQuadTree.insert(theListofObjects[i]);
+	}
 
 	//Generate the Maze and input it.
 

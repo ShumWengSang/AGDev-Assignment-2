@@ -133,11 +133,11 @@ void MVC_View::DrawScene()
 
 	Draw3DSGrid();
 
-	for (int i = 0; i < m_theModel->theListofObjects.size(); i++)
-	{
-		m_theModel->theListofObjects[i]->glRenderObject(3);
-	}
-
+	//for (int i = 0; i < m_theModel->theListofObjects.size(); i++)
+	//{
+	//	m_theModel->theListofObjects[i]->glRenderObject(3);
+	//}
+	m_theModel->theQuadTree.DrawQuadTree();
 
 
 	m_theModel->theHUD.SetHUD(true);

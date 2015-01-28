@@ -13,7 +13,7 @@ QuadTree1::QuadTree1(int pLevel, rect pBounds)
 	bounds = pBounds;
 	for (int i = 0; i < 4; i++)
 		nodes[i] = NULL;
-	MAX_OBJECTS = 1;
+	MAX_OBJECTS = 5;
 	MAX_LEVELS = 10;
 }
 
@@ -153,10 +153,14 @@ int QuadTree1::GetPtQuadrant(float x, float y)
 
 void QuadTree1::insert(BaseEntity * theEntity)
 {
-	rect InsertRect;
+	float x = theEntity->GetTopLeft().x;
+	float z = theEntity->GetBottomRight().z;
+	float width = theEntity->GetBottomRight().x - theEntity->GetTopLeft().x;
+	float height = theEntity->GetTopLeft().z - theEntity->GetBottomRight().z;
 
+	rect InsertRect(x,z,width,height,theEntity);
 
-	//insert(rect(theEntity->getPosition().x, theEntity->getPosition().z,))
+	insert(InsertRect);
 }
 
 void QuadTree1::insert(rect pRect)
@@ -188,7 +192,7 @@ void QuadTree1::insert(rect pRect)
 
 		auto i = objects.begin();
 		int counter;
-		for(i = objects.begin(), counter = 0; i != objects.end();counter++)
+		for(i = objects.begin(), counter = 0; i != objects.begin();counter++)
 		{
 			Quadrant index = GetIndex(objects.at(counter));
 			for (int a = 0; a < 4; a++)
@@ -196,10 +200,11 @@ void QuadTree1::insert(rect pRect)
 				if (index.quad[a])
 				{
 					nodes[a]->insert(objects.at(counter));
-					i = objects.erase(i);
-					counter--;
+
 				}
 			}
+			i = objects.erase(i);
+			counter--;
 		}
 	}
 	//Once the object is added, it determines whether the node needs to split by checking if the current number of objects exceeds the max allowed objects.
@@ -224,22 +229,19 @@ void QuadTree1::DrawQuad()
 
 	glColor3f(1, 0, 0);
 	glBegin(GL_LINE_STRIP);
-	glVertex3f(this->bounds.x, this->bounds.y, 0);
-	glVertex3f(this->bounds.x, this->bounds.y + this->bounds.height, 0);
-	glVertex3f(this->bounds.x + this->bounds.width, this->bounds.y + this->bounds.height, 0);
-	glVertex3f(this->bounds.x + this->bounds.width, this->bounds.y, 0);
-	glVertex3f(this->bounds.x, this->bounds.y, 0);
+	glVertex3f(this->bounds.x, 5, this->bounds.y);
+	glVertex3f(this->bounds.x, 5, this->bounds.y + this->bounds.height);
+	glVertex3f(this->bounds.x + this->bounds.width, 5, this->bounds.y + this->bounds.height);
+	glVertex3f(this->bounds.x + this->bounds.width, 5, this->bounds.y);
+	glVertex3f(this->bounds.x, 5, this->bounds.y);
 	glEnd();
 	
 	for (auto iter = this->objects.begin(); iter != this->objects.end(); iter++)
 	{
-		glColor3f(1, 1, 0);
-		glBegin(GL_QUADS);
-		glVertex3f(iter->x, iter->y, 0);
-		glVertex3f(iter->x, iter->y + 10, 0);
-		glVertex3f(iter->x + 10, iter->y + 10, 0);
-		glVertex3f(iter->x + 10, iter->y, 0);
-		glEnd();
+		if (iter->Pointer != NULL)
+		{
+			iter->Pointer->glRenderObject(3);
+		}
 	}
 }
 

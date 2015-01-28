@@ -40,32 +40,30 @@ public:
 
 	 CVector3 GetTopLeft()
 	 {
-		 CVector3 TopLeft;
+		 float resultant;
+		 glGetFloatv(GL_MATRIX_MODE, &resultant);
 		 MinMax ObjX = GetMinMax(theObjectX.theObj_LowPoly);
-		 float ObjWidthX = ObjX.MaxX - ObjX.MinX ;
-		 Matrix4x4 Scale;
-		 Scale.matrix[16] = {
-		 theScale.x,0,0,0,
-		 0,1,0,0,
-		 0,0,theScale.z,0,
-		 0,0,0,1
-		 };
-		 TopLeft.x = ObjX.MinX + ObjWidthX / 2 * theScale.x + theObjectX.GetPosition().x;
 		 MinMax ObjZ = GetMinMax(theObjectZ.theObj_LowPoly);
-		 float ObjLengthZ = ObjZ.MaxZ - ObjX.MinZ;
-		 TopLeft.z = ObjZ.MaxZ + ObjLengthZ / 2 * theScale.y + theObjectZ.GetPosition().z;
+
+		 CVector3 TopLeft(ObjX.MinX, 0, ObjZ.MaxX );
+		 TopLeft = TopLeft * Scalef;
+		 TopLeft = TopLeft + CVector3(theObjectX.GetPosition().x + theObjectX.TOffset.x, 0, theObjectZ.GetPosition().z + theObjectZ.TOffset.z);
+
+		 CVector3 result = TopLeft * Scalef;
 		 return TopLeft;
 	 }
 	 CVector3 GetBottomRight()
 	 {
-		 CVector3 BottomRight;
+
 		 MinMax ObjX = GetMinMax(theObjectX.theObj_LowPoly);
-		 float ObjWidthX = ObjX.MaxX - ObjX.MinX;
-		 BottomRight.x = ObjX.MaxX + ObjWidthX / 2 * theScale.x + theObjectX.GetPosition().x;
 		 MinMax ObjZ = GetMinMax(theObjectZ.theObj_LowPoly);
-		 float ObjLengthZ = ObjZ.MaxZ - ObjX.MinZ;
-		 BottomRight.z = ObjZ.MinZ + ObjLengthZ / 2 * theScale.y + theObjectZ.GetPosition().z;
+
+		 CVector3 BottomRight(ObjX.MaxX, 0, ObjZ.MinX);
+		 BottomRight = BottomRight * Scalef;
+		 BottomRight = BottomRight + CVector3(theObjectX.GetPosition().x + theObjectX.TOffset.x, 0, theObjectZ.GetPosition().z + theObjectZ.TOffset.z);
+
 		 return BottomRight;
+
 	 }
 };
 

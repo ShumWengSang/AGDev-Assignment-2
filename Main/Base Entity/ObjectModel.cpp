@@ -8,6 +8,7 @@ CObjectModel::CObjectModel(void)
 , theObj_LowPoly(0)
 {
 	Scale.Set(1,1,1);
+	TOffset.Set(0, 0, 0);
 }
 
 CObjectModel::~CObjectModel(void)
@@ -29,6 +30,7 @@ void CObjectModel::Render(CVector3* theCameraPosition)
 	glPushMatrix();
 
 	glTranslatef(thePosition.x, thePosition.y, thePosition.z);
+	glTranslatef(TOffset.x, TOffset.y, TOffset.z);
 	glScalef(Scale.x, Scale.y, Scale.z);
 	if (distance < 30)
 	{
@@ -53,6 +55,7 @@ void CObjectModel::Render(const int RESOLUTION)
 {
 	glPushMatrix();
 	glTranslatef(thePosition.x, thePosition.y, thePosition.z);
+	glTranslatef(TOffset.x, TOffset.y, TOffset.z);
 	glScalef(Scale.x, Scale.y, Scale.z);
 	if (RESOLUTION == 0)
 	{
@@ -101,4 +104,9 @@ void CObjectModel::SetScale(CVector3 theNewScale)
 CVector3 CObjectModel::GetScale()
 {
 	return Scale;
+}
+
+void CObjectModel::SetOffset(CVector3 theNewOffset)
+{
+	TOffset.Set(theNewOffset);
 }

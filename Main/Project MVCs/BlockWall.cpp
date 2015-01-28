@@ -21,20 +21,38 @@ bool BlockWall::glRenderObject(CVector3* theCameraPosition)
 
 bool BlockWall::glRenderObject(int RESOLUTION)
 {
-	//theObjectZ.Render(RESOLUTION);
-	//theObjectX.Render(RESOLUTION);
+	theObjectZ.Render(RESOLUTION);
+	theObjectX.Render(RESOLUTION);
 
 	CVector3 TopLeft = GetTopLeft();
 	CVector3 BottomRight = GetBottomRight();
 	this;
 	glColor3f(1, 1, 1);
 	glPushMatrix();
-	glBegin(GL_POLYGON);
+	glBegin(GL_LINE_STRIP);
 	glVertex3f(TopLeft.x, 10 , TopLeft.z);
 	glVertex3f(BottomRight.x, 10, TopLeft.z);
 	glVertex3f(BottomRight.x, 10, BottomRight.z);
 	glVertex3f(TopLeft.x, 10, BottomRight.z);
+	glVertex3f(TopLeft.x, 10, TopLeft.z);
 	glEnd();
+
+	glBegin(GL_LINE_STRIP);
+	glVertex3f(TopLeft.x, 10, TopLeft.z);
+	glVertex3f(TopLeft.x, 0, TopLeft.z);
+	glVertex3f(TopLeft.x, 0, BottomRight.z);
+	glVertex3f(TopLeft.x, 10, BottomRight.z);
+	glVertex3f(TopLeft.x, 10, TopLeft.z);
+	glEnd();
+
+	glBegin(GL_LINE_STRIP);
+	glVertex3f(BottomRight.x, 10, TopLeft.z);
+	glVertex3f(BottomRight.x, 0, TopLeft.z);
+	glVertex3f(BottomRight.x, 0, BottomRight.z);
+	glVertex3f(BottomRight.x, 10, BottomRight.z);
+	glVertex3f(BottomRight.x, 10, TopLeft.z);
+	glEnd();
+
 	glPopMatrix();
 	return true;
 }
@@ -73,8 +91,8 @@ void BlockWall::SetScale(CVector3 theNewScale, bool LeftUp)
 			{
 				Increase = true;
 			}
-			theOrigPos.Set(theOrigPos.x - (theNewScale.x / 2), theOrigPos.y, theOrigPos.z);
-			theObjectX.SetPosition(theOrigPos);
+			theOrigPos.Set(- (theNewScale.x / 2), 0, 0);
+			theObjectX.SetOffset(theOrigPos);
 		}
 		else
 		{
@@ -83,20 +101,20 @@ void BlockWall::SetScale(CVector3 theNewScale, bool LeftUp)
 			{
 				Increase = true;
 			}
-			theOrigPos.Set(theOrigPos.x + (theNewScale.x / 2), theOrigPos.y, theOrigPos.z);
-			theObjectX.SetPosition(theOrigPos);
+			theOrigPos.Set((theNewScale.x / 2), 0, 0);
+			theObjectX.SetOffset(theOrigPos);
 		}
 		if (Increase)
 		{
 			theObjectX.SetScale(CVector3(theNewScale.x * 2, 1, 1));
 			theScale.Set(theNewScale.x * 2, 1, theObjectZ.GetScale().z);
-			Scalef.Scalef(theNewScale.x * 2, 1, theObjectZ.GetScale().z);
+			Scalef.Scalef(theNewScale.x, 1, theScale.z);
 		}
 		else
 		{
 			theObjectX.SetScale(CVector3(theNewScale.x, 1, 1));
 			theScale.Set(theNewScale.x, 1, theObjectZ.GetScale().z);
-			Scalef.Scalef(theNewScale.x, 1, theObjectZ.GetScale().z);
+			Scalef.Scalef(theNewScale.x, 1, theScale.z);
 		}
 	}
 
@@ -105,12 +123,12 @@ void BlockWall::SetScale(CVector3 theNewScale, bool LeftUp)
 		if (LeftUp)
 		{
 			CVector3 theOrigPos = theObjectZ.GetPosition();
-			if (theObjectX.GetScale().x != 1)
+			if (theObjectZ.GetScale().z != 1)
 			{
 				Increase = true;
 			}
-			theOrigPos.Set(theOrigPos.x , theOrigPos.y, theOrigPos.z + (theNewScale.z / 2));
-			theObjectZ.SetPosition(theOrigPos);
+			theOrigPos.Set(0 , 0,  (theNewScale.z / 2));
+			theObjectZ.SetOffset(theOrigPos);
 
 		}
 		else
@@ -120,20 +138,20 @@ void BlockWall::SetScale(CVector3 theNewScale, bool LeftUp)
 			{
 				Increase = true;
 			}
-			theOrigPos.Set(theOrigPos.x, theOrigPos.y, theOrigPos.z - (theNewScale.z / 2));
-			theObjectZ.SetPosition(theOrigPos);
+			theOrigPos.Set(0, 0,  - (theNewScale.z / 2));
+			theObjectZ.SetOffset(theOrigPos);
 		}
 		if (Increase)
 		{
 			theObjectZ.SetScale(CVector3(1, 1, theNewScale.z * 2));
 			theScale.Set(theObjectX.GetScale().x, 1, theNewScale.z * 2);
-			Scalef.Scalef(theObjectX.GetScale().x, 1, theNewScale.z * 2);
+			Scalef.Scalef(theScale.x, 1, theNewScale.z);
 		}
 		else
 		{
 			theObjectZ.SetScale(CVector3(1, 1, theNewScale.z));
 			theScale.Set(theObjectX.GetScale().x, 1, theNewScale.z);
-			Scalef.Scalef(theObjectX.GetScale().x, 1, theNewScale.z);
+			Scalef.Scalef(theScale.x, 1, theNewScale.z);
 
 		}
 	}

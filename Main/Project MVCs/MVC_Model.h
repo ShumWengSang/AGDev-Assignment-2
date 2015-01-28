@@ -56,6 +56,7 @@ public:
 
 	HUD theHUD;
 	SkyBox theBox;
+	QuadTree1 theQuadTree;
 
 	std::vector<BaseEntity *> theListofObjects;
 	//void FrustumChecking();
