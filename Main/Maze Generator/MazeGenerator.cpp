@@ -3,6 +3,49 @@
 
 MazeGenerator::MazeGenerator()
 {
+	MAZEHEIGHT = 10;
+	MAZEWIDTH = 10;
+
+	theMaze = new int*[MAZEWIDTH];
+	for (int i = 0; i < MAZEWIDTH; ++i) {
+		theMaze[i] = new int[MAZEHEIGHT];
+	}
+
+	srand(time(NULL));
+	//Initialize the maze. Set it all to 1
+	for (int i = 0; i < MAZEWIDTH; i++)
+	{
+		for (int j = 0; j < MAZEWIDTH; j++)
+		{
+			theMaze[i][j] = 1;
+		}
+	}
+
+
+	//Set the random direction bias to 1 to 4.
+	//These numbers correspond to direction to check first.
+	for (int i = 0; i < 4; i++)
+	{
+		RandomDirectionBias.push_back(i + 1);
+	}
+
+	RandomStart();
+
+	Carve(x, z);
+
+	FindPossibleExits();
+}
+
+MazeGenerator::MazeGenerator(int width, int height)
+{
+	MAZEHEIGHT = height;
+	MAZEWIDTH = width;
+
+	theMaze = new int*[MAZEWIDTH];
+	for (int i = 0; i < MAZEWIDTH; ++i) {
+		theMaze[i] = new int[MAZEHEIGHT];
+	}
+
 	srand(time(NULL));
 	//Initialize the maze. Set it all to 1
 	for (int i = 0; i < MAZEWIDTH; i++)
@@ -31,6 +74,12 @@ MazeGenerator::MazeGenerator()
 
 MazeGenerator::~MazeGenerator()
 {
+	// Null out the pointers contained in the array:
+	for (int i = 0; i < MAZEWIDTH; ++i) {
+		for (int j = 0; j < MAZEHEIGHT; ++j) {
+			theMaze[i][j] = NULL;
+		}
+	}
 }
 
 void MazeGenerator::ShuffleRandom()

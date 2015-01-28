@@ -13,7 +13,7 @@
 MVC_Model::MVC_Model(void):
 theCamera(ThirdPerson),
 Camera2(FirstPerson),
-theQuadTree(0, rect(theBox.GetLeft(), theBox.GetNear(), theBox.Width, theBox.Height))
+theQuadTree(0, rect(theBox.GetRight(), theBox.GetNear(), theBox.Width, theBox.Height))
 {
 
 	Rotate = 0;
@@ -21,7 +21,8 @@ theQuadTree(0, rect(theBox.GetLeft(), theBox.GetNear(), theBox.Width, theBox.Hei
 	distance = 10;
 	ObjectAngle = 0;
 	PlayerID = 0;
-	//thePlayerData.theFrustum = &theFrustum;
+	//thePlayerData.theFrustum = &theFrustum;.
+	//theQuadTree = new QuadTree1(0, rect(theBox.GetLeft(), theBox.GetNear(), theBox.Width, theBox.Height));
 	theExits = NULL;
 	DebugCam = true;
 }
@@ -60,20 +61,24 @@ bool MVC_Model::InitPhase2(void)
 	if (!LoadTGA(&SkyBoxTextures[4], "SkyBox/top.tga"))				// Load The Font Texture
 		return false;										// If Loading Failed, Return False
 	if (!LoadTGA(&SkyBoxTextures[5], "SkyBox/bottom.tga"))				// Load The Font Texture
-		return false;										// If Loading Failed, Return False
+		return false;	
+	// If Loading Failed, Return False
 
-	//Find the ratio between skybox width and height and maze width and height.
-	//We need this to fully fill our skybox with the maze.
-	float ratiox = theBox.Width / MAZEWIDTH;
-	float ratioy = theBox.Height / MAZEHEIGHT;
+
 
 	MazeGenerator theMaze;
+	//Find the ratio between skybox width and height and maze width and height.
+	//We need this to fully fill our skybox with the maze.
+	float ratiox = theBox.Width / theMaze.MAZEWIDTH;
+	float ratioy = theBox.Height / theMaze.MAZEHEIGHT;
+
+
 	BlockWall * newWall;
 	ObjFile thecube = LoadOBJ("Objects/Cube.obj");
 	theMaze.Draw();
-	for (int MazeWidth = -0; MazeWidth < MAZEWIDTH; MazeWidth++)
+	for (int MazeWidth = -0; MazeWidth < theMaze.MAZEWIDTH; MazeWidth++)
 	{
-		for (int MazeHeight = -0; MazeHeight < MAZEHEIGHT; MazeHeight++)
+		for (int MazeHeight = -0; MazeHeight < theMaze.MAZEHEIGHT; MazeHeight++)
 		{
 			if (theMaze.theMaze[MazeWidth][MazeHeight] == 0)
 			{
@@ -85,7 +90,7 @@ bool MVC_Model::InitPhase2(void)
 				newWall->theObjectX.theObj_LowPoly = thecube;
 				newWall->theObjectZ.theObj_LowPoly = thecube;
 
-				newWall->SetPosition(CVector3((float)(MazeWidth - MAZEWIDTH / 2) * ratiox, 0, (float)(MazeHeight - MAZEHEIGHT / 2)* ratioy));
+				newWall->SetPosition(CVector3((float)(MazeWidth - theMaze.MAZEWIDTH / 2) * ratiox, 0, (float)(MazeHeight - theMaze.MAZEHEIGHT / 2)* ratioy));
 
 				if (newWall->getPosition().x == -100 && newWall->getPosition().z == -75)
 				{

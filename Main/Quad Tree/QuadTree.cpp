@@ -3,8 +3,8 @@
 
 QuadTree1::QuadTree1(void)
 {
-	MAX_OBJECTS = 1;
-	MAX_LEVELS = 10;
+	MAX_OBJECTS = 20;
+	MAX_LEVELS = 5;
 }
 
 QuadTree1::QuadTree1(int pLevel, rect pBounds)
@@ -13,8 +13,8 @@ QuadTree1::QuadTree1(int pLevel, rect pBounds)
 	bounds = pBounds;
 	for (int i = 0; i < 4; i++)
 		nodes[i] = NULL;
-	MAX_OBJECTS = 5;
-	MAX_LEVELS = 10;
+	MAX_OBJECTS = 20;
+	MAX_LEVELS = 5;
 }
 
 QuadTree1::~QuadTree1(void)
@@ -84,7 +84,7 @@ Quadrant QuadTree1::GetIndex(rect pRect)
 	}
 
 	//Check if the poitns are in opposite quads. IF they are, all four of them should have points.
-	if ((BottomLeftQuad + TopRightQuad) % 2 == 0)
+	if ((BottomLeftQuad + TopRightQuad) % 2 == 0 && BottomLeftQuad != TopRightQuad)
 	{
 		for (int i = 0; i < 4; i ++)
 			index.quad[i] = true;
@@ -228,13 +228,16 @@ void QuadTree1::DrawQuad()
 {
 
 	glColor3f(1, 0, 0);
+	glLineWidth(10);
 	glBegin(GL_LINE_STRIP);
-	glVertex3f(this->bounds.x, 5, this->bounds.y);
-	glVertex3f(this->bounds.x, 5, this->bounds.y + this->bounds.height);
-	glVertex3f(this->bounds.x + this->bounds.width, 5, this->bounds.y + this->bounds.height);
-	glVertex3f(this->bounds.x + this->bounds.width, 5, this->bounds.y);
-	glVertex3f(this->bounds.x, 5, this->bounds.y);
+
+	glVertex3f(this->bounds.x, 10, this->bounds.y + this->bounds.height);
+	glVertex3f(this->bounds.x, 10, this->bounds.y);
+	glVertex3f(this->bounds.x + this->bounds.width, 10, this->bounds.y);
+	glVertex3f(this->bounds.x + this->bounds.width, 10, this->bounds.y + this->bounds.height);
+	//glVertex3f(this->bounds.x, 10, this->bounds.y);
 	glEnd();
+	glLineWidth(1);
 	
 	for (auto iter = this->objects.begin(); iter != this->objects.end(); iter++)
 	{

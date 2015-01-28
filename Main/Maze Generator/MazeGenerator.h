@@ -4,8 +4,7 @@
 #include <cstdlib>
 #include <time.h>
 #include <iostream>
-#define MAZEHEIGHT 10
-#define MAZEWIDTH 10
+
 
 //////////////////////////////////////\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\
 							MAZE GENERATOR
@@ -26,14 +25,17 @@ struct Location
 class MazeGenerator
 {
 public:
+	int MAZEHEIGHT;
+	int MAZEWIDTH;
 	//The map. 1 is wall. 0 is path.
-	int theMaze[MAZEWIDTH][MAZEHEIGHT];
+	int **theMaze;
 
 	//Two variables used to keep track of the starting position. Its Z and not Y since this is 3D.
 	int x, z;
 
 	std::vector<Location> PossibleExits;
 	MazeGenerator();
+	MazeGenerator(int width, int height);
 	~MazeGenerator();
 	void Draw();
 private:
