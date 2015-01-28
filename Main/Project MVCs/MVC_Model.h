@@ -14,6 +14,7 @@
 #include "BlockWall.h"
 #include "QuadTree.h"
 #include "QuadTree2.h"
+#include "LuaInterface.h"
 
 class MVCTime;
 

@@ -13,7 +13,7 @@
 MVC_Model::MVC_Model(void):
 theCamera(ThirdPerson),
 Camera2(FirstPerson),
-theQuadTree(0, rect(theBox.GetLeft(), theBox.GetNear(), theBox.Width, theBox.Height))
+theQuadTree(0, rect(theBox.GetRight(), theBox.GetNear(), theBox.Width, theBox.Length))
 {
 
 	Rotate = 0;
@@ -65,7 +65,7 @@ bool MVC_Model::InitPhase2(void)
 	//Find the ratio between skybox width and height and maze width and height.
 	//We need this to fully fill our skybox with the maze.
 	float ratiox = theBox.Width / MAZEWIDTH;
-	float ratioy = theBox.Height / MAZEHEIGHT;
+	float ratioy = theBox.Length / MAZEHEIGHT;
 
 	MazeGenerator theMaze;
 	BlockWall * newWall;
@@ -112,8 +112,11 @@ bool MVC_Model::InitPhase2(void)
 		}
 	}
 
-
-
+	newWall = new BlockWall;
+	newWall->theObjectX.theObj_LowPoly = thecube;
+	newWall->theObjectZ.theObj_LowPoly = thecube;
+	newWall->SetPosition(CVector3(0,10,0));
+	theListofObjects.push_back(newWall);
 
 	//if (!LoadTGA(&ExitTexture[0], "exit.tga"))				// Load The Font Texture
 		//return false;	// If Loading Failed, Return False

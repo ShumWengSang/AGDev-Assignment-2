@@ -2,8 +2,6 @@
 #include "MVC_Model.h"
 #include "MVC_View.h"
 #include "MVC_Controller.h"
-//#include "gl.h"
-#define _CRT_SECURE_NO_DEPRECATE
 
 
 

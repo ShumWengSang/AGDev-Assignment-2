@@ -2,9 +2,12 @@
 #include <vector>
 extern "C"
 {
-#include "lua.h"
-#include "lualib.h"
-#include "lauxlib.h"
+#include <lua.h>
+#include <lualib.h>
+#include <lauxlib.h>
+//#include "lua.h"
+//#include "lualib.h"
+//#include "lauxlib.h"
 }
 
 
@@ -18,5 +21,8 @@ public:
 
 	bool RunScript(char * filename);
 	bool LoadFile(char * filename);
+	float GetFloat(char * name);
+	int GetInt(char * name);
+	bool GetBool(char * name);
 };
 

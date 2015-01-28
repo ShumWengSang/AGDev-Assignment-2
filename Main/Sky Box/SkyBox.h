@@ -12,13 +12,14 @@ public:
 	int textureID[6];
 	void Draw();
 
-	float Height, Width;
+	float Height, Width, Length;
 	float GetTop();
 	float GetBottom();
 	float GetLeft();
 	float GetRight();
 	float GetNear();
 	float GetFar();
+	float GetLength();
 private:
 
 	void Init();

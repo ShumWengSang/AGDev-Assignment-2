@@ -53,13 +53,14 @@
       <Optimization>Disabled</Optimization>
       <PreprocessorDefinitions>WIN32;_DEBUG;_CONSOLE;_LIB;_CRT_SECURE_NO_DEPRECATE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <SDLCheck>true</SDLCheck>
-      <AdditionalIncludeDirectories>$(SolutionDir)Base Entity;$(SolutionDir)Camera;$(SolutionDir)Camera 2;$(SolutionDir)Frustum Clip Space;$(SolutionDir)Lua Interface;$(SolutionDir)Math;$(SolutionDir)Model and Texture Loader;$(SolutionDir)Mouse;$(SolutionDir)Quad Tree;$(SolutionDir)Sky Box;$(SolutionDir)Time;$(SolutionDir)UserInterface HUD;$(SolutionDir)Frustum Geometry;$(SolutionDir)Maze Generator;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>$(SolutionDir)include;$(SolutionDir)Base Entity;$(SolutionDir)Camera;$(SolutionDir)Camera 2;$(SolutionDir)Frustum Clip Space;$(SolutionDir)Lua Interface;$(SolutionDir)Math;$(SolutionDir)Model and Texture Loader;$(SolutionDir)Mouse;$(SolutionDir)Quad Tree;$(SolutionDir)Sky Box;$(SolutionDir)Time;$(SolutionDir)UserInterface HUD;$(SolutionDir)Frustum Geometry;$(SolutionDir)Maze Generator;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
       <BrowseInformation>true</BrowseInformation>
     </ClCompile>
     <Link>
       <SubSystem>Console</SubSystem>
       <GenerateDebugInformation>true</GenerateDebugInformation>
-      <AdditionalDependencies>OpenGL32.lib;glu32.lib;%(AdditionalDependencies)</AdditionalDependencies>
+      <AdditionalDependencies>lua5.1.lib;OpenGL32.lib;glu32.lib;%(AdditionalDependencies)</AdditionalDependencies>
+      <AdditionalLibraryDirectories>$(SolutionDir)lib;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
     </Link>
     <Bscmake>
       <PreserveSBR>true</PreserveSBR>
@@ -115,6 +116,9 @@
     </ProjectReference>
     <ProjectReference Include="..\Frustum Geometry\Frustum Geometry.vcxproj">
       <Project>{2d6c98ff-7be7-4930-a686-351e43d49d9a}</Project>
+    </ProjectReference>
+    <ProjectReference Include="..\Lua Interface\Lua Interface.vcxproj">
+      <Project>{f14aea54-2847-4851-8fa2-570e2b769142}</Project>
     </ProjectReference>
     <ProjectReference Include="..\Math\Math.vcxproj">
       <Project>{9bb92af9-c0e9-4a30-bafa-baea759c6409}</Project>

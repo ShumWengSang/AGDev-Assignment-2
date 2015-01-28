@@ -20,6 +20,7 @@ void SkyBox::Init()
 	Far = 100;
 	Width = Left - Right;
 	Height = Top - Bottom;
+	Length = Far - Near;
 }
 
 void SkyBox::Draw()
@@ -128,4 +129,9 @@ float SkyBox::GetNear()
 float SkyBox::GetFar()
 {
 	return Far;
+}
+
+float SkyBox::GetLength()
+{
+	return Length;
 }

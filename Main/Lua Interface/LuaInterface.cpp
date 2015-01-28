@@ -28,3 +28,32 @@ bool LuaInterface::LoadFile(char * filename)
 	}
 	return true;
 }
+
+float LuaInterface::GetFloat(char * name)
+{
+	lua_getglobal(L, name);
+	float number = lua_tonumber(L, -1);
+	return number;
+}
+
+bool LuaInterface::GetBool(char * name)
+{
+	lua_getglobal(L, name);
+	bool number = lua_toboolean(L, -1);
+	return number;
+}
+
+
+int LuaInterface::GetInt(char * name)
+{
+	lua_getglobal(L, name);
+	int number = lua_tointeger(L, -1);
+	return number;
+}
+
+std::string LuaInterface::GetString(char * name)
+{
+	lua_getglobal(L, name);
+	std::string number = lua_tolstring(L, -1, 100);
+	return number;
+}

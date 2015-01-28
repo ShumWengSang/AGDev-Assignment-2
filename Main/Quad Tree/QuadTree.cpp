@@ -84,7 +84,7 @@ Quadrant QuadTree1::GetIndex(rect pRect)
 	}
 
 	//Check if the poitns are in opposite quads. IF they are, all four of them should have points.
-	if ((BottomLeftQuad + TopRightQuad) % 2 == 0)
+	if ((BottomLeftQuad + TopRightQuad) % 2 == 0 && (BottomLeftQuad != TopRightQuad))
 	{
 		for (int i = 0; i < 4; i ++)
 			index.quad[i] = true;
@@ -180,6 +180,7 @@ void QuadTree1::insert(rect pRect)
 	}
 	//The method first determines whether the node has any child nodes and tries to add the object there.
 
+
 	objects.push_back(pRect);
 	//If there are no child nodes or the object doesn’t fit in a child node, it adds the object to the current node.
 
@@ -190,9 +191,9 @@ void QuadTree1::insert(rect pRect)
 			Split();
 		}
 
-		auto i = objects.begin();
-		int counter;
-		for(i = objects.begin(), counter = 0; i != objects.begin();counter++)
+		vector<rect>::iterator i = objects.begin();
+		int counter = 0;
+		for(i = objects.begin(), counter = 0; i != objects.end();counter++)
 		{
 			Quadrant index = GetIndex(objects.at(counter));
 			for (int a = 0; a < 4; a++)
@@ -200,7 +201,6 @@ void QuadTree1::insert(rect pRect)
 				if (index.quad[a])
 				{
 					nodes[a]->insert(objects.at(counter));
-
 				}
 			}
 			i = objects.erase(i);
