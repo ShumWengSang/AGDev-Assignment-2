@@ -75,16 +75,6 @@ void BlockWall::SetScale(CVector3 theNewScale, bool LeftUp)
 			}
 			theOrigPos.Set(theOrigPos.x - (theNewScale.x / 2), theOrigPos.y, theOrigPos.z);
 			theObjectX.SetPosition(theOrigPos);
-			if (Increase)
-			{
-				theObjectX.SetScale(CVector3(theNewScale.x * 2, 1, 1));
-				theScale.Set(theNewScale.x * 2, 1, theObjectZ.GetScale().z);
-			}
-			else
-			{
-				theObjectX.SetScale(CVector3(theNewScale.x, 1, 1));
-				theScale.Set(theNewScale.x , 1, theObjectZ.GetScale().z);
-			}
 		}
 		else
 		{
@@ -95,17 +85,18 @@ void BlockWall::SetScale(CVector3 theNewScale, bool LeftUp)
 			}
 			theOrigPos.Set(theOrigPos.x + (theNewScale.x / 2), theOrigPos.y, theOrigPos.z);
 			theObjectX.SetPosition(theOrigPos);
-
-			if (Increase)
-			{
-				theObjectX.SetScale(CVector3(theNewScale.x * 2, 1, 1));
-				theScale.Set(theNewScale.x * 2, 1, theObjectZ.GetScale().z);
-			}
-			else
-			{
-				theObjectX.SetScale(CVector3(theNewScale.x, 1, 1));
-				theScale.Set(theNewScale.x , 1, theObjectZ.GetScale().z);
-			}
+		}
+		if (Increase)
+		{
+			theObjectX.SetScale(CVector3(theNewScale.x * 2, 1, 1));
+			theScale.Set(theNewScale.x * 2, 1, theObjectZ.GetScale().z);
+			Scalef.Scalef(theNewScale.x * 2, 1, theObjectZ.GetScale().z);
+		}
+		else
+		{
+			theObjectX.SetScale(CVector3(theNewScale.x, 1, 1));
+			theScale.Set(theNewScale.x, 1, theObjectZ.GetScale().z);
+			Scalef.Scalef(theNewScale.x, 1, theObjectZ.GetScale().z);
 		}
 	}
 
@@ -121,16 +112,6 @@ void BlockWall::SetScale(CVector3 theNewScale, bool LeftUp)
 			theOrigPos.Set(theOrigPos.x , theOrigPos.y, theOrigPos.z + (theNewScale.z / 2));
 			theObjectZ.SetPosition(theOrigPos);
 
-			if (Increase)
-			{
-				theObjectZ.SetScale(CVector3(1, 1, theNewScale.z * 2));
-				theScale.Set(theObjectX.GetScale().x, 1, theNewScale.z * 2);
-			}
-			else
-			{
-				theObjectZ.SetScale(CVector3(1, 1, theNewScale.z));
-				theScale.Set(theObjectX.GetScale().x, 1, theNewScale.z );
-			}
 		}
 		else
 		{
@@ -141,16 +122,19 @@ void BlockWall::SetScale(CVector3 theNewScale, bool LeftUp)
 			}
 			theOrigPos.Set(theOrigPos.x, theOrigPos.y, theOrigPos.z - (theNewScale.z / 2));
 			theObjectZ.SetPosition(theOrigPos);
-			if (Increase)
-			{
-				theObjectZ.SetScale(CVector3(1, 1, theNewScale.z * 2));
-				theScale.Set(theObjectX.GetScale().x, 1, theNewScale.z * 2);
-			}
-			else
-			{
-				theObjectZ.SetScale(CVector3(1, 1, theNewScale.z));
-				theScale.Set(theObjectX.GetScale().x, 1, theNewScale.z );
-			}
+		}
+		if (Increase)
+		{
+			theObjectZ.SetScale(CVector3(1, 1, theNewScale.z * 2));
+			theScale.Set(theObjectX.GetScale().x, 1, theNewScale.z * 2);
+			Scalef.Scalef(theObjectX.GetScale().x, 1, theNewScale.z * 2);
+		}
+		else
+		{
+			theObjectZ.SetScale(CVector3(1, 1, theNewScale.z));
+			theScale.Set(theObjectX.GetScale().x, 1, theNewScale.z);
+			Scalef.Scalef(theObjectX.GetScale().x, 1, theNewScale.z);
+
 		}
 	}
 }

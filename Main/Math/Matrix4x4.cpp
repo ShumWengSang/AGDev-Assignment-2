@@ -1,6 +1,5 @@
-#ifndef __MATRIX4X4_H__
 #include "Matrix4x4.h"
-#endif
+
 
 Matrix4x4::Matrix4x4()
 {

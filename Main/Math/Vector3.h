@@ -1,5 +1,6 @@
 #pragma once
 #include <math.h>
+#include "Matrix4x4.h"
 class CVector3
 {
 public:
@@ -39,6 +40,13 @@ public:
 	static CVector3 CVector3::Cross(CVector3 vVector1, CVector3 vVector2);
 	static float DotProduct(CVector3 vVector1, CVector3 vVector2);
 	CVector3 Normalize(CVector3 vNormal);
+
+	CVector3 operator*(const Matrix4x4 &m) const
+	{
+		return CVector3(x*m.matrix[0] + y*m.matrix[4] + z*m.matrix[8] + 1 * m.matrix[12],
+			x*m.matrix[1] + y*m.matrix[5] + z*m.matrix[9] + 1 * m.matrix[13],
+			x*m.matrix[2] + y*m.matrix[6] + z*m.matrix[10] + 1 * m.matrix[14]);
+	}
 
 	float x, y, z;
 };

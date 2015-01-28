@@ -30,6 +30,7 @@ public:
 	 }
 	 CObjectModel theObjectX;
 	 CObjectModel theObjectZ;
+	 Matrix4x4 Scalef;
 
 	 void SetPosition(CVector3 theNewPosition);
 	 void SetScale(CVector3 theNewScale, bool LeftUp);
@@ -42,6 +43,13 @@ public:
 		 CVector3 TopLeft;
 		 MinMax ObjX = GetMinMax(theObjectX.theObj_LowPoly);
 		 float ObjWidthX = ObjX.MaxX - ObjX.MinX ;
+		 Matrix4x4 Scale;
+		 Scale.matrix[16] = {
+		 theScale.x,0,0,0,
+		 0,1,0,0,
+		 0,0,theScale.z,0,
+		 0,0,0,1
+		 };
 		 TopLeft.x = ObjX.MinX + ObjWidthX / 2 * theScale.x + theObjectX.GetPosition().x;
 		 MinMax ObjZ = GetMinMax(theObjectZ.theObj_LowPoly);
 		 float ObjLengthZ = ObjZ.MaxZ - ObjX.MinZ;

@@ -1,34 +1,14 @@
-#ifndef __MATRIX4X4_H__
-#define __MATRIX4X4_H__
+#pragma once
 
-#ifndef __CMATH__
 #include <cmath>
-#define __CMATH__
-#endif
 
-#ifndef __IOSTREAM__
 #include <iostream>
-#define __IOSTREAM__
-#endif
-
-#ifndef __STDIO_H__
 #include <stdio.h>
-#define __STDIO_H__
-#endif
 
-#ifndef __WINDOWS_H__
 #include <windows.h> // Header File For Windows
-#endif
-
-#ifndef __GL_H__
 #include <gl\gl.h> // Header File For The OpenGL32 Library
-#pragma comment(lib, "glu32.lib")
-#endif
-
-#ifndef __GLU_H__
 #include <gl\glu.h> // Header File For The GLu32 Library
-#pragma comment(lib, "opengl32.lib")
-#endif
+
 using namespace std;
 
 class Matrix4x4
@@ -75,5 +55,3 @@ public:
 		return temp;
 	}
 };
-
-#endif
