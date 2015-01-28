@@ -1,13 +1,11 @@
 #pragma once
 #include <vector>
+#include <string>
 extern "C"
 {
 #include <lua.h>
 #include <lualib.h>
 #include <lauxlib.h>
-//#include "lua.h"
-//#include "lualib.h"
-//#include "lauxlib.h"
 }
 
 
@@ -24,5 +22,6 @@ public:
 	float GetFloat(char * name);
 	int GetInt(char * name);
 	bool GetBool(char * name);
+	char* GetString(char * name);
 };
 

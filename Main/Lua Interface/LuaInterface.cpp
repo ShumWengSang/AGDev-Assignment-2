@@ -51,9 +51,9 @@ int LuaInterface::GetInt(char * name)
 	return number;
 }
 
-std::string LuaInterface::GetString(char * name)
+char* LuaInterface::GetString(char * name)
 {
 	lua_getglobal(L, name);
-	std::string number = lua_tolstring(L, -1, 100);
+	char * number = (char*)lua_tostring(L, -1);
 	return number;
 }
