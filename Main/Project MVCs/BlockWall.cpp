@@ -21,18 +21,21 @@ bool BlockWall::glRenderObject(CVector3* theCameraPosition)
 
 bool BlockWall::glRenderObject(int RESOLUTION)
 {
-	theObjectZ.Render(RESOLUTION);
-	theObjectX.Render(RESOLUTION);
+	//theObjectZ.Render(RESOLUTION);
+	//theObjectX.Render(RESOLUTION);
 
 	CVector3 TopLeft = GetTopLeft();
 	CVector3 BottomRight = GetBottomRight();
-
-	glBegin(GL_LINE);
-	glVertex3f(TopLeft.x, 0 , TopLeft.z);
-	glVertex3f(BottomRight.x, 0, TopLeft.z);
-	glVertex3f(BottomRight.x, 0, BottomRight.z);
-	glVertex3f(TopLeft.x, 0, BottomRight.z);
+	this;
+	glColor3f(1, 1, 1);
+	glPushMatrix();
+	glBegin(GL_POLYGON);
+	glVertex3f(TopLeft.x, 10 , TopLeft.z);
+	glVertex3f(BottomRight.x, 10, TopLeft.z);
+	glVertex3f(BottomRight.x, 10, BottomRight.z);
+	glVertex3f(TopLeft.x, 10, BottomRight.z);
 	glEnd();
+	glPopMatrix();
 	return true;
 }
 
@@ -75,10 +78,12 @@ void BlockWall::SetScale(CVector3 theNewScale, bool LeftUp)
 			if (Increase)
 			{
 				theObjectX.SetScale(CVector3(theNewScale.x * 2, 1, 1));
+				theScale.Set(theNewScale.x * 2, 1, theObjectZ.GetScale().z);
 			}
 			else
 			{
 				theObjectX.SetScale(CVector3(theNewScale.x, 1, 1));
+				theScale.Set(theNewScale.x , 1, theObjectZ.GetScale().z);
 			}
 		}
 		else
@@ -94,10 +99,12 @@ void BlockWall::SetScale(CVector3 theNewScale, bool LeftUp)
 			if (Increase)
 			{
 				theObjectX.SetScale(CVector3(theNewScale.x * 2, 1, 1));
+				theScale.Set(theNewScale.x * 2, 1, theObjectZ.GetScale().z);
 			}
 			else
 			{
 				theObjectX.SetScale(CVector3(theNewScale.x, 1, 1));
+				theScale.Set(theNewScale.x , 1, theObjectZ.GetScale().z);
 			}
 		}
 	}
@@ -117,10 +124,12 @@ void BlockWall::SetScale(CVector3 theNewScale, bool LeftUp)
 			if (Increase)
 			{
 				theObjectZ.SetScale(CVector3(1, 1, theNewScale.z * 2));
+				theScale.Set(theObjectX.GetScale().x, 1, theNewScale.z * 2);
 			}
 			else
 			{
 				theObjectZ.SetScale(CVector3(1, 1, theNewScale.z));
+				theScale.Set(theObjectX.GetScale().x, 1, theNewScale.z );
 			}
 		}
 		else
@@ -135,10 +144,12 @@ void BlockWall::SetScale(CVector3 theNewScale, bool LeftUp)
 			if (Increase)
 			{
 				theObjectZ.SetScale(CVector3(1, 1, theNewScale.z * 2));
+				theScale.Set(theObjectX.GetScale().x, 1, theNewScale.z * 2);
 			}
 			else
 			{
 				theObjectZ.SetScale(CVector3(1, 1, theNewScale.z));
+				theScale.Set(theObjectX.GetScale().x, 1, theNewScale.z );
 			}
 		}
 	}

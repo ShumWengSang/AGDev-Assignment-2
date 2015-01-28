@@ -692,31 +692,6 @@ ObjFile LoadOBJ(const char *filename)
 							&pMesh->m_aVertexArray[ vc ].y,
 							&pMesh->m_aVertexArray[ vc ].z);
 			++vc;
-			//Storing the min and max.
-			if (pMesh->m_aVertexArray[vc].x > pMesh->MaxX)
-			{
-				pMesh->MaxX = pMesh->m_aVertexArray[vc].x;
-			}
-			if (pMesh->m_aVertexArray[vc].y > pMesh->MaxY)
-			{
-				pMesh->MaxX = pMesh->m_aVertexArray[vc].y;
-			}
-			if (pMesh->m_aVertexArray[vc].z > pMesh->MaxZ)
-			{
-				pMesh->MaxX = pMesh->m_aVertexArray[vc].z;
-			}
-			if (pMesh->m_aVertexArray[vc].x < pMesh->MinX)
-			{
-				pMesh->m_aVertexArray[vc].x = pMesh->MinX;
-			}
-			if (pMesh->m_aVertexArray[vc].y < pMesh->MinY)
-			{
-				pMesh->m_aVertexArray[vc].y = pMesh->MinY;
-			}
-			if (pMesh->m_aVertexArray[vc].z < pMesh->MinZ)
-			{
-				pMesh->m_aVertexArray[vc].z = pMesh->MinZ;
-			}
 		}
 		else
 
@@ -853,6 +828,43 @@ ObjFile LoadOBJ(const char *filename)
 				aSecondIndices[2] = pf->m_aTexCoordIndicies[2];
 
 				pSplitString = strtok(NULL," \t\n");
+			}
+		}
+	}
+
+
+			//Storing the min and max.
+	unsigned int i;
+	for (i = 0; i<pMesh->m_iNumberOfFaces; i++)
+	{
+		unsigned int j;
+		ObjFace *pf = &pMesh->m_aFaces[i];
+		for (j = 0; j<3; j++)
+		{
+
+			if (pMesh->m_aVertexArray[pf->m_aVertexIndices[j]].x > pMesh->MaxX)
+			{
+				pMesh->MaxX = pMesh->m_aVertexArray[pf->m_aVertexIndices[j]].x;
+			}
+			if (pMesh->m_aVertexArray[pf->m_aVertexIndices[j]].y > pMesh->MaxY)
+			{
+				pMesh->MaxY = pMesh->m_aVertexArray[pf->m_aVertexIndices[j]].y;
+			}
+			if (pMesh->m_aVertexArray[pf->m_aVertexIndices[j]].z > pMesh->MaxZ)
+			{
+				pMesh->MaxZ = pMesh->m_aVertexArray[pf->m_aVertexIndices[j]].z;
+			}
+			if (pMesh->m_aVertexArray[pf->m_aVertexIndices[j]].x < pMesh->MinX)
+			{
+				pMesh->MinX = pMesh->m_aVertexArray[pf->m_aVertexIndices[j]].x;
+			}
+			if (pMesh->m_aVertexArray[pf->m_aVertexIndices[j]].y < pMesh->MinY)
+			{
+				pMesh->MinY = pMesh->m_aVertexArray[pf->m_aVertexIndices[j]].y;
+			}
+			if (pMesh->m_aVertexArray[pf->m_aVertexIndices[j]].z < pMesh->MinZ)
+			{
+				pMesh->MinZ = pMesh->m_aVertexArray[pf->m_aVertexIndices[j]].z;
 			}
 		}
 	}
