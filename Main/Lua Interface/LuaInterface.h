@@ -10,12 +10,7 @@ extern "C"
 
 
 // type that represents unused type parameters
-
-class  NullT
-
-{
-
-};
+typedef int(*lua_CFunction) (lua_State *L);
 
 class LuaInterface
 {
@@ -32,7 +27,7 @@ public:
 	void Get(bool &value, char * name);
 	void Get(char *value,char * name);
 
-	//bool Pushfunction(char * FunctionName, T(*Function)());
+	void Pushfunction(char * FunctionName, lua_CFunction theFunction);
 
 	void Push(const int &value)
 	{
@@ -52,6 +47,8 @@ public:
 	{
 		lua_pushstring(L, value.c_str());
 	}
+
+
 
 private:
 	lua_State * L;

@@ -240,8 +240,33 @@ void QuadTree1::DrawQuad(CFrustum *theFrustum)
 	{
 		if (iter->Pointer != NULL)
 		{
-			if(theFrustum->CubeInFrustum(iter->Pointer->getPosition().x,iter->Pointer->getPosition().z,iter->Pointer->GetScale.x/2,iter->Pointer->GetScale.z/2))
+			if (theFrustum != NULL){
+				if (theFrustum->CubeInFrustum(iter->Pointer->getPosition().x, iter->Pointer->getPosition().z,
+					(iter->Pointer->GetScale().x) / 2, (iter->Pointer->GetScale().z) / 2)){
+					iter->Pointer->glRenderObject(3);
+				}
+			}
+			else
+			{
 				iter->Pointer->glRenderObject(3);
+			}
+		}
+	}
+}
+
+void QuadTree1::DrawQuadTree(rect * pRect)
+{
+	//int index = GetIndex(pRect);
+	if (pRect == NULL)
+	{
+		pRect = &bounds;
+		DrawQuad();
+	}
+	for (int i = 0; i < 4; i++)
+	{
+		if (this->nodes[i] != NULL)
+		{
+			nodes[i]->DrawQuadTree();
 		}
 	}
 }

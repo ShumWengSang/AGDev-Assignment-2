@@ -56,3 +56,8 @@ void LuaInterface::Get(char *value,char * name)
 	value = (char*)lua_tostring(L, -1);
 
 }
+
+void LuaInterface::Pushfunction(char * FunctionName, lua_CFunction theFunction)
+{
+	lua_register(L, FunctionName, theFunction);
+}

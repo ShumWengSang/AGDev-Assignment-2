@@ -7,7 +7,10 @@
 
 #include "MVC_Model.h"
 
-
+static void TestFunction()
+{
+	std::cout << "ITS WORKING" << std::endl;
+}
 
 
 MVC_Model::MVC_Model(void):
@@ -88,26 +91,32 @@ bool MVC_Model::InitPhase2(void)
 				newWall->SetPosition(CVector3((float)(MazeWidth - MAZEWIDTH / 2) * ratiox, 0, (float)(MazeHeight - MAZEHEIGHT / 2)* ratioy));
 
 
-				if (theMaze.theMaze[MazeWidth + 1][MazeHeight] == 1)
+				if (theMaze.theMaze[MazeWidth + 1][MazeHeight] == 1 &&MazeWidth+1<MAZEWIDTH)
 				{
-					newWall->SetScale(CVector3(ratiox ,1,1),false);
+					newWall->SetScale(CVector3(ratiox, newWall->GetScale().y, newWall->GetScale().z), false);
 				}
-				if (theMaze.theMaze[MazeWidth - 1][MazeHeight] == 1)
+				if (theMaze.theMaze[MazeWidth - 1][MazeHeight] == 1 &&MazeWidth>0)
 				{
-					newWall->SetScale(CVector3(ratiox , 1, 1),true);
+					newWall->SetScale(CVector3(ratiox, newWall->GetScale().y, newWall->GetScale().z), true);
 				}
-				if (theMaze.theMaze[MazeWidth][MazeHeight + 1])
+				if (theMaze.theMaze[MazeWidth][MazeHeight + 1]==1 && MazeHeight+1<MAZEHEIGHT)
 				{
-					newWall->SetScale(CVector3(1, 1, ratioy ),true);
+					newWall->SetScale(CVector3(newWall->GetScale().x, newWall->GetScale().y, ratioy), true);
 				}
-				if (theMaze.theMaze[MazeWidth][MazeHeight - 1] == 1)
+				if (theMaze.theMaze[MazeWidth][MazeHeight - 1] == 1 && MazeHeight>0)
 				{
-					newWall->SetScale(CVector3(1, 1, ratioy ),false );
+					newWall->SetScale(CVector3(newWall->GetScale().x, newWall->GetScale().y, ratioy), false);
 				}
 				theListofObjects.push_back(newWall);
 			}
 		}
 	}
+
+	newWall = new BlockWall;
+	newWall->theObjectX.theObj_LowPoly = thecube;
+	newWall->theObjectZ.theObj_LowPoly = thecube;
+	newWall->SetPosition(CVector3((float)(theMaze.x - MAZEWIDTH / 2) * ratiox, 0, (float)(theMaze.z - MAZEHEIGHT / 2)* ratioy));
+	theListofObjects.push_back(newWall);
 
 	newWall = new BlockWall;
 	newWall->theObjectX.theObj_LowPoly = thecube;
@@ -384,3 +393,4 @@ void MVC_Model::Update(void)
 //		}
 //	}
 //}
+

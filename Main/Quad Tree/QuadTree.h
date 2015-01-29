@@ -79,8 +79,9 @@ public:
 	void insert(rect pRect);
 	vector<rect> retrive(vector<rect> &returnObjects, rect pRect);
 
-	void DrawQuad(CFrustum *theFrustum);
+	void DrawQuad(CFrustum *theFrustum = NULL);
 	void DrawQuadTree(CFrustum *theFrustum, rect * pRect = NULL);
+	void DrawQuadTree( rect * pRect = NULL);
 
 };
 

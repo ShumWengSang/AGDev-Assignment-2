@@ -30,7 +30,7 @@ void CObjectModel::Render(CVector3* theCameraPosition)
 	glPushMatrix();
 
 	glTranslatef(thePosition.x, thePosition.y, thePosition.z);
-	glTranslatef(TOffset.x, TOffset.y, TOffset.z);
+	//glTranslatef(TOffset.x, TOffset.y, TOffset.z);
 	glScalef(Scale.x, Scale.y, Scale.z);
 	if (distance < 30)
 	{
@@ -55,7 +55,7 @@ void CObjectModel::Render(const int RESOLUTION)
 {
 	glPushMatrix();
 	glTranslatef(thePosition.x, thePosition.y, thePosition.z);
-	glTranslatef(TOffset.x, TOffset.y, TOffset.z);
+	//glTranslatef(TOffset.x, TOffset.y, TOffset.z);
 	glScalef(Scale.x, Scale.y, Scale.z);
 	if (RESOLUTION == 0)
 	{

@@ -41,6 +41,7 @@ public:
 
 	TextureImage SkyBoxTextures[6];
 	TextureImage ExitTexture[6];
+	LuaInterface theInterface;
 
 	CExit * theExits;
 

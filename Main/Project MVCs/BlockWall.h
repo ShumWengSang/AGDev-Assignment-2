@@ -45,11 +45,11 @@ public:
 		 MinMax ObjX = GetMinMax(theObjectX.theObj_LowPoly);
 		 MinMax ObjZ = GetMinMax(theObjectZ.theObj_LowPoly);
 
-		 CVector3 TopLeft(ObjX.MinX, 0, ObjZ.MaxX );
+		 CVector3 TopLeft(ObjX.MinX, 0, ObjZ.MaxZ );
 		 TopLeft = TopLeft * Scalef;
-		 TopLeft = TopLeft + CVector3(theObjectX.GetPosition().x + theObjectX.TOffset.x, 0, theObjectZ.GetPosition().z + theObjectZ.TOffset.z);
+		 TopLeft = TopLeft + CVector3(theObjectX.GetPosition().x, 0, theObjectZ.GetPosition().z);
 
-		 CVector3 result = TopLeft * Scalef;
+		// CVector3 result = TopLeft * Scalef;
 		 return TopLeft;
 	 }
 	 CVector3 GetBottomRight()
@@ -58,7 +58,7 @@ public:
 		 MinMax ObjX = GetMinMax(theObjectX.theObj_LowPoly);
 		 MinMax ObjZ = GetMinMax(theObjectZ.theObj_LowPoly);
 
-		 CVector3 BottomRight(ObjX.MaxX, 0, ObjZ.MinX);
+		 CVector3 BottomRight(ObjX.MaxX, 0, ObjZ.MinZ);
 		 BottomRight = BottomRight * Scalef;
 		 BottomRight = BottomRight + CVector3(theObjectX.GetPosition().x + theObjectX.TOffset.x, 0, theObjectZ.GetPosition().z + theObjectZ.TOffset.z);
 
