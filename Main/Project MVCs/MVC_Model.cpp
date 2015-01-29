@@ -87,25 +87,22 @@ bool MVC_Model::InitPhase2(void)
 
 				newWall->SetPosition(CVector3((float)(MazeWidth - MAZEWIDTH / 2) * ratiox, 0, (float)(MazeHeight - MAZEHEIGHT / 2)* ratioy));
 
-				if (newWall->getPosition().x == -100 && newWall->getPosition().z == -75)
-				{
-					int i = 1;
-				}
+
 				if (theMaze.theMaze[MazeWidth + 1][MazeHeight] == 1)
 				{
-					newWall->SetScale(CVector3(ratiox / 2,1,1),false);
+					newWall->SetScale(CVector3(ratiox ,1,1),false);
 				}
 				if (theMaze.theMaze[MazeWidth - 1][MazeHeight] == 1)
 				{
-					newWall->SetScale(CVector3(ratiox / 2, 1, 1),true);
+					newWall->SetScale(CVector3(ratiox , 1, 1),true);
 				}
 				if (theMaze.theMaze[MazeWidth][MazeHeight + 1])
 				{
-					newWall->SetScale(CVector3(1, 1, ratioy / 2),true);
+					newWall->SetScale(CVector3(1, 1, ratioy ),true);
 				}
 				if (theMaze.theMaze[MazeWidth][MazeHeight - 1] == 1)
 				{
-					newWall->SetScale(CVector3(1, 1, ratioy / 2),false );
+					newWall->SetScale(CVector3(1, 1, ratioy ),false );
 				}
 				theListofObjects.push_back(newWall);
 			}

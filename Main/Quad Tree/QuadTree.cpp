@@ -224,7 +224,7 @@ vector<rect> QuadTree1::retrive(vector<rect> &returnObjects, rect pRect)
 	return returnObjects;
 }
 
-void QuadTree1::DrawQuad()
+void QuadTree1::DrawQuad(CFrustum *theFrustum)
 {
 
 	glColor3f(1, 0, 0);
@@ -240,24 +240,25 @@ void QuadTree1::DrawQuad()
 	{
 		if (iter->Pointer != NULL)
 		{
-			iter->Pointer->glRenderObject(3);
+			if(theFrustum->CubeInFrustum(iter->Pointer->getPosition().x,iter->Pointer->getPosition().z,iter->Pointer->GetScale.x/2,iter->Pointer->GetScale.z/2))
+				iter->Pointer->glRenderObject(3);
 		}
 	}
 }
 
-void QuadTree1::DrawQuadTree(rect * pRect)
+void QuadTree1::DrawQuadTree(CFrustum *theFrustum, rect * pRect)
 {
 	//int index = GetIndex(pRect);
 	if (pRect == NULL)
 	{
 		pRect = &bounds;
-		DrawQuad();
+		DrawQuad(theFrustum);
 	}
 	for (int i = 0; i < 4; i++)
 	{
 		if (this->nodes[i] != NULL)
 		{
-			nodes[i]->DrawQuadTree();
+			nodes[i]->DrawQuadTree(theFrustum);
 		}
 	}
 

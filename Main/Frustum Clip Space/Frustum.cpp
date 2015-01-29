@@ -1,14 +1,4 @@
-//***********************************************************************//
-//																		 //
-//		- "Talk to me like I'm a 3 year old!" Programming Lessons -		 //
-//                                                                       //
-//		$Author:		DigiBen		digiben@gametutorials.com			 //
-//																		 //
-//		$Program:		Octree3	 										 //
-//																		 //
-//		$Description:	A working octree with a .3ds file format scene   //
-//																		 //
-//***********************************************************************//
+
 
 #include "Frustum.h"
 
@@ -263,23 +253,5 @@ bool CFrustum::CubeInFrustum( float x, float y, float z, float size )
 	return true;
 }
 
-
-/////////////////////////////////////////////////////////////////////////////////
-//
-// * QUICK NOTES * 
-//
-// This code was taken directly from the frustum tutorial located at www.GameTutorials.com.
-// Most of the large block of comments were taken out.  If you want to learn more about
-// this frustum code, visit our site.  Though we don't use the PointInFrustum() or 
-// SphereInFrustum() code I decided to leave it in, just so you don't have to paste
-// it in from the frustum tutorial if you include this file in your application/game.
-//
-//
-// Ben Humphrey (DigiBen)
-// Game Programmer
-// DigiBen@GameTutorials.com
-// www.GameTutorials.com
-//
-//
 
 

@@ -29,31 +29,30 @@ bool LuaInterface::LoadFile(char * filename)
 	return true;
 }
 
-float LuaInterface::GetFloat(char * name)
+void LuaInterface::Get(float &value, char * name)
 {
 	lua_getglobal(L, name);
-	float number = lua_tonumber(L, -1);
-	return number;
+	value = lua_tonumber(L, -1);
 }
 
-bool LuaInterface::GetBool(char * name)
+void LuaInterface::Get(int& value, char * name)
 {
 	lua_getglobal(L, name);
-	bool number = lua_toboolean(L, -1);
-	return number;
+	value = lua_toboolean(L, -1);
+
 }
 
 
-int LuaInterface::GetInt(char * name)
+void LuaInterface::Get(bool &value, char * name)
 {
 	lua_getglobal(L, name);
-	int number = lua_tointeger(L, -1);
-	return number;
+	value = lua_tointeger(L, -1);
+
 }
 
-char* LuaInterface::GetString(char * name)
+void LuaInterface::Get(char *value,char * name)
 {
 	lua_getglobal(L, name);
-	char * number = (char*)lua_tostring(L, -1);
-	return number;
+	value = (char*)lua_tostring(L, -1);
+
 }

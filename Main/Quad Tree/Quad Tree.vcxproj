@@ -47,7 +47,7 @@
       <WarningLevel>Level3</WarningLevel>
       <Optimization>Disabled</Optimization>
       <PreprocessorDefinitions>WIN32;_DEBUG;_LIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
-      <AdditionalIncludeDirectories>$(SolutionDir)Base Entity; $(SolutionDir)Math; $(SolutionDir)Model and Texture Loader</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>$(SolutionDir)Frustum Clip Space;$(SolutionDir)Base Entity;$(SolutionDir)Math;$(SolutionDir)Model and Texture Loader</AdditionalIncludeDirectories>
       <BrowseInformation>true</BrowseInformation>
     </ClCompile>
     <Link>
@@ -89,6 +89,9 @@
   <ItemGroup>
     <ProjectReference Include="..\Base Entity\Base Entity.vcxproj">
       <Project>{b3195217-5047-4fe5-8dee-02f84c7279f2}</Project>
+    </ProjectReference>
+    <ProjectReference Include="..\Frustum Clip Space\Frustum Clip Space.vcxproj">
+      <Project>{54ba401f-fb39-4c72-b592-17c5a9e73668}</Project>
     </ProjectReference>
     <ProjectReference Include="..\Math\Math.vcxproj">
       <Project>{9bb92af9-c0e9-4a30-bafa-baea759c6409}</Project>

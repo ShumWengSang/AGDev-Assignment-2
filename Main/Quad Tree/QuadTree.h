@@ -4,6 +4,8 @@
 #include <vector>
 #include "BaseEntity.h"
 #include "tgaLoader.h"
+#include "Frustum.h"
+
 using namespace std;
 
 struct Quadrant
@@ -77,8 +79,8 @@ public:
 	void insert(rect pRect);
 	vector<rect> retrive(vector<rect> &returnObjects, rect pRect);
 
-	void DrawQuad();
-	void DrawQuadTree(rect * pRect = NULL);
+	void DrawQuad(CFrustum *theFrustum);
+	void DrawQuadTree(CFrustum *theFrustum, rect * pRect = NULL);
 
 };
 

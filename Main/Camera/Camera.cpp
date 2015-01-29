@@ -371,14 +371,16 @@ void CCamera::CheckForMovement()
 	if(GetKeyState(VK_UP) & 0x80 || GetKeyState('W') & 0x80) {				
 
 		// Move our camera forward by a positive SPEED
-		MoveCamera(speed);				
+		MoveCamera(speed);
+		theFrustum.CalculateFrustum();
 	}
 
 	// Check if we hit the Down arrow or the 's' key
 	if(GetKeyState(VK_DOWN) & 0x80 || GetKeyState('S') & 0x80) {			
 
 		// Move our camera backward by a negative SPEED
-		MoveCamera(-speed);				
+		MoveCamera(-speed);
+		theFrustum.CalculateFrustum();
 	}
 
 	//if (theType == ThirdPerson)
@@ -401,6 +403,7 @@ void CCamera::CheckForMovement()
 
 		// Strafe the camera left
 		StrafeCamera(-speed);
+		theFrustum.CalculateFrustum();
 	}
 
 	// Check if we hit the Right arrow or the 'd' key
@@ -408,6 +411,7 @@ void CCamera::CheckForMovement()
 
 		// Strafe the camera right
 		StrafeCamera(speed);
+		theFrustum.CalculateFrustum();
 	}
 }
 
@@ -435,10 +439,12 @@ void CCamera::Update()
 	{
 		// Move the camera's view by the mouse
 		SetViewByMouseTwo(mousePos.x,mousePos.y);
+		theFrustum.CalculateFrustum();
 	}
 	else if(theType == ThirdPerson)
 	{
 		CheckMouse();
+		theFrustum.CalculateFrustum();
 	}
 }
 

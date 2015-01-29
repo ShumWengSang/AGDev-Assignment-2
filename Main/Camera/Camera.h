@@ -7,6 +7,8 @@
 #include "Mouse.h"
 #include "Vector3.h"
 #include "Math2.h"
+#include "Frustum.h"
+
 enum CameraType {
   FirstPerson = 1,
   ThirdPerson = 2
@@ -68,6 +70,8 @@ public:
 
 	void GetKeys(bool * theKeys);
 	void SetScreen(int, int);
+
+	CFrustum theFrustum;
 
 private:
 	CameraType theType;

@@ -5,8 +5,8 @@
 #include <time.h>
 #include <iostream>
 
-#define MAZEHEIGHT 5
-#define MAZEWIDTH 5
+#define MAZEHEIGHT 20
+#define MAZEWIDTH 20
 
 //////////////////////////////////////\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\
 							MAZE GENERATOR
