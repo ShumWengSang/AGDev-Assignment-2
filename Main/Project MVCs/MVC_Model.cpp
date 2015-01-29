@@ -7,9 +7,10 @@
 
 #include "MVC_Model.h"
 
-static void TestFunction()
+int TestFunction(lua_State *state)
 {
 	std::cout << "ITS WORKING" << std::endl;
+	return 1;
 }
 
 
@@ -40,7 +41,8 @@ bool MVC_Model::Init(float fpsLimit)
 {
 	m_timer->Init(true,int(fpsLimit));
 	m_moveX=m_moveY=0;
-
+	//theInterface.Pushfunction("TestFunction", TestFunction);
+//	theInterface.RunScript("LuaTest.lua");
 	return true;
 }
 

@@ -56,9 +56,12 @@ BOOL MVC_Controller::RunMainLoop(void)
 	{
 		m_theView->SetFullScreen( false );
 		int height, width;
-		m_theView->GetDefaultRes(height, width);
+		m_theModel->theInterface.RunScript("InitOpengl.lua");
+		m_theModel->theInterface.Get(height, "ScreenHeight");
+		m_theModel->theInterface.Get(width, "ScreenWidth");
+
 		// Create Our OpenGL Window
-		if (!m_theView->CreateGLWindow("NeHe's OpenGL Framework",800,600,16))
+		if (!m_theView->CreateGLWindow("NeHe's OpenGL Framework",width,height,16))
 		{
 			return false;									// Quit If Window Was Not Created
 		}
