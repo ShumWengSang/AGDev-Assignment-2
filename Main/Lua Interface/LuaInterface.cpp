@@ -38,7 +38,7 @@ void LuaInterface::Get(float &value, char * name)
 void LuaInterface::Get(int& value, char * name)
 {
 	lua_getglobal(L, name);
-	value = lua_toboolean(L, -1);
+	value = lua_tointeger(L, -1);
 
 }
 
@@ -46,7 +46,7 @@ void LuaInterface::Get(int& value, char * name)
 void LuaInterface::Get(bool &value, char * name)
 {
 	lua_getglobal(L, name);
-	value = lua_tointeger(L, -1);
+	value = lua_toboolean(L, -1);
 
 }
 

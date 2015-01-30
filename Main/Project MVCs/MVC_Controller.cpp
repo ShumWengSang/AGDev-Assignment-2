@@ -291,3 +291,5 @@ void MVC_Controller::RotateCamera(float AngletoChange)
 	}
 	*/
 }
+
+MVC_Controller * MVC_Controller::Singleton = NULL;

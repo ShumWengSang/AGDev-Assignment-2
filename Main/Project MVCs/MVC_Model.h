@@ -20,9 +20,31 @@ class MVCTime;
 
 class MVC_Model
 {
-public:
+
 	MVC_Model(void);
 	~MVC_Model(void);
+	static MVC_Model * Singleton;
+public:
+
+	static MVC_Model * GetInstace()
+	{
+		if(Singleton == NULL)
+		{
+			Singleton = new MVC_Model();
+		}
+		return Singleton;
+	}
+
+		static void Drop()
+	{
+		if(Singleton != NULL)
+		{
+			delete Singleton;
+			Singleton = NULL;
+		}
+	}
+
+
 	// Update the model
 	void Update(void);
 	bool Init(float fpsLimit);

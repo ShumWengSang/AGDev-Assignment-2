@@ -5,9 +5,6 @@
 #include <time.h>
 #include <iostream>
 
-#define MAZEHEIGHT 20
-#define MAZEWIDTH 20
-
 //////////////////////////////////////\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\
 							MAZE GENERATOR
 //							By Shum Weng Sang
@@ -28,15 +25,19 @@ class MazeGenerator
 {
 public:
 	//The map. 1 is wall. 0 is path.
-	int theMaze[MAZEWIDTH][MAZEHEIGHT];
+	int** theMaze;
 
 	//Two variables used to keep track of the starting position. Its Z and not Y since this is 3D.
 	int x, z;
 
 	std::vector<Location> PossibleExits;
 	MazeGenerator();
+	MazeGenerator(int width, int height);
 	~MazeGenerator();
 	void Draw();
+
+	int MAZEHEIGHT;
+	int MAZEWIDTH;
 private:
 	//A vector used to control the direction of the search.
 	std::vector<int> RandomDirectionBias;

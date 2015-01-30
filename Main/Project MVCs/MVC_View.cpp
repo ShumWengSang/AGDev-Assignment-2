@@ -6,7 +6,39 @@
 //************************************************************************************************************************************//
 #include "MVC_View.h"
 
+static int L_PrintDebug(lua_State *state)
+{
+	MVC_View * theView = MVC_View::GetInstance(MVC_Model::GetInstace());
 
+	int n = lua_gettop(state);
+	
+	// check if number of arguments is less than 4
+	// then we stop as not enough parameters
+	if(n < 3)
+	{
+		std::cout << "Error: printDebug(number,number, char *, ... )" << std::endl;
+		lua_error(state);
+	}
+
+	// gets parameter
+	int x = lua_tointeger(state, 1);
+	int y = lua_tointeger(state, 2);
+	char * words = (char*) lua_tostring(state, 3);
+
+	std::vector<float> Numbers;
+	for(int i = 4;i != n; i++)
+	{
+		if(lua_type(state,i) == LUA_TNUMBER)
+		{
+			float theNumber = lua_tonumber(state,i);
+			Numbers.push_back(theNumber);
+		}
+	}
+
+	// call C++ create window function
+	theView->Printw(x,y,words);
+	return 1;
+}
 
 MVC_View::MVC_View(MVC_Model* theModel)
 {
@@ -31,6 +63,8 @@ MVC_View::MVC_View(MVC_Model* theModel)
 	}
 
 	m_theModel->Camera2.GetKeys(GetKeyBuffer());
+
+	m_theModel->theInterface.Pushfunction("PrintOnScreen",L_PrintDebug);
 }
 
 MVC_View::~MVC_View(void)
@@ -195,3 +229,5 @@ void MVC_View::Draw3DSGrid()
 	}
 	glLineWidth(1);
 }
+
+MVC_View * MVC_View::Singleton = NULL;

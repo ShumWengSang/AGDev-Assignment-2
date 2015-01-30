@@ -92,20 +92,23 @@ bool MVC_Model::InitPhase2(void)
 
 				newWall->SetPosition(CVector3((float)(MazeWidth - MAZEWIDTH / 2) * ratiox, 0, (float)(MazeHeight - MAZEHEIGHT / 2)* ratioy));
 
-
-				if (theMaze.theMaze[MazeWidth + 1][MazeHeight] == 1 &&MazeWidth+1<MAZEWIDTH)
+				if(MazeWidth+1<MAZEWIDTH)
+				if (theMaze.theMaze[MazeWidth + 1][MazeHeight] == 1 )
 				{
 					newWall->SetScale(CVector3(ratiox, newWall->GetScale().y, newWall->GetScale().z), false);
 				}
-				if (theMaze.theMaze[MazeWidth - 1][MazeHeight] == 1 &&MazeWidth>0)
-				{
-					newWall->SetScale(CVector3(ratiox, newWall->GetScale().y, newWall->GetScale().z), true);
-				}
-				if (theMaze.theMaze[MazeWidth][MazeHeight + 1]==1 && MazeHeight+1<MAZEHEIGHT)
+				if(MazeWidth>0)
+					if (theMaze.theMaze[MazeWidth - 1][MazeHeight] == 1)
+					{
+						newWall->SetScale(CVector3(ratiox, newWall->GetScale().y, newWall->GetScale().z), true);
+					}
+				if(MazeHeight+1<MAZEHEIGHT)
+				if (theMaze.theMaze[MazeWidth][MazeHeight + 1]==1)
 				{
 					newWall->SetScale(CVector3(newWall->GetScale().x, newWall->GetScale().y, ratioy), true);
 				}
-				if (theMaze.theMaze[MazeWidth][MazeHeight - 1] == 1 && MazeHeight>0)
+				if(MazeHeight>0)
+				if (theMaze.theMaze[MazeWidth][MazeHeight - 1] == 1 )
 				{
 					newWall->SetScale(CVector3(newWall->GetScale().x, newWall->GetScale().y, ratioy), false);
 				}
@@ -396,3 +399,4 @@ void MVC_Model::Update(void)
 //	}
 //}
 
+MVC_Model * MVC_Model::Singleton = NULL;
