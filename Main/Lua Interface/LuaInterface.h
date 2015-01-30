@@ -1,6 +1,7 @@
 #pragma once
 #include <vector>
 #include <string>
+#include "Vector3.h"
 extern "C"
 {
 #include <lua.h>
@@ -48,7 +49,18 @@ public:
 		lua_pushstring(L, value.c_str());
 	}
 
+	void Push(const CVector3 &value)
+	{
+		lua_pushnumber(L, value.x);
+		lua_pushnumber(L, value.y);
+		lua_pushnumber(L, value.z);
+	}
 
+	void Pop()
+	{
+		int n = lua_gettop(L);
+		lua_pop(L,n);
+	}
 
 private:
 	lua_State * L;

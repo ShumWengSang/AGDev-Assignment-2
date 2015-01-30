@@ -12,9 +12,10 @@ MazeGenerator::MazeGenerator()
 	{
 		theMaze[i]=new int[MAZEHEIGHT];
 	}
+
 	for (int i = 0; i < MAZEWIDTH; i++)
 	{
-		for (int j = 0; j < MAZEWIDTH; j++)
+		for (int j = 0; j < MAZEHEIGHT; j++)
 		{
 			theMaze[i][j] = 1;
 		}

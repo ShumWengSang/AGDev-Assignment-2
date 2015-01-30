@@ -82,4 +82,6 @@ public:
 	void DrawScene();
 	void DrawObject();
 	void MVC_View::Draw3DSGrid();
+
+	friend static int L_PrintDebug(lua_State *state);
 };

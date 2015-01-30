@@ -56,7 +56,7 @@ BOOL MVC_Controller::RunMainLoop(void)
 	{
 		m_theView->SetFullScreen( false );
 		int height, width;
-		m_theModel->theInterface.RunScript("InitOpengl.lua");
+		m_theModel->theInterface.RunScript("Init.lua");
 		m_theModel->theInterface.Get(height, "ScreenHeight");
 		m_theModel->theInterface.Get(width, "ScreenWidth");
 

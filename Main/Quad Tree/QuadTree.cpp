@@ -50,10 +50,10 @@ void QuadTree1::clear()
 
 void QuadTree1::Split()
 {
-	int subWidth = (int)(bounds.width * 0.5);
-	int subHeight = (int)(bounds.height * 0.5);
-	int x = (int)bounds.x;
-	int y = (int)bounds.y;
+	float subWidth = (float)(bounds.width * 0.5);
+	float subHeight = (float)(bounds.height * 0.5);
+	float x = (float)bounds.x;
+	float y = (float)bounds.y;
 
 	nodes[0] =  new QuadTree1(level+1, rect(x + subWidth, y, subWidth, subHeight));
 	nodes[1] =  new QuadTree1(level+1,  rect(x, y, subWidth, subHeight));
@@ -67,8 +67,8 @@ Quadrant QuadTree1::GetIndex(rect pRect)
 	double verticalMidpoint = bounds.x + (bounds.width / 2);
 	double horizontalMidpoint = bounds.y + (bounds.height / 2);
 
-	int BottomLeftQuad = GetPtQuadrant(pRect.x, pRect.y);
-	int TopRightQuad = GetPtQuadrant(pRect.x + pRect.width, pRect.y + pRect.height);
+	float BottomLeftQuad = GetPtQuadrant(pRect.x, pRect.y);
+	float TopRightQuad = GetPtQuadrant(pRect.x + pRect.width, pRect.y + pRect.height);
 
 
 	for (int i = 0; i < 4; i++)
@@ -84,7 +84,7 @@ Quadrant QuadTree1::GetIndex(rect pRect)
 	}
 
 	//Check if the poitns are in opposite quads. IF they are, all four of them should have points.
-	if ((BottomLeftQuad + TopRightQuad) % 2 == 0 && (BottomLeftQuad != TopRightQuad))
+	if ((int)(BottomLeftQuad + TopRightQuad) % 2 == 0 && (BottomLeftQuad != TopRightQuad))
 	{
 		for (int i = 0; i < 4; i ++)
 			index.quad[i] = true;

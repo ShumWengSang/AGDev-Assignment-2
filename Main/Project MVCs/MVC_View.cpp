@@ -11,7 +11,7 @@ static int L_PrintDebug(lua_State *state)
 	MVC_View * theView = MVC_View::GetInstance(MVC_Model::GetInstace());
 
 	int n = lua_gettop(state);
-	
+
 	// check if number of arguments is less than 4
 	// then we stop as not enough parameters
 	if(n < 3)
@@ -21,22 +21,39 @@ static int L_PrintDebug(lua_State *state)
 	}
 
 	// gets parameter
+	//int x = lua_tointeger(state, 1);
+	//int y = lua_tointeger(state, 2);
+	//char * words = (char*) lua_tostring(state, 3);
+
+
+	char text[256]; /* Be careful! Buffer overflow potential for not checking lengths of sprintf and not using snprintf */
+	char *buf = &text[0]; /* start buf at beginning of text */
 	int x = lua_tointeger(state, 1);
 	int y = lua_tointeger(state, 2);
-	char * words = (char*) lua_tostring(state, 3);
-
-	std::vector<float> Numbers;
-	for(int i = 4;i != n; i++)
+	for (int i = 3; i < n + 1; i++)
 	{
-		if(lua_type(state,i) == LUA_TNUMBER)
-		{
-			float theNumber = lua_tonumber(state,i);
-			Numbers.push_back(theNumber);
+		if (lua_type(state,i) == LUA_TNUMBER) {
+			sprintf(buf, "%f", lua_tonumber(state,i));
+		} else if (lua_type(state,i) == LUA_TSTRING) {
+			sprintf(buf, "%s", lua_tostring(state,i));
+		} else {
+			// ERROR SOMEHOW
 		}
+		buf += strlen(buf); /* Move the end of buf for more appending
+							}
+							/* At this point, we've filled in text by walking through it with our buf pointer, and we have a complete string */
+		glRasterPos2f(x,y);
+		glPushAttrib(GL_LIST_BIT);
+		glListBase(theView->m_base-32);
+		glCallLists(strlen(text),GL_UNSIGNED_BYTE,text);
+		glPopAttrib();
 	}
+	return 1;
+}
 
-	// call C++ create window function
-	theView->Printw(x,y,words);
+static int L_Update(lua_State *state)
+{
+	
 	return 1;
 }
 
@@ -177,25 +194,33 @@ void MVC_View::DrawScene()
 	m_theModel->theHUD.SetHUD(true);
 	m_theModel->theHUD.Draw();
 	glColor3f(0.0, 0.0, 1.0);
-	if(m_theModel->DebugCam)
+	if(GetKeyState('O') & 0x80)
 	{
-		Printw(10, 50, "FPS: %.2f", MVCTime::GetInstance()->GetFPS());
-		Printw(10, 100, "Camera 2 Pos: %f %f %f", m_theModel->Camera2.Position().x, m_theModel->Camera2.Position().y, m_theModel->Camera2.Position().z);
-		Printw(10, 150, "Player Data Pos: %f %f %f", m_theModel->thePlayerData.getPosition().x, m_theModel->thePlayerData.getPosition().y, m_theModel->thePlayerData.getPosition().z);
-		Printw(10, 200, "Player Direction %f %f %f , Angle : %f", m_theModel->thePlayerData.getDirection().x, m_theModel->thePlayerData.getDirection().y, m_theModel->thePlayerData.getDirection().z, Math::VectorToAngle(m_theModel->thePlayerData.getDirection()));
-		Printw(10, 250, "Camera 2 Direction %f %f %f , Angle : %f", m_theModel->Camera2.View().x, m_theModel->Camera2.View().y, m_theModel->Camera2.View().z, Math::VectorToAngle(m_theModel->Camera2.View()));
-	}
-	else
-	{
-		Printw(10, 50, "FPS: %.2f", MVCTime::GetInstance()->GetFPS());
-		Printw(10, 100, "Camera 2 Pos: %f %f %f", m_theModel->theCamera.Position().x, m_theModel->theCamera.Position().y, m_theModel->theCamera.Position().z);
-		Printw(10, 150, "Player Data Pos: %f %f %f", m_theModel->thePlayerData.getPosition().x, m_theModel->thePlayerData.getPosition().y, m_theModel->thePlayerData.getPosition().z);
-		Printw(10, 200, "Player Direction %f %f %f , Angle : %f", m_theModel->thePlayerData.getDirection().x, m_theModel->thePlayerData.getDirection().y, m_theModel->thePlayerData.getDirection().z, Math::VectorToAngle(m_theModel->thePlayerData.getDirection()));
-		Printw(10, 250, "Camera 2 Direction %f %f %f , Angle : %f", m_theModel->theCamera.View().x, m_theModel->theCamera.View().y, m_theModel->theCamera.View().z, Math::VectorToAngle(m_theModel->theCamera.View()));
+		if(m_theModel->DebugCam)
+		{
+			m_theModel->theInterface.Pop();
+			m_theModel->theInterface.Push(m_theModel->Camera2.Position());
+			m_theModel->theInterface.Push(m_theModel->m_timer->GetFPS());
+			m_theModel->theInterface.RunScript("Debug.lua");
+			m_theModel->theInterface.Pop();
+			//Printw(10, 50, "FPS: %.2f", MVCTime::GetInstance()->GetFPS());
+			//Printw(10, 100, "Camera 2 Pos: %f %f %f", m_theModel->Camera2.Position().x, m_theModel->Camera2.Position().y, m_theModel->Camera2.Position().z);
+			Printw(10, 150, "Player Data Pos: %f %f %f", m_theModel->thePlayerData.getPosition().x, m_theModel->thePlayerData.getPosition().y, m_theModel->thePlayerData.getPosition().z);
+			Printw(10, 200, "Player Direction %f %f %f , Angle : %f", m_theModel->thePlayerData.getDirection().x, m_theModel->thePlayerData.getDirection().y, m_theModel->thePlayerData.getDirection().z, Math::VectorToAngle(m_theModel->thePlayerData.getDirection()));
+			Printw(10, 250, "Camera 2 Direction %f %f %f , Angle : %f", m_theModel->Camera2.View().x, m_theModel->Camera2.View().y, m_theModel->Camera2.View().z, Math::VectorToAngle(m_theModel->Camera2.View()));
+		}
+		else
+		{
+			Printw(10, 50, "FPS: %.2f", MVCTime::GetInstance()->GetFPS());
+			Printw(10, 100, "Camera 2 Pos: %f %f %f", m_theModel->theCamera.Position().x, m_theModel->theCamera.Position().y, m_theModel->theCamera.Position().z);
+			Printw(10, 150, "Player Data Pos: %f %f %f", m_theModel->thePlayerData.getPosition().x, m_theModel->thePlayerData.getPosition().y, m_theModel->thePlayerData.getPosition().z);
+			Printw(10, 200, "Player Direction %f %f %f , Angle : %f", m_theModel->thePlayerData.getDirection().x, m_theModel->thePlayerData.getDirection().y, m_theModel->thePlayerData.getDirection().z, Math::VectorToAngle(m_theModel->thePlayerData.getDirection()));
+			Printw(10, 250, "Camera 2 Direction %f %f %f , Angle : %f", m_theModel->theCamera.View().x, m_theModel->theCamera.View().y, m_theModel->theCamera.View().z, Math::VectorToAngle(m_theModel->theCamera.View()));
+		}
 	}
 
 
-	Printw(10, 300, "Distance with Data: %f", (m_theModel->thePlayerData.getPosition() - m_theModel->theCamera.Position()).GetMagnitude());
+	//Printw(10, 300, "Distance with Data: %f", (m_theModel->thePlayerData.getPosition() - m_theModel->theCamera.Position()).GetMagnitude());
 	m_theModel->theHUD.SetHUD(false);
 	glPopMatrix();
 

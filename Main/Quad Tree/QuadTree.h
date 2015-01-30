@@ -22,13 +22,13 @@ struct Quadrant
 
 struct rect
 {
-	int x;
-	int y;
-	int height;
-	int width;
+	float x;
+	float y;
+	float height;
+	float width;
 	BaseEntity * Pointer;
 
-	rect(int x, int y, int width, int height)
+	rect(float x, float y, float width, float height)
 	{
 		this->x = x;
 		this->y = y;
@@ -36,7 +36,7 @@ struct rect
 		this->height = height;
 	}
 
-	rect(int x, int y, int width, int height, BaseEntity * theEntity)
+	rect(float x, float y, float width, float height, BaseEntity * theEntity)
 	{
 		this->x = x;
 		this->y = y;

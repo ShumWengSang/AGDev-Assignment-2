@@ -69,16 +69,25 @@ bool MVC_Model::InitPhase2(void)
 
 	//Find the ratio between skybox width and height and maze width and height.
 	//We need this to fully fill our skybox with the maze.
-	float ratiox = theBox.Width / MAZEWIDTH;
-	float ratioy = theBox.Length / MAZEHEIGHT;
 
-	MazeGenerator theMaze;
+	//theInterface.RunScript("Init.lua");
+	int width;
+	int height;
+	theInterface.Get(width, "MazeWidth");
+	theInterface.Get(height, "MazeHeight");
+
+
+	MazeGenerator theMaze(width,height);
+	float ratiox = theBox.Width / theMaze.MAZEWIDTH;
+	float ratioy = theBox.Length / theMaze.MAZEHEIGHT;
+
+
 	BlockWall * newWall;
 	ObjFile thecube = LoadOBJ("Objects/Cube.obj");
 	theMaze.Draw();
-	for (int MazeWidth = -0; MazeWidth < MAZEWIDTH; MazeWidth++)
+	for (int MazeWidth = -0; MazeWidth < theMaze.MAZEWIDTH; MazeWidth++)
 	{
-		for (int MazeHeight = -0; MazeHeight < MAZEHEIGHT; MazeHeight++)
+		for (int MazeHeight = -0; MazeHeight < theMaze.MAZEHEIGHT; MazeHeight++)
 		{
 			if (theMaze.theMaze[MazeWidth][MazeHeight] == 0)
 			{
@@ -90,29 +99,29 @@ bool MVC_Model::InitPhase2(void)
 				newWall->theObjectX.theObj_LowPoly = thecube;
 				newWall->theObjectZ.theObj_LowPoly = thecube;
 
-				newWall->SetPosition(CVector3((float)(MazeWidth - MAZEWIDTH / 2) * ratiox, 0, (float)(MazeHeight - MAZEHEIGHT / 2)* ratioy));
+				newWall->SetPosition(CVector3((float)(MazeWidth - theMaze.MAZEWIDTH / 2) * ratiox, 0, (float)(MazeHeight - theMaze.MAZEHEIGHT / 2)* ratioy));
 
-				if(MazeWidth+1<MAZEWIDTH)
-				if (theMaze.theMaze[MazeWidth + 1][MazeHeight] == 1 )
-				{
-					newWall->SetScale(CVector3(ratiox, newWall->GetScale().y, newWall->GetScale().z), false);
-				}
-				if(MazeWidth>0)
-					if (theMaze.theMaze[MazeWidth - 1][MazeHeight] == 1)
+				if(MazeWidth+1<theMaze.MAZEWIDTH)
+					if (theMaze.theMaze[MazeWidth + 1][MazeHeight] == 1 )
 					{
-						newWall->SetScale(CVector3(ratiox, newWall->GetScale().y, newWall->GetScale().z), true);
+						newWall->SetScale(CVector3(ratiox, newWall->GetScale().y, newWall->GetScale().z), false);
 					}
-				if(MazeHeight+1<MAZEHEIGHT)
-				if (theMaze.theMaze[MazeWidth][MazeHeight + 1]==1)
-				{
-					newWall->SetScale(CVector3(newWall->GetScale().x, newWall->GetScale().y, ratioy), true);
-				}
-				if(MazeHeight>0)
-				if (theMaze.theMaze[MazeWidth][MazeHeight - 1] == 1 )
-				{
-					newWall->SetScale(CVector3(newWall->GetScale().x, newWall->GetScale().y, ratioy), false);
-				}
-				theListofObjects.push_back(newWall);
+					if(MazeWidth>0)
+						if (theMaze.theMaze[MazeWidth - 1][MazeHeight] == 1)
+						{
+							newWall->SetScale(CVector3(ratiox, newWall->GetScale().y, newWall->GetScale().z), true);
+						}
+						if(MazeHeight+1<theMaze.MAZEHEIGHT)
+							if (theMaze.theMaze[MazeWidth][MazeHeight + 1]==1)
+							{
+								newWall->SetScale(CVector3(newWall->GetScale().x, newWall->GetScale().y, ratioy), true);
+							}
+							if(MazeHeight>0)
+								if (theMaze.theMaze[MazeWidth][MazeHeight - 1] == 1 )
+								{
+									newWall->SetScale(CVector3(newWall->GetScale().x, newWall->GetScale().y, ratioy), false);
+								}
+								theListofObjects.push_back(newWall);
 			}
 		}
 	}
@@ -120,7 +129,7 @@ bool MVC_Model::InitPhase2(void)
 	newWall = new BlockWall;
 	newWall->theObjectX.theObj_LowPoly = thecube;
 	newWall->theObjectZ.theObj_LowPoly = thecube;
-	newWall->SetPosition(CVector3((float)(theMaze.x - MAZEWIDTH / 2) * ratiox, 0, (float)(theMaze.z - MAZEHEIGHT / 2)* ratioy));
+	newWall->SetPosition(CVector3((float)(theMaze.x - theMaze.MAZEWIDTH / 2) * ratiox, 0, (float)(theMaze.z - theMaze.MAZEHEIGHT / 2)* ratioy));
 	theListofObjects.push_back(newWall);
 
 	newWall = new BlockWall;
@@ -155,7 +164,7 @@ bool MVC_Model::InitPhase2(void)
 	//Generate the Maze and input it.
 
 
-
+	//theInterface.LoadFile("Debug.lua");
 	return true;
 }
 
