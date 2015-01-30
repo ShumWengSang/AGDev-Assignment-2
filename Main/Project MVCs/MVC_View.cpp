@@ -6,6 +6,35 @@
 //************************************************************************************************************************************//
 #include "MVC_View.h"
 
+static int L_GetCamnFPS(lua_State *state)
+{
+	int n = lua_gettop(state);
+
+	// check if number of arguments is less than 4
+	// then we stop as not enough parameters
+	if(n != 0)
+	{
+		std::cout << "Error: nothing." << std::endl;
+		lua_error(state);
+		return 0;
+	}
+
+	MVC_Model * theModel = MVC_Model::GetInstace();
+
+	if(theModel->DebugCam)
+	{
+		theModel->theInterface.Push(theModel->Camera2.Position());
+	}
+	else
+	{
+		theModel->theInterface.Push(theModel->theCamera.Position());
+	}
+	theModel->theInterface.Push(theModel->m_timer->GetFPS());
+
+
+	return 4;
+}
+
 static int L_PrintDebug(lua_State *state)
 {
 	MVC_View * theView = MVC_View::GetInstance(MVC_Model::GetInstace());
@@ -196,27 +225,13 @@ void MVC_View::DrawScene()
 	glColor3f(0.0, 0.0, 1.0);
 	if(GetKeyState('O') & 0x80)
 	{
-		if(m_theModel->DebugCam)
-		{
-			m_theModel->theInterface.Pop();
-			m_theModel->theInterface.Push(m_theModel->Camera2.Position());
-			m_theModel->theInterface.Push(m_theModel->m_timer->GetFPS());
-			m_theModel->theInterface.RunScript("Debug.lua");
-			m_theModel->theInterface.Pop();
-			//Printw(10, 50, "FPS: %.2f", MVCTime::GetInstance()->GetFPS());
-			//Printw(10, 100, "Camera 2 Pos: %f %f %f", m_theModel->Camera2.Position().x, m_theModel->Camera2.Position().y, m_theModel->Camera2.Position().z);
-			Printw(10, 150, "Player Data Pos: %f %f %f", m_theModel->thePlayerData.getPosition().x, m_theModel->thePlayerData.getPosition().y, m_theModel->thePlayerData.getPosition().z);
-			Printw(10, 200, "Player Direction %f %f %f , Angle : %f", m_theModel->thePlayerData.getDirection().x, m_theModel->thePlayerData.getDirection().y, m_theModel->thePlayerData.getDirection().z, Math::VectorToAngle(m_theModel->thePlayerData.getDirection()));
-			Printw(10, 250, "Camera 2 Direction %f %f %f , Angle : %f", m_theModel->Camera2.View().x, m_theModel->Camera2.View().y, m_theModel->Camera2.View().z, Math::VectorToAngle(m_theModel->Camera2.View()));
-		}
-		else
-		{
-			Printw(10, 50, "FPS: %.2f", MVCTime::GetInstance()->GetFPS());
-			Printw(10, 100, "Camera 2 Pos: %f %f %f", m_theModel->theCamera.Position().x, m_theModel->theCamera.Position().y, m_theModel->theCamera.Position().z);
-			Printw(10, 150, "Player Data Pos: %f %f %f", m_theModel->thePlayerData.getPosition().x, m_theModel->thePlayerData.getPosition().y, m_theModel->thePlayerData.getPosition().z);
-			Printw(10, 200, "Player Direction %f %f %f , Angle : %f", m_theModel->thePlayerData.getDirection().x, m_theModel->thePlayerData.getDirection().y, m_theModel->thePlayerData.getDirection().z, Math::VectorToAngle(m_theModel->thePlayerData.getDirection()));
-			Printw(10, 250, "Camera 2 Direction %f %f %f , Angle : %f", m_theModel->theCamera.View().x, m_theModel->theCamera.View().y, m_theModel->theCamera.View().z, Math::VectorToAngle(m_theModel->theCamera.View()));
-		}
+		m_theModel->theInterface.Pushfunction("GetCamAndFPS",L_GetCamnFPS);
+		m_theModel->theInterface.RunScript("Debug.lua");
+		//Printw(10, 50, "FPS: %.2f", MVCTime::GetInstance()->GetFPS());
+		//Printw(10, 100, "Camera 2 Pos: %f %f %f", m_theModel->Camera2.Position().x, m_theModel->Camera2.Position().y, m_theModel->Camera2.Position().z);
+		//Printw(10, 150, "Player Data Pos: %f %f %f", m_theModel->thePlayerData.getPosition().x, m_theModel->thePlayerData.getPosition().y, m_theModel->thePlayerData.getPosition().z);
+		//Printw(10, 200, "Player Direction %f %f %f , Angle : %f", m_theModel->thePlayerData.getDirection().x, m_theModel->thePlayerData.getDirection().y, m_theModel->thePlayerData.getDirection().z, Math::VectorToAngle(m_theModel->thePlayerData.getDirection()));
+		//Printw(10, 250, "Camera 2 Direction %f %f %f , Angle : %f", m_theModel->Camera2.View().x, m_theModel->Camera2.View().y, m_theModel->Camera2.View().z, Math::VectorToAngle(m_theModel->Camera2.View()));
 	}
 
 
