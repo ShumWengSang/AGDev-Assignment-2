@@ -14,9 +14,30 @@ class MVCTime;
 
 class MVC_Controller
 {
-public:
-	MVC_Controller(MVC_Model* theModel, MVC_View* theView);
+
+	 MVC_Controller(MVC_Model* theModel, MVC_View* theView);
 	~MVC_Controller(void);
+	static MVC_Controller * Singleton;
+public:
+	static MVC_Controller * GetInstace(MVC_Model* theModel, MVC_View* theView)
+	{
+		if(Singleton == NULL)
+		{
+			Singleton = new MVC_Controller(theModel, theView);
+		}
+		return Singleton;
+	}
+
+	static void Drop()
+	{
+		if(Singleton != NULL)
+		{
+			delete Singleton;
+			Singleton = NULL;
+		}
+	}
+
+
 
 	// Get the status of the stop game boolean flag
 	BOOL RunMainLoop(void);

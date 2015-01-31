@@ -452,7 +452,6 @@ bool* MVC_View::GetKeyBuffer()
 void MVC_View::Printw (float x, float y, const char* format, ...) 
 { 
 	glRasterPos2f(x,y);
-	//credit to nehe bitmap font tutorial for base char printing code
 	char text[256];
 	va_list ap;
 	if(format==NULL)

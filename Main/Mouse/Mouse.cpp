@@ -15,8 +15,6 @@ CMouse* CMouse::getInstance(int num)
     if(singleton[num]==0)
     {
         singleton[num] = new CMouse();
-        instanceFlag = true;
-
     }
     return singleton[num];
 }		

@@ -49,7 +49,6 @@ void LuaInterface::Get(int &value, char * name)
 	lua_getglobal(L, name);
 	value = lua_tointeger(L, -1);
 	lua_pop(L, 1);
-
 }
 
 void LuaInterface::Get(char *value,char * name)

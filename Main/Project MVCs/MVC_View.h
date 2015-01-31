@@ -10,7 +10,24 @@ class MVC_Model;
 class MVC_View
 {
 public:
-	MVC_View(MVC_Model* theModel);
+	static MVC_View * GetInstance(MVC_Model * theModel)
+	{
+		if(Singleton == 0)
+		{
+			Singleton = new MVC_View(theModel);
+		}
+		return Singleton;
+	}
+	static void Drop()
+	{
+		if(Singleton != NULL)
+		{
+			delete Singleton;
+			Singleton = NULL;
+		}
+	}
+
+
 	~MVC_View(void);
 	// Draw the view
 	BOOL Draw(void);
@@ -27,8 +44,10 @@ public:
 	CMouse * m_MouseInfo;
 	float m_Swidth,m_Sheight;
 private:
+	static MVC_View * Singleton;
+	MVC_View(MVC_Model* theModel);
 	GLuint  m_base;                           // Base Display List For The Font Set
-	void Printw (float x, float y,const char* format, ...);
+
 
 	MVC_Model* m_theModel;
 
@@ -48,7 +67,7 @@ private:
 	virtual LRESULT CALLBACK MsgProc(HWND, UINT, WPARAM, LPARAM); // Declaration For WndProc
 	static LRESULT CALLBACK WndProc(HWND, UINT, WPARAM, LPARAM); // Declaration For WndProc
 public:
-
+	void Printw (float x, float y,const char* format, ...);
 	int m_iWindows_Width, m_iWindows_Height;
 	void GetDefaultRes(int& height,int& width);
 	// Check if the player wants to quit the game
@@ -63,4 +82,6 @@ public:
 	void DrawScene();
 	void DrawObject();
 	void MVC_View::Draw3DSGrid();
+
+	friend static int L_PrintDebug(lua_State *state);
 };

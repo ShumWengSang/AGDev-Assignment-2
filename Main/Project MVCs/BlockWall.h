@@ -60,10 +60,9 @@ public:
 
 		 CVector3 BottomRight(ObjX.MaxX, 0, ObjZ.MinZ);
 		 BottomRight = BottomRight * Scalef;
-		 BottomRight = BottomRight + CVector3(theObjectX.GetPosition().x + theObjectX.TOffset.x, 0, theObjectZ.GetPosition().z + theObjectZ.TOffset.z);
+		 BottomRight = BottomRight + CVector3(theObjectX.GetPosition().x, 0, theObjectZ.GetPosition().z );
 
 		 return BottomRight;
-
 	 }
 };
 

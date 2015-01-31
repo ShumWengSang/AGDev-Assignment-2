@@ -6,8 +6,7 @@ enum EntityType
 	NONE = 0,
 	PLAYER = 1,
 	HorizontalWall,
-	VerticalWall,
-	BothWall,
+	ENEMY,
 	EXIT
 };
 

@@ -62,10 +62,9 @@ BOOL MVC_Controller::RunMainLoop(void)
 		m_theView->SetFullScreen( false );
 		int height, width;
 
-
-		m_theModel->theInterface.Get(height, "height");
-		m_theModel->theInterface.Get(width, "width");
-
+		m_theModel->theInterface.RunScript("Init.lua");
+		m_theModel->theInterface.Get(height, "ScreenHeight");
+		m_theModel->theInterface.Get(width, "ScreenWidth");
 
 		// Create Our OpenGL Window
 		if (!m_theView->CreateGLWindow((char*)name.c_str(),width,height,16))
@@ -298,3 +297,5 @@ void MVC_Controller::RotateCamera(float AngletoChange)
 	}
 	*/
 }
+
+MVC_Controller * MVC_Controller::Singleton = NULL;

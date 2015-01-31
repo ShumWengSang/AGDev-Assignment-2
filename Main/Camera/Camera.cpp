@@ -1,14 +1,4 @@
-//***********************************************************************//
-//																		 //
-//		- "Talk to me like I'm a 3 year old!" Programming Lessons -		 //
-//                                                                       //
-//		$Author:		DigiBen		digiben@gametutorials.com			 //
-//																		 //
-//		$Program:		Octree3	 										 //
-//																		 //
-//		$Description:	A working octree with a .3ds file format scene   //
-//																		 //
-//***********************************************************************//
+
 
 #pragma comment(lib, "winmm.lib")
 
