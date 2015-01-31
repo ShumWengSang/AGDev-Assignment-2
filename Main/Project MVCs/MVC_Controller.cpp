@@ -52,16 +52,23 @@ BOOL MVC_Controller::RunMainLoop(void)
 	MSG msg; // Windows Message Structure
 	BOOL done=FALSE; // Bool Variable To Exit Loop
 		// Ask The User Which Screen Mode They Prefer
+	
+	m_theModel->theInterface.RunScript("InitOpengl.lua");
+	std::string name;
+	m_theModel->theInterface.Get(name, "title");
+
 	if (MessageBox(NULL,"Would You Like To Run In Fullscreen Mode?", "Start FullScreen?",MB_YESNO|MB_ICONQUESTION)==IDNO)
 	{
 		m_theView->SetFullScreen( false );
 		int height, width;
-		m_theModel->theInterface.RunScript("InitOpengl.lua");
-		m_theModel->theInterface.Get(height, "ScreenHeight");
-		m_theModel->theInterface.Get(width, "ScreenWidth");
+
+
+		m_theModel->theInterface.Get(height, "height");
+		m_theModel->theInterface.Get(width, "width");
+
 
 		// Create Our OpenGL Window
-		if (!m_theView->CreateGLWindow("NeHe's OpenGL Framework",width,height,16))
+		if (!m_theView->CreateGLWindow((char*)name.c_str(),width,height,16))
 		{
 			return false;									// Quit If Window Was Not Created
 		}
@@ -72,7 +79,7 @@ BOOL MVC_Controller::RunMainLoop(void)
 		int height,width;
 		m_theView->GetDefaultRes(height,width);
 		// Create Our OpenGL Window
-		if (!m_theView->CreateGLWindow("NeHe's OpenGL Framework",width,height,16))
+		if (!m_theView->CreateGLWindow((char*)name.c_str(),width,height,16))
 		{
 			return false;									// Quit If Window Was Not Created
 		}

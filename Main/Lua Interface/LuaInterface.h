@@ -26,7 +26,7 @@ public:
 	void Get(int& value, char * name);
 	void Get(bool &value, char * name);
 	void Get(char *value,char * name);
-
+	void Get(std::string &value, char * name);
 	void Pushfunction(char * FunctionName, lua_CFunction theFunction);
 
 	void Push(const int &value)
