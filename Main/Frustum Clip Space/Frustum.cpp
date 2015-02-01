@@ -184,6 +184,10 @@ bool CFrustum::PointInFrustum( float x, float y, float z )
 	return true;
 }
 
+bool CFrustum::PointInFrustum(CVector3 vector)
+{
+	return PointInFrustum(vector.x, vector.y, vector.z);
+}
 
 ///////////////////////////////// SPHERE IN FRUSTUM \\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\*
 /////
@@ -253,5 +257,97 @@ bool CFrustum::CubeInFrustum( float x, float y, float z, float size )
 	return true;
 }
 
+bool CFrustum::ContainmentCheck(CVector3 topleft, CVector3 bottomright)
+{
+	CVector3 NearTopLeft, NearTopRight, NearBottomLeft, NearBottomRight;
 
+	//Vectors for bottom check.
+	NearTopLeft = topleft;
+	NearTopRight.Set(-topleft.x, topleft.y, topleft.z);
+	NearBottomLeft.Set(topleft.x, topleft.y, bottomright.z);
+	NearBottomRight.Set(bottomright.x, topleft.y, bottomright.z);
 
+	//Vector checking for top
+	CVector3 TopTopLeft, TopTopRight, TopBottomLeft, TopBottomRight;
+	TopTopLeft.Set(topleft.x, 10, topleft.z);
+	TopTopRight.Set(-topleft.x, 10, topleft.z);
+	TopBottomLeft.Set(topleft.x, 10, bottomright.z);
+	TopBottomRight.Set(bottomright.x, 10, bottomright.z);
+
+	bool TopLeft = PointInFrustum(NearTopLeft);
+	bool TopRight = PointInFrustum(NearTopRight);
+	bool BottomLeft = PointInFrustum(NearBottomLeft);
+	bool BottomRight = PointInFrustum(NearBottomRight);
+
+	bool BTopTopLeft = PointInFrustum(TopTopLeft);
+	bool BTopTopRight = PointInFrustum(TopTopRight);
+	bool BTopBottomLeft = PointInFrustum(TopBottomLeft);
+	bool BTopBottomRight = PointInFrustum(TopBottomRight);
+
+	if (!(TopLeft || TopRight
+		|| BottomLeft || BottomRight
+		|| BTopTopLeft || BTopTopRight
+		|| BTopBottomLeft || BTopBottomRight
+))
+	{
+		//The scene graph is not inside the frustum
+		return false;
+	}
+
+	else
+	{
+		if (TopLeft && TopRight
+			&& BottomLeft && BottomRight
+			&& BTopTopLeft && BTopTopRight
+			&& BTopBottomLeft && BTopBottomRight)
+		{
+			return true;
+		}
+
+		else
+		{
+			//Scene graph halfway in.
+			return true;
+		}
+	}
+}
+
+//int CFrustum::ContainmentCheck(const Vector3D min, const Vector3D max)
+//{
+//	//0-far plane
+//	//1-near plane
+//	//2-right plane
+//	//3-left plane
+//	//4-top plane
+//	//-5-bottom plane;
+//
+//	int result = 1;
+//	Vector3D p;
+//	Vector3D n;
+//	//for each plane do ...
+//	for (int i = 0; i < 6; i++) {
+//		Vector3D normal = m_planes[i].getNorm();
+//		p.Set(min.x, min.y, min.z);
+//		if (normal.x >= 0)
+//			p.x = max.x;
+//		if (normal.y >= 0)
+//			p.y = max.y;
+//		if (normal.z >= 0)
+//			p.z = max.z;
+//		n.Set(max.x, max.y, max.z);
+//		if (normal.x >= 0)
+//			n.x = min.x;
+//		if (normal.y >= 0)
+//			n.y = min.y;
+//		if (normal.z >= 0)
+//			n.z = min.z;
+//		// distance return (d + normal.dot(p));
+//		// getVertexP(is the the positive normal relative to the planes
+//		if (m_planes[i].GetDist(p) < 0)
+//			return 0;
+//		//getVertexN is the negative normal relative to the plane's
+//		else if (m_planes[i].GetDist(n) < 0)
+//			result = 2;
+//	}
+//	return(result);
+//}

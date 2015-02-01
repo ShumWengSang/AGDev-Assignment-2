@@ -81,10 +81,6 @@ CVector3 Enemy::GetScale()
 	return theObject.GetScale();
 }
 
-void Enemy::SetPosition(CVector3 theNewPosition)
-{
-	theObject.SetPosition(theNewPosition);
-}
 void Enemy::SetScale(CVector3 theNewScale)
 {
 	theObject.SetScale(theNewScale);

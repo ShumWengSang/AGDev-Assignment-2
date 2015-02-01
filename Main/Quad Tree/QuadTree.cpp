@@ -224,7 +224,7 @@ vector<rect> QuadTree1::retrive(vector<rect> &returnObjects, rect pRect)
 	return returnObjects;
 }
 
-void QuadTree1::DrawQuad(CFrustum *theFrustum)
+void QuadTree1::DrawQuad(CCamera *theCamera)
 {
 
 	glColor3f(1, 0, 0);
@@ -240,11 +240,10 @@ void QuadTree1::DrawQuad(CFrustum *theFrustum)
 	{
 		if (iter->Pointer != NULL)
 		{
-			if (theFrustum != NULL)
+			if (theCamera != NULL)
 			{
-
-				if (theFrustum->CubeInFrustum(iter->Pointer->getPosition().x, iter->Pointer->getPosition().z,
-					(iter->Pointer->GetScale().x) / 2, (iter->Pointer->GetScale().z) / 2))
+				if (theCamera->theFrustum.ContainmentCheck(iter->Pointer->GetTopLeft(),iter->Pointer->GetBottomRight())
+					/*|| ((theCamera->Position() - iter->Pointer->getPosition()).GetMagnitude() < 10)*/)
 				{
 					iter->Pointer->glRenderObject(3);
 				}
@@ -274,19 +273,19 @@ void QuadTree1::DrawQuadTree(rect * pRect)
 	}
 }
 
-void QuadTree1::DrawQuadTree(CFrustum *theFrustum, rect * pRect)
+void QuadTree1::DrawQuadTree(CCamera *theCamera, rect * pRect)
 {
 	//int index = GetIndex(pRect);
 	if (pRect == NULL)
 	{
 		pRect = &bounds;
-		DrawQuad(theFrustum);
+		DrawQuad(theCamera);
 	}
 	for (int i = 0; i < 4; i++)
 	{
 		if (this->nodes[i] != NULL)
 		{
-			nodes[i]->DrawQuadTree(theFrustum);
+			nodes[i]->DrawQuadTree(theCamera);
 		}
 	}
 

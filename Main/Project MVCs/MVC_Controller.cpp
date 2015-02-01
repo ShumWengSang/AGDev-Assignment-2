@@ -53,7 +53,7 @@ BOOL MVC_Controller::RunMainLoop(void)
 	BOOL done=FALSE; // Bool Variable To Exit Loop
 		// Ask The User Which Screen Mode They Prefer
 	
-	m_theModel->theInterface.RunScript("InitOpengl.lua");
+	m_theModel->theInterface.RunScript("Init.lua");
 	std::string name;
 	m_theModel->theInterface.Get(name, "title");
 

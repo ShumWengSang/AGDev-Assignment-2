@@ -5,6 +5,7 @@
 #include "BaseEntity.h"
 #include "tgaLoader.h"
 #include "Frustum.h"
+#include "Camera.h"
 
 using namespace std;
 
@@ -79,8 +80,8 @@ public:
 	void insert(rect pRect);
 	vector<rect> retrive(vector<rect> &returnObjects, rect pRect);
 
-	void DrawQuad(CFrustum *theFrustum = NULL);
-	void DrawQuadTree(CFrustum *theFrustum, rect * pRect = NULL);
+	void DrawQuad(CCamera *theCamera = NULL);
+	void DrawQuadTree(CCamera *theCamera, rect * pRect = NULL);
 	void DrawQuadTree( rect * pRect = NULL);
 
 };

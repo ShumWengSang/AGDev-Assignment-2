@@ -48,6 +48,7 @@
       <Optimization>Disabled</Optimization>
       <PreprocessorDefinitions>WIN32;_DEBUG;_LIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <BrowseInformation>true</BrowseInformation>
+      <AdditionalIncludeDirectories>$(SolutionDir)Math</AdditionalIncludeDirectories>
     </ClCompile>
     <Link>
       <SubSystem>Windows</SubSystem>
@@ -82,6 +83,11 @@
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Frustum.cpp" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\Math\Math.vcxproj">
+      <Project>{9bb92af9-c0e9-4a30-bafa-baea759c6409}</Project>
+    </ProjectReference>
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

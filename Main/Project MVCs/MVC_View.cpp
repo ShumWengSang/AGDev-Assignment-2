@@ -217,7 +217,7 @@ void MVC_View::DrawScene()
 	//{
 	//	m_theModel->theListofObjects[i]->glRenderObject(3);
 	//}
-	m_theModel->theQuadTree.DrawQuadTree(/*&m_theModel->Camera2.theFrustum*/);
+	m_theModel->theQuadTree.DrawQuadTree(&m_theModel->Camera2);
 
 
 	m_theModel->theHUD.SetHUD(true);
