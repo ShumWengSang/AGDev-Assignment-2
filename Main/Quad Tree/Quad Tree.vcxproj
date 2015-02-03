@@ -47,7 +47,7 @@
       <WarningLevel>Level3</WarningLevel>
       <Optimization>Disabled</Optimization>
       <PreprocessorDefinitions>WIN32;_DEBUG;_LIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
-      <AdditionalIncludeDirectories>$(SolutionDir)Frustum Clip Space;$(SolutionDir)Base Entity;$(SolutionDir)Math;$(SolutionDir)Model and Texture Loader;$(SolutionDir)Camera;$(SolutionDir)Mouse</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>$(SolutionDir)Frustum Clip Space;$(SolutionDir)Base Entity;$(SolutionDir)Math;$(SolutionDir)Model and Texture Loader;$(SolutionDir)Camera;$(SolutionDir)Mouse;$(SolutionDir)Lua Interface;$(SolutionDir)include</AdditionalIncludeDirectories>
       <BrowseInformation>true</BrowseInformation>
     </ClCompile>
     <Link>

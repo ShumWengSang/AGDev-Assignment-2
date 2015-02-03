@@ -7,6 +7,25 @@ LuaInterface::LuaInterface(void)
 	luaL_openlibs(L);
 }
 
+LuaInterface * LuaInterface::GetInstance()
+{
+	if (OnlyInstance == false)
+	{
+		Singleton = new LuaInterface();
+		OnlyInstance = true;
+	}
+	return Singleton;
+}
+
+void LuaInterface::Drop()
+{
+	if (Singleton != NULL)
+	{
+		delete Singleton;
+		Singleton = NULL;
+	}
+}
+
 
 LuaInterface::~LuaInterface(void)
 {
@@ -65,7 +84,11 @@ void LuaInterface::Get(std::string &value, char * name)
 	lua_pop(L, -1);
 }
 
+
 void LuaInterface::Pushfunction(char * FunctionName, lua_CFunction theFunction)
 {
 	lua_register(L, FunctionName, theFunction);
 }
+
+LuaInterface * LuaInterface::Singleton = NULL;
+bool LuaInterface::OnlyInstance = false;

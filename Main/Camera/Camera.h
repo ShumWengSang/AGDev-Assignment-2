@@ -8,6 +8,7 @@
 #include "Vector3.h"
 #include "Math2.h"
 #include "Frustum.h"
+#include "LuaInterface.h"
 
 enum CameraType {
   FirstPerson = 1,
@@ -17,13 +18,14 @@ enum CameraType {
 
 // This is our camera class
 class CCamera {
+	// Our camera constructor
 
 public:
-
-	// Our camera constructor
 	CCamera();
 	CCamera(CameraType theType);
 	~CCamera();
+	
+
 
 	// These are are data access functions for our camera's private data
 	inline CVector3 Position() {	return m_vPosition;		}

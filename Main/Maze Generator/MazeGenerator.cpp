@@ -236,12 +236,12 @@ void MazeGenerator::FindPossibleExits()
 		{
 			if (k == 0)
 				continue;
-			if((PossibleExits[i].x + k) > 0)
+			if ((PossibleExits[i].x + k) < MAZEWIDTH)
 			if (theMaze[PossibleExits[i].x + k][(PossibleExits[i].y)] == 0)
 			{
 				Counter++;
 			}
-			if( (PossibleExits[i].y + k) > 0)
+			if ((PossibleExits[i].y + k) < MAZEHEIGHT)
 			if (theMaze[PossibleExits[i].x][(PossibleExits[i].y + k)] == 0)
 			{
 				Counter++;

@@ -15,11 +15,14 @@ typedef int(*lua_CFunction) (lua_State *L);
 
 class LuaInterface
 {
-public:
+
+	static LuaInterface * Singleton;
 	LuaInterface(void);
 	~LuaInterface(void);
-
-
+	static bool OnlyInstance;
+public:
+	static LuaInterface * GetInstance();
+	static void Drop();
 
 	bool RunScript(char * filename);
 	bool LoadFile(char * filename);

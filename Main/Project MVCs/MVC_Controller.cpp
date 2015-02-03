@@ -53,18 +53,18 @@ BOOL MVC_Controller::RunMainLoop(void)
 	BOOL done=FALSE; // Bool Variable To Exit Loop
 		// Ask The User Which Screen Mode They Prefer
 	
-	m_theModel->theInterface.RunScript("Init.lua");
+	m_theModel->theInterface->RunScript("Init.lua");
 	std::string name;
-	m_theModel->theInterface.Get(name, "title");
+	m_theModel->theInterface->Get(name, "title");
 
 	if (MessageBox(NULL,"Would You Like To Run In Fullscreen Mode?", "Start FullScreen?",MB_YESNO|MB_ICONQUESTION)==IDNO)
 	{
 		m_theView->SetFullScreen( false );
 		int height, width;
 
-		m_theModel->theInterface.RunScript("Init.lua");
-		m_theModel->theInterface.Get(height, "ScreenHeight");
-		m_theModel->theInterface.Get(width, "ScreenWidth");
+		m_theModel->theInterface->RunScript("Init.lua");
+		m_theModel->theInterface->Get(height, "ScreenHeight");
+		m_theModel->theInterface->Get(width, "ScreenWidth");
 
 		// Create Our OpenGL Window
 		if (!m_theView->CreateGLWindow((char*)name.c_str(),width,height,16))

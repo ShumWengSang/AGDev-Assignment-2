@@ -12,12 +12,16 @@ SkyBox::~SkyBox()
 
 void SkyBox::Init()
 {
-	Top = 100;
-	Bottom = -50;
-	Left = 100;
-	Right = -100;
-	Near = -100;
-	Far = 100;
+	LuaInterface * theInterface = LuaInterface::GetInstance();
+
+	theInterface->Get(Top, "Top");
+	theInterface->Get(Bottom, "Bottom");
+	theInterface->Get(Left, "Left");
+	theInterface->Get(Right, "Right");
+	theInterface->Get(Near, "Near");
+	theInterface->Get(Far, "Far");
+
+
 	Width = Left - Right;
 	Height = Top - Bottom;
 	Length = Far - Near;

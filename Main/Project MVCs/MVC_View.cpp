@@ -23,13 +23,13 @@ static int L_GetCamnFPS(lua_State *state)
 
 	if(theModel->DebugCam)
 	{
-		theModel->theInterface.Push(theModel->Camera2.Position());
+		theModel->theInterface->Push(theModel->Camera2.Position());
 	}
 	else
 	{
-		theModel->theInterface.Push(theModel->theCamera.Position());
+		theModel->theInterface->Push(theModel->theCamera.Position());
 	}
-	theModel->theInterface.Push(theModel->m_timer->GetFPS());
+	theModel->theInterface->Push(theModel->m_timer->GetFPS());
 
 
 	return 4;
@@ -110,7 +110,7 @@ MVC_View::MVC_View(MVC_Model* theModel)
 
 	m_theModel->Camera2.GetKeys(GetKeyBuffer());
 
-	m_theModel->theInterface.Pushfunction("PrintOnScreen",L_PrintDebug);
+	m_theModel->theInterface->Pushfunction("PrintOnScreen",L_PrintDebug);
 }
 
 MVC_View::~MVC_View(void)
@@ -225,8 +225,8 @@ void MVC_View::DrawScene()
 	glColor3f(0.0, 0.0, 1.0);
 	if(GetKeyState('O') & 0x80)
 	{
-		m_theModel->theInterface.Pushfunction("GetCamAndFPS",L_GetCamnFPS);
-		m_theModel->theInterface.RunScript("Debug.lua");
+		m_theModel->theInterface->Pushfunction("GetCamAndFPS",L_GetCamnFPS);
+		m_theModel->theInterface->RunScript("Debug.lua");
 		//Printw(10, 50, "FPS: %.2f", MVCTime::GetInstance()->GetFPS());
 		//Printw(10, 100, "Camera 2 Pos: %f %f %f", m_theModel->Camera2.Position().x, m_theModel->Camera2.Position().y, m_theModel->Camera2.Position().z);
 		//Printw(10, 150, "Player Data Pos: %f %f %f", m_theModel->thePlayerData.getPosition().x, m_theModel->thePlayerData.getPosition().y, m_theModel->thePlayerData.getPosition().z);

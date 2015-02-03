@@ -24,13 +24,23 @@ CCamera::CCamera(void)
 
 CCamera::CCamera(CameraType theType)
 {
+	LuaInterface * theInterface = LuaInterface::GetInstance();	
 	theMouse = CMouse::getInstance(0);
-	CVector3 vZero = CVector3(0.0, 10.0, 0.0);		// Init a vVector to 0 0 0 for our position
-	CVector3 vView = CVector3(0.0, 0.0, 1.0);		// Init a starting view vVector (looking up and out the screen) 
+
+	theInterface->RunScript("Init.lua");
+	CVector3 Position;
+	theInterface->Get(Position.x, "PCamx");
+	theInterface->Get(Position.y, "PCamy");
+	theInterface->Get(Position.z, "PCamz");
+	CVector3 Dir;
+	theInterface->Get(Dir.x, "DCamx");
+	theInterface->Get(Dir.y, "DCamy");
+	theInterface->Get(Dir.z, "DCamz");
+
 	CVector3 vUp   = CVector3(0.0, 1.0, 0.0);		// Init a standard up vVector (Rarely ever changes)
 
-	m_vPosition	= vZero;					// Init the position to zero
-	m_vView		= vView;					// Init the view to a std starting view
+	m_vPosition	= Position;					// Init the position to zero
+	m_vView		= Dir;					// Init the view to a std starting view
 	m_vUpVector	= vUp;						// Init the UpVector
 
 	this->theType = theType;

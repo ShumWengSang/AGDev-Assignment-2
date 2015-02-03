@@ -19,7 +19,7 @@ theCamera(ThirdPerson),
 Camera2(FirstPerson),
 theQuadTree(0, rect(theBox.GetRight(), theBox.GetNear(), theBox.Width, theBox.Length))
 {
-
+	theInterface = LuaInterface::GetInstance();
 	Rotate = 0;
 	m_timer=MVCTime::GetInstance();
 	distance = 10;
@@ -32,7 +32,7 @@ theQuadTree(0, rect(theBox.GetRight(), theBox.GetNear(), theBox.Width, theBox.Le
 
 MVC_Model::~MVC_Model(void)
 {
-
+	LuaInterface::Drop();
 	delete[] theExits;
 	theExits = NULL;
 }
@@ -41,8 +41,8 @@ bool MVC_Model::Init(float fpsLimit)
 {
 	m_timer->Init(true,int(fpsLimit));
 	m_moveX=m_moveY=0;
-	//theInterface.Pushfunction("TestFunction", TestFunction);
-//	theInterface.RunScript("LuaTest.lua");
+	//theInterface->Pushfunction("TestFunction", TestFunction);
+//	theInterface->RunScript("LuaTest.lua");
 	return true;
 }
 
@@ -52,38 +52,46 @@ bool MVC_Model::InitPhase2(void)
 	m_testY=m_worldSizeY*0.5f;
 
 	glEnable(GL_TEXTURE_2D);							// Enable Texture Mapping ( NEW )
+	theInterface->RunScript("Init.lua");
+	std::string front, back, left, right, top, bottom;
+	theInterface->Get(front, "front");
+	theInterface->Get(back, "back");
+	theInterface->Get(left, "left");
+	theInterface->Get(right, "right");
+	theInterface->Get(top, "top");
+	theInterface->Get(bottom, "bottom");
 
-
-	if (!LoadTGA(&SkyBoxTextures[0], "SkyBox/front.tga"))				// Load The Font Texture
+	if (!LoadTGA(&SkyBoxTextures[0], (char*)front.c_str()))				// Load The Font Texture
 		return false;	// If Loading Failed, Return False
-	if (!LoadTGA(&SkyBoxTextures[1], "SkyBox/back.tga"))				// Load The Font Texture
+	if (!LoadTGA(&SkyBoxTextures[1], (char*)back.c_str()))				// Load The Font Texture
 		return false;										// If Loading Failed, Return False
-	if (!LoadTGA(&SkyBoxTextures[2], "SkyBox/left.tga"))				// Load The Font Texture
+	if (!LoadTGA(&SkyBoxTextures[2], (char*)left.c_str()))				// Load The Font Texture
 		return false;										// If Loading Failed, Return False
-	if (!LoadTGA(&SkyBoxTextures[3], "SkyBox/right.tga"))				// Load The Font Texture
+	if (!LoadTGA(&SkyBoxTextures[3], (char*)right.c_str()))				// Load The Font Texture
 		return false;										// If Loading Failed, Return False
-	if (!LoadTGA(&SkyBoxTextures[4], "SkyBox/top.tga"))				// Load The Font Texture
+	if (!LoadTGA(&SkyBoxTextures[4], (char*)top.c_str()))				// Load The Font Texture
 		return false;										// If Loading Failed, Return False
-	if (!LoadTGA(&SkyBoxTextures[5], "SkyBox/bottom.tga"))				// Load The Font Texture
+	if (!LoadTGA(&SkyBoxTextures[5], (char*)bottom.c_str()))				// Load The Font Texture
 		return false;										// If Loading Failed, Return False
 
 	//Find the ratio between skybox width and height and maze width and height.
 	//We need this to fully fill our skybox with the maze.
 
-	//theInterface.RunScript("Init.lua");
+	//theInterface->RunScript("Init.lua");
 	int width;
 	int height;
-	theInterface.Get(width, "MazeWidth");
-	theInterface.Get(height, "MazeHeight");
+	theInterface->Get(width, "MazeWidth");
+	theInterface->Get(height, "MazeHeight");
 
 
 	MazeGenerator theMaze(width,height);
 	float ratiox = theBox.Width / theMaze.MAZEWIDTH;
 	float ratioy = theBox.Length / theMaze.MAZEHEIGHT;
 
-
+	std::string Obj;
+	theInterface->Get(Obj, "obj");
 	BlockWall * newWall;
-	ObjFile thecube = LoadOBJ("Objects/Cube.obj");
+	ObjFile thecube = LoadOBJ(Obj.c_str());
 	theMaze.Draw();
 	for (int MazeWidth = -0; MazeWidth < theMaze.MAZEWIDTH; MazeWidth++)
 	{
@@ -164,7 +172,7 @@ bool MVC_Model::InitPhase2(void)
 	//Generate the Maze and input it.
 
 
-	//theInterface.LoadFile("Debug.lua");
+	//theInterface->LoadFile("Debug.lua");
 	return true;
 }
 

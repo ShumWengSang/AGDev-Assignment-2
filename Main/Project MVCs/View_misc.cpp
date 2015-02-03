@@ -21,7 +21,7 @@ GLvoid MVC_View::ReSizeGLScene(GLsizei width, GLsizei height)		// Resize And Ini
 	glLoadIdentity(); // ReSet The Projection Matrix
 
 	float fov;
-	m_theModel->theInterface.Get(fov, "fov");
+	m_theModel->theInterface->Get(fov, "fov");
 	// Calculate The Aspect Ratio Of The Window
 	gluPerspective(fov,(GLfloat)width/(GLfloat)height,0.1f,1000.0f);
 

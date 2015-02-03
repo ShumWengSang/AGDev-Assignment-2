@@ -48,6 +48,7 @@
       <Optimization>Disabled</Optimization>
       <PreprocessorDefinitions>WIN32;_DEBUG;_LIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <BrowseInformation>true</BrowseInformation>
+      <AdditionalIncludeDirectories>$(SolutionDir)include;$(SolutionDir)Lua Interface;$(SolutionDir)Math</AdditionalIncludeDirectories>
     </ClCompile>
     <Link>
       <SubSystem>Windows</SubSystem>
@@ -82,6 +83,11 @@
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="SkyBox.h" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\Lua Interface\Lua Interface.vcxproj">
+      <Project>{f14aea54-2847-4851-8fa2-570e2b769142}</Project>
+    </ProjectReference>
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
