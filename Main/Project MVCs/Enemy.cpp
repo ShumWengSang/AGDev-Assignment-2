@@ -11,7 +11,7 @@ Enemy::~Enemy(void)
 {
 }
 
-bool Enemy::glRenderObject(CVector3* theCameraPosition)
+bool Enemy::glRenderObject(CVector3 theCameraPosition)
 {
 	theObject.Render(theCameraPosition);
 

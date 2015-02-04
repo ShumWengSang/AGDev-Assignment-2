@@ -13,7 +13,7 @@ public:
 	void SetDir(CVector3 newDir);
 	void SetPos(CVector3 newPos);
 
-	bool glRenderObject(CVector3* theCameraPosition);
+	bool glRenderObject(CVector3 theCameraPosition);
 	bool glRenderObject(int RESOLUTION);
 
 	EntityType getObjectType(void);

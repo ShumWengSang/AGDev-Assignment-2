@@ -11,7 +11,7 @@ public:
 	BlockWall();
 	~BlockWall();
 
-	 bool glRenderObject(CVector3* theCameraPosition);
+	 bool glRenderObject(CVector3 theCameraPosition);
 	 bool glRenderObject(int RESOLUTION);
 
 	 EntityType getObjectType(void);

@@ -12,7 +12,7 @@ BlockWall::~BlockWall()
 {
 }
 
-bool BlockWall::glRenderObject(CVector3* theCameraPosition)
+bool BlockWall::glRenderObject(CVector3 theCameraPosition)
 {
 	theObjectZ.Render(theCameraPosition);
 	theObjectX.Render(theCameraPosition);

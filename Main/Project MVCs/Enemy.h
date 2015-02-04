@@ -9,7 +9,7 @@ public:
 	 Matrix4x4 Scalef;
 
 
-	bool glRenderObject(CVector3* theCameraPosition);
+	bool glRenderObject(CVector3 theCameraPosition);
 	bool glRenderObject(int RESOLUTION);
 
 	 EntityType getObjectType(void);

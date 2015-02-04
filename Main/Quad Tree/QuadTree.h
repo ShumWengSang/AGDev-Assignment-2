@@ -80,9 +80,11 @@ public:
 	void insert(rect pRect);
 	vector<rect> retrive(vector<rect> &returnObjects, rect pRect);
 
-	void DrawQuad(CCamera *theCamera = NULL);
-	void DrawQuadTree(CCamera *theCamera, rect * pRect = NULL);
+	void DrawQuad( int res, CCamera *theCamera = NULL);
+	void DrawQuadTree(CCamera *theCamera, int res = 0, rect * pRect = NULL);
 	void DrawQuadTree( rect * pRect = NULL);
-
+	void Draw(CCamera * theCamera);
+	static bool DetermineLOD;
+	static bool FirstPass;
 };
 

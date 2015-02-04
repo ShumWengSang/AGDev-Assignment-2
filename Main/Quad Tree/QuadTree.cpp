@@ -224,7 +224,7 @@ vector<rect> QuadTree1::retrive(vector<rect> &returnObjects, rect pRect)
 	return returnObjects;
 }
 
-void QuadTree1::DrawQuad(CCamera *theCamera)
+void QuadTree1::DrawQuad(int res, CCamera *theCamera)
 {
 
 	glColor3f(1, 0, 0);
@@ -245,7 +245,7 @@ void QuadTree1::DrawQuad(CCamera *theCamera)
 				if (theCamera->theFrustum.ContainmentCheck(iter->Pointer->GetTopLeft(),iter->Pointer->GetBottomRight())
 					/*|| ((theCamera->Position() - iter->Pointer->getPosition()).GetMagnitude() < 10)*/)
 				{
-					iter->Pointer->glRenderObject(3);
+					iter->Pointer->glRenderObject(theCamera->Position());
 				}
 			}
 			else
@@ -262,7 +262,7 @@ void QuadTree1::DrawQuadTree(rect * pRect)
 	if (pRect == NULL)
 	{
 		pRect = &bounds;
-		DrawQuad();
+		DrawQuad(3);
 	}
 	for (int i = 0; i < 4; i++)
 	{
@@ -273,23 +273,52 @@ void QuadTree1::DrawQuadTree(rect * pRect)
 	}
 }
 
-void QuadTree1::DrawQuadTree(CCamera *theCamera, rect * pRect)
+void QuadTree1::DrawQuadTree(CCamera *theCamera, int res, rect * pRect)
 {
 	//int index = GetIndex(pRect);
+	if (!DetermineLOD && !FirstPass)
+	{
+		float middleX = (bounds.width + bounds.x) / 2;
+		float middleY = (bounds.height + bounds.y) / 2;
+		CVector3 camPos(theCamera->Position().x, 0, theCamera->Position().z);
+		CVector3 rectPos(middleX, 0, middleY);
+		float distance = (camPos - rectPos).GetMagnitude();
+		if (distance < 30)
+		{
+			res = 0;
+		}
+		else if (distance < 60)
+		{
+			res = 1;
+		}
+		else
+		{
+			res = 2;
+		}
+		DetermineLOD = true;
+	}
 	if (pRect == NULL)
 	{
+		FirstPass = false;
 		pRect = &bounds;
-		DrawQuad(theCamera);
+		DrawQuad(res, theCamera);
 	}
 	for (int i = 0; i < 4; i++)
 	{
 		if (this->nodes[i] != NULL)
 		{
-			nodes[i]->DrawQuadTree(theCamera);
+			nodes[i]->DrawQuadTree(theCamera, res);
 		}
 	}
-
-	//returnObjects.insert(returnObjects.end(), objects.begin(), objects.end());
-	//return returnObjects;
-
 }
+
+void QuadTree1::Draw(CCamera * theCamera)
+{
+	DrawQuadTree(theCamera);
+
+	DetermineLOD = false;
+	FirstPass = true;
+}
+
+bool QuadTree1::DetermineLOD = false;
+bool QuadTree1::FirstPass = true;

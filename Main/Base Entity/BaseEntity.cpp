@@ -11,7 +11,7 @@ BaseEntity::~BaseEntity()
 {
 }
 
-bool BaseEntity::glRenderObject(CVector3* theCameraPosition)
+bool BaseEntity::glRenderObject(CVector3 theCameraPosition)
 {
 	return false;
 };

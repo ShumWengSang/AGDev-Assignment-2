@@ -25,7 +25,7 @@ public:
 
 	ObjFile * theCurrent;
 	void Init(void);
-	void Render(CVector3* theCameraPosition);
+	void Render(CVector3 theCameraPosition);
 	void Render(const int RESOLUTION);
 	void SetPosition(CVector3 theNewPosition);
 	void SetDirection(CVector3 theNewDirection);

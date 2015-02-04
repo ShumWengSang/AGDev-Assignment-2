@@ -22,7 +22,7 @@ void CExit::SetPos(CVector3 newPos)
 }
 
 
-bool CExit::glRenderObject(CVector3* theCameraPosition)
+bool CExit::glRenderObject(CVector3 theCameraPosition)
 {
 	theObject.Render(theCameraPosition);
 	return true;

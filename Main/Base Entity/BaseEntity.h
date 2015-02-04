@@ -18,7 +18,7 @@ public:
 	BaseEntity(const BaseEntity& o);
 	virtual ~BaseEntity();
 
-	virtual bool glRenderObject(CVector3* theCameraPosition);
+	virtual bool glRenderObject(CVector3 theCameraPosition);
 	virtual bool glRenderObject(int RESOLUTION);
 	// Designed to render the specified object.  Returns TRUE if the object is successfully
 	// rendered, otherwise FALSE.  All derived objects are expected to override this

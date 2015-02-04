@@ -217,7 +217,7 @@ void MVC_View::DrawScene()
 	//{
 	//	m_theModel->theListofObjects[i]->glRenderObject(3);
 	//}
-	m_theModel->theQuadTree.DrawQuadTree(&m_theModel->Camera2);
+	m_theModel->theQuadTree.Draw(&m_theModel->Camera2);
 
 
 	m_theModel->theHUD.SetHUD(true);
@@ -248,7 +248,7 @@ void MVC_View::Draw3DSGrid()
 	// green lines vertical and horizontal along the X and Z axis.
 
 	// Turn the lines GREEN
-	glColor3ub(0, 255, 0);
+	glColor3ub(255, 192, 203);
 	glLineWidth(5);
 	// Draw a 1x1 grid along the X and Z axis'
 	for (float i = -m_theModel->theBox.Width; i <= m_theModel->theBox.Width; i += 1)

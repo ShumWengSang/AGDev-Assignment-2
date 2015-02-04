@@ -34,7 +34,7 @@ void Player::SetDir(CVector3 newPos)
 }
 
 
-bool Player::glRenderObject(CVector3* theCameraPosition)
+bool Player::glRenderObject(CVector3 theCameraPosition)
 {
 	theObject.Render(theCameraPosition);
 	return true;

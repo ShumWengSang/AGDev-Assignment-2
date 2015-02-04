@@ -20,13 +20,12 @@ void CObjectModel::Init(void)
 
 }
 
-void CObjectModel::Render(CVector3* theCameraPosition)
+void CObjectModel::Render(CVector3 theCameraPosition)
 {
-	CVector3 theDistance(theCameraPosition->x - thePosition.x,
-		theCameraPosition->y - thePosition.y,
-		theCameraPosition->z - thePosition.z);
+	CVector3 theDistance(theCameraPosition.x - thePosition.x,
+		theCameraPosition.y - thePosition.y,
+		theCameraPosition.z - thePosition.z);
 	float distance = theDistance.GetMagnitude();
-
 	glPushMatrix();
 
 	glTranslatef(thePosition.x, thePosition.y, thePosition.z);
@@ -34,17 +33,20 @@ void CObjectModel::Render(CVector3* theCameraPosition)
 	glScalef(Scale.x, Scale.y, Scale.z);
 	if (distance < 30)
 	{
-		theCurrent = &theObj_HighPoly;
-		DrawOBJ(theObj_HighPoly);
+		glColor3f(1.0f, 0.0f, 0.0f);
+		//DrawOBJ(theObj_HighPoly);
+		DrawOBJ(theObj_LowPoly);
 	}
 	else if (distance < 60)
 	{
-		theCurrent = &theObj_MedPoly;
-		DrawOBJ(theObj_MedPoly);
+		glColor3f(0.0f, 1.0f, 0.0f);
+		//DrawOBJ(theObj_MedPoly);
+		DrawOBJ(theObj_LowPoly);
 	}
 	else
 	{
-		theCurrent = &theObj_LowPoly;
+		glColor3f(0.0f, 0.0f, 1.0f);
+		//DrawOBJ(theObj_MedPoly);
 		DrawOBJ(theObj_LowPoly);
 	}
 
@@ -60,12 +62,14 @@ void CObjectModel::Render(const int RESOLUTION)
 	if (RESOLUTION == 0)
 	{
 		glColor3f(1.0f, 0.0f, 0.0f);
-		DrawOBJ(theObj_HighPoly);
+		//DrawOBJ(theObj_HighPoly);
+		DrawOBJ(theObj_LowPoly);
 	}
 	else if (RESOLUTION == 1)
 	{
 		glColor3f(0.0f, 1.0f, 0.0f);
-		DrawOBJ(theObj_MedPoly);
+		//DrawOBJ(theObj_MedPoly);
+		DrawOBJ(theObj_LowPoly);
 	}
 	else
 	{
