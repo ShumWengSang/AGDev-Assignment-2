@@ -209,7 +209,7 @@ void MVC_View::DrawObject()
 void MVC_View::DrawScene()
 {
 	glPushMatrix();
-	m_theModel->theBox.Draw();
+	//m_theModel->theBox.Draw();
 
 	Draw3DSGrid();
 

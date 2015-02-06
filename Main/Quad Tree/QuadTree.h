@@ -6,6 +6,7 @@
 #include "tgaLoader.h"
 #include "Frustum.h"
 #include "Camera.h"
+#include <cmath>
 
 using namespace std;
 
@@ -28,7 +29,6 @@ struct rect
 	float height;
 	float width;
 	BaseEntity * Pointer;
-
 	rect(float x, float y, float width, float height)
 	{
 		this->x = x;

@@ -227,7 +227,7 @@ vector<rect> QuadTree1::retrive(vector<rect> &returnObjects, rect pRect)
 void QuadTree1::DrawQuad(int res, CCamera *theCamera)
 {
 
-	glColor3f(1, 0, 0);
+	glColor3f(0,0,0);
 	glBegin(GL_LINE_STRIP);
 	glVertex3f(this->bounds.x, 5, this->bounds.y);
 	glVertex3f(this->bounds.x, 5, this->bounds.y + this->bounds.height);
@@ -235,7 +235,30 @@ void QuadTree1::DrawQuad(int res, CCamera *theCamera)
 	glVertex3f(this->bounds.x + this->bounds.width, 5, this->bounds.y);
 	glVertex3f(this->bounds.x, 5, this->bounds.y);
 	glEnd();
-	
+
+	if(res == 0)
+	{
+		glColor3f(1, 0, 0);
+	}
+	else if(res == 1)
+	{
+		glColor3f(0,1,0);
+	}
+	else if(res == 2)
+	{
+		glColor3f(0,0,1);
+	}
+	glPushMatrix();
+	glBegin(GL_QUADS);
+	glVertex3f(this->bounds.x, 0, this->bounds.y);
+	glVertex3f(this->bounds.x, 0, this->bounds.y + this->bounds.height);
+	glVertex3f(this->bounds.x + this->bounds.width, 0, this->bounds.y + this->bounds.height);
+	glVertex3f(this->bounds.x + this->bounds.width, 0, this->bounds.y);
+	glEnd();
+	glPopMatrix();
+	glColor3f(1,1,1);
+
+
 	for (auto iter = this->objects.begin(); iter != this->objects.end(); iter++)
 	{
 		if (iter->Pointer != NULL)
@@ -245,7 +268,7 @@ void QuadTree1::DrawQuad(int res, CCamera *theCamera)
 				if (theCamera->theFrustum.ContainmentCheck(iter->Pointer->GetTopLeft(),iter->Pointer->GetBottomRight())
 					/*|| ((theCamera->Position() - iter->Pointer->getPosition()).GetMagnitude() < 10)*/)
 				{
-					iter->Pointer->glRenderObject(theCamera->Position());
+					//iter->Pointer->glRenderObject(res);
 				}
 			}
 			else
@@ -275,28 +298,6 @@ void QuadTree1::DrawQuadTree(rect * pRect)
 
 void QuadTree1::DrawQuadTree(CCamera *theCamera, int res, rect * pRect)
 {
-	//int index = GetIndex(pRect);
-	if (!DetermineLOD && !FirstPass)
-	{
-		float middleX = (bounds.width + bounds.x) / 2;
-		float middleY = (bounds.height + bounds.y) / 2;
-		CVector3 camPos(theCamera->Position().x, 0, theCamera->Position().z);
-		CVector3 rectPos(middleX, 0, middleY);
-		float distance = (camPos - rectPos).GetMagnitude();
-		if (distance < 30)
-		{
-			res = 0;
-		}
-		else if (distance < 60)
-		{
-			res = 1;
-		}
-		else
-		{
-			res = 2;
-		}
-		DetermineLOD = true;
-	}
 	if (pRect == NULL)
 	{
 		FirstPass = false;
@@ -314,10 +315,59 @@ void QuadTree1::DrawQuadTree(CCamera *theCamera, int res, rect * pRect)
 
 void QuadTree1::Draw(CCamera * theCamera)
 {
-	DrawQuadTree(theCamera);
+	//DrawQuadTree(theCamera);
+	for (int i = 0; i < 4; i ++)
+	{
+		double verticalMidpoint = nodes[i]->bounds.x + (nodes[i]->bounds.width / 2);
+		double horizontalMidpoint = nodes[i]->bounds.y + (nodes[i]->bounds.height / 2);
+		CVector3 camPos(theCamera->Position().x, 0, theCamera->Position().z);
+		CVector3 rectPos(verticalMidpoint, 0, horizontalMidpoint);
 
-	DetermineLOD = false;
-	FirstPass = true;
+		//Four cornors of quad.
+		//	glVertex3f(this->bounds.x, 0, this->bounds.y);
+	//glVertex3f(this->bounds.x, 0, this->bounds.y + this->bounds.height);
+	//glVertex3f(this->bounds.x + this->bounds.width, 0, this->bounds.y + this->bounds.height);
+	//glVertex3f(this->bounds.x + this->bounds.width, 0, this->bounds.y);
+		CVector3 topright (nodes[i]->bounds.x + nodes[i]->bounds.width, 0 , nodes[i]->bounds.y + nodes[i]->bounds.height);
+		CVector3 bottomleft(nodes[i]->bounds.x , 0 , nodes[i]->bounds.y);
+
+		glPushMatrix();
+		glBegin(GL_LINES);
+		glColor3f(1,0,1);
+		glLineWidth(10);
+		glVertex3f(verticalMidpoint, 0, horizontalMidpoint);
+		glVertex3f(verticalMidpoint, 100, horizontalMidpoint);
+		glLineWidth(1);
+		glColor3f(1,1,1);
+		glEnd();
+		glPopMatrix();
+
+		glPushMatrix();
+		glBegin(GL_LINES);
+		glColor3f(1,0,1);
+		glLineWidth(10);
+		glVertex3f(nodes[i]->bounds.x + nodes[i]->bounds.width, 0, nodes[i]->bounds.y + nodes[i]->bounds.height);
+		glVertex3f(nodes[i]->bounds.x + nodes[i]->bounds.width, 100, nodes[i]->bounds.y + nodes[i]->bounds.height);
+		glLineWidth(1);
+		glColor3f(1,1,1);
+		glEnd();
+		glPopMatrix();
+
+		float distance = (camPos - rectPos).GetMagnitude();
+		if (distance < 30)
+		{
+			nodes[i]->DrawQuadTree(theCamera,0);
+		}
+		else if (distance < 60)
+		{
+			nodes[i]->DrawQuadTree(theCamera,1);
+		}
+		else
+		{
+			nodes[i]->DrawQuadTree(theCamera,2);
+		}
+
+	}
 }
 
 bool QuadTree1::DetermineLOD = false;
